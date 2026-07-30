@@ -62,3 +62,84 @@ def test_parse_response_sorts_newest_first_and_handles_missing():
     no_date = [p for p in pubs if p["put_code"] == 333][0]
     assert no_date["year"] is None
     assert no_date["venue"] is None
+
+
+def test_parse_response_deduplicates_same_doi_across_groups():
+    raw = {
+        "group": [
+            {
+                "work-summary": [
+                    {
+                        "put-code": 111,
+                        "title": {"title": {"value": "Catalytic conversion of biomass"}},
+                        "journal-title": {"value": "Nature Catalysis"},
+                        "publication-date": {"year": {"value": "2023"}},
+                        "type": "journal-article",
+                        "external-ids": {
+                            "external-id": [
+                                {
+                                    "external-id-type": "doi",
+                                    "external-id-value": "10.1000/abc123",
+                                    "external-id-url": {"value": "https://doi.org/10.1000/abc123"},
+                                }
+                            ]
+                        },
+                    }
+                ]
+            },
+            {
+                "work-summary": [
+                    {
+                        "put-code": 999,
+                        "title": {"title": {"value": "Catalytic conversion of biomass (duplicate record)"}},
+                        "journal-title": {"value": "Nature Catalysis"},
+                        "publication-date": {"year": {"value": "2023"}},
+                        "type": "journal-article",
+                        "external-ids": {
+                            "external-id": [
+                                {
+                                    "external-id-type": "doi",
+                                    "external-id-value": "10.1000/abc123",
+                                    "external-id-url": {"value": "https://doi.org/10.1000/abc123"},
+                                }
+                            ]
+                        },
+                    }
+                ]
+            },
+        ]
+    }
+    pubs = sync_orcid.parse_works_summary_response(raw)
+    assert len(pubs) == 1
+    assert pubs[0]["put_code"] == 111  # first occurrence wins
+
+
+def test_parse_response_uses_first_work_summary_in_group():
+    raw = {
+        "group": [
+            {
+                "work-summary": [
+                    {
+                        "put-code": 111,
+                        "title": {"title": {"value": "Preferred title"}},
+                        "journal-title": {"value": "Nature Catalysis"},
+                        "publication-date": {"year": {"value": "2023"}},
+                        "type": "journal-article",
+                        "external-ids": {"external-id": []},
+                    },
+                    {
+                        "put-code": 222,
+                        "title": {"title": {"value": "Alternate title"}},
+                        "journal-title": {"value": "Alt Journal"},
+                        "publication-date": {"year": {"value": "2022"}},
+                        "type": "journal-article",
+                        "external-ids": {"external-id": []},
+                    },
+                ]
+            }
+        ]
+    }
+    pubs = sync_orcid.parse_works_summary_response(raw)
+    assert len(pubs) == 1
+    assert pubs[0]["put_code"] == 111
+    assert pubs[0]["title"] == "Preferred title"
