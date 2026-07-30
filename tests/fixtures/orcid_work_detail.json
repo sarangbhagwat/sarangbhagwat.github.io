@@ -1,0 +1,9 @@
+{
+  "contributors": {
+    "contributor": [
+      { "credit-name": { "value": "Your Name" } },
+      { "credit-name": { "value": "Coauthor One" } },
+      { "credit-name": { "value": "Coauthor Two" } }
+    ]
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "generated_at": "2026-07-30T20:09:05.028222+00:00",
+  "orcid_id": "0000-0002-1825-0097",
+  "publications": [
+    {
+      "title": "A Methodology for the Emulation of Architecture",
+      "venue": null,
+      "year": 2012,
+      "type": "journal-article",
+      "doi": "10.5555/12345680",
+      "url": "https://doi.org/10.5555/12345680",
+      "put_code": 9543020,
+      "authors": []
+    },
+    {
+      "title": "The Memory Bus Considered Harmful",
+      "venue": null,
+      "year": 2012,
+      "type": "journal-article",
+      "doi": "10.5555/666655554444",
+      "url": "https://doi.org/10.5555/666655554444",
+      "put_code": 4562455,
+      "authors": []
+    },
+    {
+      "title": "The Impact of Interactive Epistemologies on Cryptography",
+      "venue": null,
+      "year": 2011,
+      "type": "journal-article",
+      "doi": "10.5555/987654321",
+      "url": "https://doi.org/10.5555/987654321",
+      "put_code": 4562454,
+      "authors": []
+    },
+    {
+      "title": "Developing Thin Clients Using Amphibious Epistemologies",
+      "venue": null,
+      "year": 2008,
+      "type": "journal-article",
+      "doi": "10.5555/12345679",
+      "url": "https://doi.org/10.5555/12345679",
+      "put_code": 4562453,
+      "authors": []
+    },
+    {
+      "title": "Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory",
+      "venue": null,
+      "year": 2008,
+      "type": "journal-article",
+      "doi": "10.5555/12345678",
+      "url": "https://doi.org/10.5555/12345678",
+      "put_code": 4562456,
+      "authors": []
+    },
+    {
+      "title": "Bulk and surface plasmons in artificially structured materials",
+      "venue": "IEEE Transactions on Plasma Science",
+      "year": 1987,
+      "type": "journal-article",
+      "doi": "10.1109/TPS.1987.4316723",
+      "url": "https://doi.org/10.1109/TPS.1987.4316723",
+      "put_code": 19980729,
+      "authors": [
+        "Quinn, J.J.",
+        "Carberry, J.S."
+      ]
+    }
+  ]
+}
