@@ -1,5 +1,13 @@
 import "./vendor/js-yaml.min.js"; // exposes global `jsyaml`
 
+function safeUrl(url) {
+  const u = (url == null ? "" : String(url)).trim();
+  if (!u) return "#";
+  if (/^(https?:|mailto:)/i.test(u)) return u;   // safe absolute schemes
+  if (/^[a-z][a-z0-9+.-]*:/i.test(u)) return "#"; // any other explicit scheme -> block
+  return u;                                        // relative URL (no scheme) -> safe
+}
+
 async function loadContent() {
   const res = await fetch("data/content.yml", { cache: "no-cache" });
   if (!res.ok) throw new Error(`content.yml HTTP ${res.status}`);
@@ -16,7 +24,7 @@ function el(tag, props = {}, children = []) {
 
 function renderContent(data) {
   const m = data.meta || {};
-  document.title = `${m.name} — ${m.title}`;
+  document.title = [m.name, m.title].filter(Boolean).join(" — ") || "Personal website";
   document.querySelector(".nav-name").textContent = m.name || "";
   document.getElementById("hero-name").textContent = m.name || "";
   document.getElementById("hero-title").textContent =
@@ -31,7 +39,7 @@ function renderContent(data) {
   const heroLinks = document.getElementById("hero-links");
   heroLinks.replaceChildren(
     ...(m.links || []).map((l) =>
-      el("li", {}, el("a", { href: l.url, textContent: l.label }))
+      el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
     )
   );
 
@@ -55,7 +63,7 @@ function renderContent(data) {
   );
 
   const scholar = document.getElementById("scholar-link");
-  if (m.scholar_url) scholar.href = m.scholar_url;
+  if (m.scholar_url) scholar.href = safeUrl(m.scholar_url);
 
   const teaching = data.teaching || {};
   document.getElementById("teaching-philosophy").replaceChildren(
@@ -73,7 +81,7 @@ function renderContent(data) {
 
   document.getElementById("contact-list").replaceChildren(
     ...(m.links || []).map((l) =>
-      el("li", {}, el("a", { href: l.url, textContent: l.label }))
+      el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
     )
   );
 
@@ -87,11 +95,22 @@ async function loadPublications() {
   return res.json();
 }
 
+function isSelfAuthor(name, selfName) {
+  if (!name || !selfName) return false;
+  const toks = (s) => s.toLowerCase().replace(/[.,]/g, " ").split(/\s+/).filter(Boolean);
+  const a = toks(name), self = toks(selfName);
+  if (a.length < 1 || self.length < 2) return false;
+  const first = self[0], last = self[self.length - 1];
+  const hasLast = a.includes(last);
+  const hasFirst = a.some((t) => t === first || t === first[0]);
+  return hasLast && hasFirst;
+}
+
 function authorsFragment(authors, selfName) {
   const frag = document.createDocumentFragment();
   authors.forEach((name, i) => {
     if (i > 0) frag.append(", ");
-    const isSelf = selfName && name.toLowerCase() === selfName.toLowerCase();
+    const isSelf = isSelfAuthor(name, selfName);
     frag.append(el(isSelf ? "strong" : "span", { textContent: name }));
   });
   return frag;
@@ -127,7 +146,7 @@ function renderPublications(doc, selfName) {
       }
       const meta = [p.venue, p.year].filter(Boolean).join(", ");
       if (meta) li.append(el("div", { className: "pub-venue", textContent: meta }));
-      if (p.url) li.append(el("a", { className: "pub-doi", href: p.url, textContent: "DOI" }));
+      if (p.url) li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: "DOI" }));
       return li;
     });
     blocks.push(el("ul", { className: "pub-list" }, items));
@@ -162,7 +181,6 @@ async function init() {
   try {
     const data = await loadContent();
     renderContent(data);
-    window.__content = data;
     try {
       const pubs = await loadPublications();
       renderPublications(pubs, (data.meta || {}).name);

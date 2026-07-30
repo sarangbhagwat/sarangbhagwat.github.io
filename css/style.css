@@ -30,7 +30,7 @@ a:hover { text-decoration: underline; }
 /* Sticky nav */
 #site-header {
   position: sticky; top: 0; z-index: 10;
-  background: rgba(251, 250, 247, 0.92); backdrop-filter: blur(6px);
+  background: rgba(251, 250, 247, 0.92); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
   border-bottom: 1px solid var(--line);
 }
 #site-nav {

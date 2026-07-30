@@ -103,7 +103,9 @@ def build_publications(orcid_id: str, *, opener=fetch_json) -> dict:
         try:
             detail = opener(f"{ORCID_API}/{orcid_id}/work/{put_code}")
             pub["authors"] = parse_contributors(detail)
-        except Exception:
+        except Exception as err:
+            print(f"warning: could not fetch authors for work {put_code}: {err}",
+                  file=sys.stderr)
             pub["authors"] = []  # authors are best-effort
     return {
         "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
