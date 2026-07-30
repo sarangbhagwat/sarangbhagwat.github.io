@@ -1,0 +1,32 @@
+# Edit this file to update your website. After saving, refresh the page.
+# The publications list is generated automatically from ORCID — do not edit it here.
+meta:
+  name: "Your Name"
+  title: "Postdoctoral Researcher"
+  institution: "Your University"
+  tagline: "One-line summary of your research focus."
+  email: "you@example.com"
+  orcid_id: "0000-0002-1825-0097"          # your ORCID iD — drives the publications sync
+  scholar_url: "https://scholar.google.com/citations?user=REPLACE_ME"
+  links:
+    - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=REPLACE_ME" }
+    - { label: "ORCID", url: "https://orcid.org/0000-0002-1825-0097" }
+    - { label: "Email", url: "mailto:you@example.com" }
+about:
+  - "First paragraph about you: your current role, where, and your overarching research vision."
+  - "Second paragraph: your trajectory and what motivates your work."
+education:
+  - { degree: "Ph.D., Chemical Engineering", institution: "University Name", year: "20XX" }
+  - { degree: "B.S., Chemical Engineering", institution: "University Name", year: "20XX" }
+research_interests:
+  - { heading: "Research theme one", body: "One or two sentences describing this theme." }
+  - { heading: "Research theme two", body: "One or two sentences describing this theme." }
+  - { heading: "Research theme three", body: "One or two sentences describing this theme." }
+teaching:
+  philosophy: "A short paragraph on your teaching philosophy and approach to mentoring."
+  courses:
+    - "Course you have taught or could teach"
+    - "Another course"
+awards:
+  - { year: "20XX", description: "Fellowship, award, or honor" }
+  - { year: "20XX", description: "Another award" }
