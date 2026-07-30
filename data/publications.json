@@ -1,68 +1,314 @@
 {
-  "generated_at": "2026-07-30T20:09:05.028222+00:00",
-  "orcid_id": "0000-0002-1825-0097",
+  "generated_at": "2026-07-30T22:37:17.421567+00:00",
+  "orcid_id": "0000-0002-2620-2829",
   "publications": [
     {
-      "title": "A Methodology for the Emulation of Architecture",
-      "venue": null,
-      "year": 2012,
+      "title": "A unifying equation for fermentation sustainability across the titer-rate-yield landscape",
+      "venue": "Nature Communications",
+      "year": 2026,
       "type": "journal-article",
-      "doi": "10.5555/12345680",
-      "url": "https://doi.org/10.5555/12345680",
-      "put_code": 9543020,
-      "authors": []
-    },
-    {
-      "title": "The Memory Bus Considered Harmful",
-      "venue": null,
-      "year": 2012,
-      "type": "journal-article",
-      "doi": "10.5555/666655554444",
-      "url": "https://doi.org/10.5555/666655554444",
-      "put_code": 4562455,
-      "authors": []
-    },
-    {
-      "title": "The Impact of Interactive Epistemologies on Cryptography",
-      "venue": null,
-      "year": 2011,
-      "type": "journal-article",
-      "doi": "10.5555/987654321",
-      "url": "https://doi.org/10.5555/987654321",
-      "put_code": 4562454,
-      "authors": []
-    },
-    {
-      "title": "Developing Thin Clients Using Amphibious Epistemologies",
-      "venue": null,
-      "year": 2008,
-      "type": "journal-article",
-      "doi": "10.5555/12345679",
-      "url": "https://doi.org/10.5555/12345679",
-      "put_code": 4562453,
-      "authors": []
-    },
-    {
-      "title": "Toward a Unified Theory of High-Energy Metaphysics: Silly String Theory",
-      "venue": null,
-      "year": 2008,
-      "type": "journal-article",
-      "doi": "10.5555/12345678",
-      "url": "https://doi.org/10.5555/12345678",
-      "put_code": 4562456,
-      "authors": []
-    },
-    {
-      "title": "Bulk and surface plasmons in artificially structured materials",
-      "venue": "IEEE Transactions on Plasma Science",
-      "year": 1987,
-      "type": "journal-article",
-      "doi": "10.1109/TPS.1987.4316723",
-      "url": "https://doi.org/10.1109/TPS.1987.4316723",
-      "put_code": 19980729,
+      "doi": "10.1038/s41467-026-75285-1",
+      "url": "https://doi.org/10.1038/s41467-026-75285-1",
+      "put_code": 220278686,
       "authors": [
-        "Quinn, J.J.",
-        "Carberry, J.S."
+        "Sarang S. Bhagwat",
+        "Christopher V. Rao",
+        "Huimin Zhao",
+        "Vijay Singh",
+        "Jeremy S. Guest"
+      ]
+    },
+    {
+      "title": "Prioritizing early opportunities to enhance carbon efficiency at biorefineries",
+      "venue": null,
+      "year": 2026,
+      "type": "preprint",
+      "doi": "10.26434/chemrxiv.15005419/v1",
+      "url": "https://doi.org/10.26434/chemrxiv.15005419/v1",
+      "put_code": 219174631,
+      "authors": [
+        "Wenjun Guo",
+        "Yoel R. Cortés-Peña",
+        "Sarang S. Bhagwat",
+        "Lavanya P. Kudli",
+        "Jeremy S. Guest"
+      ]
+    },
+    {
+      "title": "Cost and Carbon Intensity Implications of Coprocessing Sustainable Aviation Fuel at Petroleum Refineries",
+      "venue": "Environmental Science & Technology",
+      "year": 2026,
+      "type": "journal-article",
+      "doi": "10.1021/acs.est.5c17540",
+      "url": "https://doi.org/10.1021/acs.est.5c17540",
+      "put_code": 203164634,
+      "authors": [
+        "Wenjun Guo",
+        "Lavanya P. Kudli",
+        "Sarang S. Bhagwat",
+        "Maria F. Bianco",
+        "Jeremy S. Guest"
+      ]
+    },
+    {
+      "title": "Bio-based oxalic acid production in Issatchenkia orientalis enables sustainable rare earth recovery",
+      "venue": "Nature Communications",
+      "year": 2026,
+      "type": "journal-article",
+      "doi": "10.1038/s41467-026-68957-5",
+      "url": "https://doi.org/10.1038/s41467-026-68957-5",
+      "put_code": 204168804,
+      "authors": [
+        "Jingxia Lu",
+        "Wenjun Guo",
+        "Ziye Dong",
+        "Sarang S. Bhagwat",
+        "Shih-I Tan",
+        "Zhixin Zhu",
+        "Andrew Johnson",
+        "Jeremy S. Guest",
+        "Rick Honaker",
+        "Dan M. Park",
+        "Yongqin Jiao",
+        "Huimin Zhao"
+      ]
+    },
+    {
+      "title": "Characterizing the Potential for Sustainable Azelaic Acid Production from High-Oleic Vegetable Oil Using Two-Step Oxidative Cleavage",
+      "venue": "ACS ES&T Engineering",
+      "year": 2026,
+      "type": "journal-article",
+      "doi": "10.1021/acsestengg.5c00853",
+      "url": "https://doi.org/10.1021/acsestengg.5c00853",
+      "put_code": 199552781,
+      "authors": [
+        "Lavanya P. Kudli",
+        "Yoel R. Cortés-Peña",
+        "Sarang S. Bhagwat",
+        "Jeremy S. Guest"
+      ]
+    },
+    {
+      "title": "High yield production of 3-hydroxypropionic acid using Issatchenkia orientalis",
+      "venue": "Nature Communications",
+      "year": 2026,
+      "type": "journal-article",
+      "doi": "10.1038/s41467-025-67621-8",
+      "url": "https://doi.org/10.1038/s41467-025-67621-8",
+      "put_code": 201905540,
+      "authors": [
+        "Shih-I Tan",
+        "Sarang S. Bhagwat",
+        "Teresa A. Martin",
+        "Patrick F. Suthers",
+        "Vinh G. Tran",
+        "Wuying Tang",
+        "Zia Fatma",
+        "Costas D. Maranas",
+        "Jeremy S. Guest",
+        "Huimin Zhao"
+      ]
+    },
+    {
+      "title": "Sustainable Triacetic Acid Lactone Production from Sugarcane by Fermentation and Crystallization",
+      "venue": "ACS Sustainable Chemistry & Engineering",
+      "year": 2025,
+      "type": "journal-article",
+      "doi": "10.1021/acssuschemeng.5c04797",
+      "url": "https://doi.org/10.1021/acssuschemeng.5c04797",
+      "put_code": 194452877,
+      "authors": [
+        "Sarang S. Bhagwat",
+        "Marco Nazareno Dell’Anna",
+        "Yalin Li",
+        "Mingfeng Cao",
+        "Emma C. Brace",
+        "Sunil S. Bhagwat",
+        "George W. Huber",
+        "Huimin Zhao",
+        "Jeremy S. Guest"
+      ]
+    },
+    {
+      "title": "Decompartmentalization of the yeast mitochondrial metabolism to improve chemical production in Issatchenkia orientalis",
+      "venue": "Nature Communications",
+      "year": 2025,
+      "type": "journal-article",
+      "doi": "10.1038/s41467-025-62304-w",
+      "url": "https://doi.org/10.1038/s41467-025-62304-w",
+      "put_code": 189092812,
+      "authors": [
+        "Vinh G. Tran",
+        "Shih-I Tan",
+        "Hao Xu",
+        "Daniel R. Weilandt",
+        "Xi Li",
+        "Sarang S. Bhagwat",
+        "Zhixin Zhu",
+        "Jeremy S. Guest",
+        "Joshua D. Rabinowitz",
+        "Huimin Zhao"
+      ]
+    },
+    {
+      "title": "Sustainable potassium sorbate production from triacetic acid lactone in food-grade solvents",
+      "venue": "Green Chemistry",
+      "year": 2025,
+      "type": "journal-article",
+      "doi": "10.1039/D4GC04832F",
+      "url": "https://doi.org/10.1039/D4GC04832F",
+      "put_code": 183535742,
+      "authors": [
+        "Min Soo Kim",
+        "Sarang S. Bhagwat",
+        "Leoncio Santiago-Martínez",
+        "Xiaolei Shi",
+        "Kyuhyeok Choi",
+        "Jeremy S. Guest",
+        "George W. Huber"
+      ]
+    },
+    {
+      "title": "Catalytic Production of Biomass-Based Food Preservative in Food-Grade Solvents",
+      "venue": null,
+      "year": 2024,
+      "type": "preprint",
+      "doi": "10.2139/ssrn.4911012",
+      "url": "https://doi.org/10.2139/ssrn.4911012",
+      "put_code": 222144761,
+      "authors": [
+        "Min Soo Kim",
+        "Sarang Bhagwat",
+        "Leoncio Santiago-Martinez",
+        "Xiaolei Shi",
+        "Kyuhyeok Choi",
+        "Jeremy Guest",
+        "George W. Huber"
+      ]
+    },
+    {
+      "title": "An end-to-end pipeline for succinic acid production at an industrially relevant scale using Issatchenkia orientalis",
+      "venue": "Nature Communications",
+      "year": 2023,
+      "type": "journal-article",
+      "doi": "10.1038/s41467-023-41616-9",
+      "url": "https://doi.org/10.1038/s41467-023-41616-9",
+      "put_code": 143452565,
+      "authors": [
+        "Vinh G. Tran",
+        "Somesh Mishra",
+        "Sarang S. Bhagwat",
+        "Saman Shafaei",
+        "Yihui Shen",
+        "Jayne L. Allen",
+        "Benjamin A. Crosly",
+        "Shih-I Tan",
+        "Zia Fatma",
+        "Joshua D. Rabinowitz",
+        "Jeremy S. Guest",
+        "Vijay Singh",
+        "Huimin Zhao"
+      ]
+    },
+    {
+      "title": "Adsorptive separation and recovery of triacetic acid lactone from fermentation broth",
+      "venue": "Biofuels, Bioproducts and Biorefining",
+      "year": 2023,
+      "type": "journal-article",
+      "doi": null,
+      "url": null,
+      "put_code": 134517266,
+      "authors": [
+        "Singh, Ramkrishna",
+        "Bhagwat, Sarang S",
+        "Viswanathan, Mothi Bharath",
+        "Cortés-Peña, Yoel R",
+        "Eilts, Kristen K",
+        "McDonough, Grace",
+        "Cao, Mingfeng",
+        "Guest, Jeremy S",
+        "Zhao, Huimin",
+        "Singh, Vijay"
+      ]
+    },
+    {
+      "title": "Evaluation of 1, 2-diacyl-3-acetyl triacylglycerol production in Yarrowia lipolytica",
+      "venue": "Metabolic Engineering",
+      "year": 2023,
+      "type": "journal-article",
+      "doi": null,
+      "url": null,
+      "put_code": 134517270,
+      "authors": [
+        "Yan, Qiang",
+        "Jacobson, Tyler B",
+        "Ye, Zhou",
+        "Cortés-Pena, Yoel R",
+        "Bhagwat, Sarang S",
+        "Hubbard, Susan",
+        "Cordell, William T",
+        "Oleniczak, Rebecca E",
+        "Gambacorta, Francesca V",
+        "Vazquez, Julio Rivera",
+        "others"
+      ]
+    },
+    {
+      "title": "Rewiring yeast metabolism for producing 2, 3-butanediol and two downstream applications: Techno-economic analysis and life cycle assessment of methyl ethyl ketone (MEK) and agricultural biostimulant production",
+      "venue": "Chemical Engineering Journal",
+      "year": 2023,
+      "type": "journal-article",
+      "doi": null,
+      "url": null,
+      "put_code": 134517267,
+      "authors": [
+        "Lee, Jae Won",
+        "Bhagwat, Sarang S",
+        "Kuanyshev, Nurzhan",
+        "Cho, Young B",
+        "Sun, Liang",
+        "Lee, Ye-Gi",
+        "Cortés-Peña, Yoel R",
+        "Li, Yalin",
+        "Rao, Christopher V",
+        "Guest, Jeremy S",
+        "others"
+      ]
+    },
+    {
+      "title": "Sustainable Lactic Acid Production from Lignocellulosic Biomass",
+      "venue": "ACS Sustainable Chemistry & Engineering",
+      "year": 2021,
+      "type": "journal-article",
+      "doi": null,
+      "url": null,
+      "put_code": 134517451,
+      "authors": [
+        "Li, Yalin",
+        "Bhagwat, Sarang S",
+        "Cortés-Peña, Yoel R",
+        "Ki, Dongwon",
+        "Rao, Christopher V",
+        "Jin, Yong-Su",
+        "Guest, Jeremy S"
+      ]
+    },
+    {
+      "title": "Sustainable Production of Acrylic Acid via 3-Hydroxypropionic Acid from Lignocellulosic Biomass",
+      "venue": "ACS Sustainable Chemistry and Engineering",
+      "year": 2021,
+      "type": "journal-article",
+      "doi": null,
+      "url": null,
+      "put_code": 134517452,
+      "authors": [
+        "Bhagwat, Sarang S.",
+        "Li, Yalin",
+        "Cortés-Peña, Yoel R.",
+        "Brace, Emma C.",
+        "Martin, Teresa A.",
+        "Zhao, Huimin",
+        "Guest, Jeremy S."
       ]
     }
   ]
