@@ -22,6 +22,18 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+function fill(id, nodes) {
+  const target = document.getElementById(id);
+  if (target) target.replaceChildren(...nodes);
+}
+
+function show(id, visible) {
+  const target = document.getElementById(id);
+  if (target) target.hidden = !visible;
+  const navLink = document.querySelector(`#site-nav .nav-links a[href="#${id}"]`);
+  if (navLink) navLink.parentElement.hidden = !visible;
+}
+
 function renderContent(data) {
   const m = data.meta || {};
   document.title = [m.name, m.title].filter(Boolean).join(" — ") || "Personal website";
@@ -43,47 +55,44 @@ function renderContent(data) {
     )
   );
 
-  document.getElementById("about-body").replaceChildren(
-    ...(data.about || []).map((p) => el("p", { textContent: p }))
-  );
+  const about = data.about || [];
+  const education = data.education || [];
+  fill("about-body", about.map((p) => el("p", { textContent: p })));
+  fill("education-list", education.map((e) =>
+    el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
+  ));
+  show("about", about.length > 0 || education.length > 0);
+  show("education-heading", education.length > 0);
 
-  document.getElementById("education-list").replaceChildren(
-    ...(data.education || []).map((e) =>
-      el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
-    )
-  );
-
-  document.getElementById("research-list").replaceChildren(
-    ...(data.research_interests || []).map((r) =>
-      el("div", { className: "research-item" }, [
-        el("h3", { textContent: r.heading }),
-        el("p", { textContent: r.body }),
-      ])
-    )
-  );
+  const research = data.research_interests || [];
+  fill("research-list", research.map((r) =>
+    el("div", { className: "research-item" }, [
+      el("h3", { textContent: r.heading }),
+      el("p", { textContent: r.body }),
+    ])
+  ));
+  show("research", research.length > 0);
 
   const scholar = document.getElementById("scholar-link");
-  if (m.scholar_url) scholar.href = safeUrl(m.scholar_url);
+  if (scholar && m.scholar_url) scholar.href = safeUrl(m.scholar_url);
 
   const teaching = data.teaching || {};
-  document.getElementById("teaching-philosophy").replaceChildren(
-    el("p", { textContent: teaching.philosophy || "" })
-  );
-  document.getElementById("teaching-courses").replaceChildren(
-    ...(teaching.courses || []).map((c) => el("li", { textContent: c }))
-  );
+  const courses = teaching.courses || [];
+  fill("teaching-philosophy",
+    teaching.philosophy ? [el("p", { textContent: teaching.philosophy })] : []);
+  fill("teaching-courses", courses.map((c) => el("li", { textContent: c })));
+  show("teaching", Boolean(teaching.philosophy) || courses.length > 0);
+  show("courses-heading", courses.length > 0);
 
-  document.getElementById("awards-list").replaceChildren(
-    ...(data.awards || []).map((a) =>
-      el("li", {}, [el("strong", { textContent: `${a.year} ` }), a.description])
-    )
-  );
+  const awards = data.awards || [];
+  fill("awards-list", awards.map((a) =>
+    el("li", {}, [el("strong", { textContent: `${a.year} ` }), a.description])
+  ));
+  show("awards", awards.length > 0);
 
-  document.getElementById("contact-list").replaceChildren(
-    ...(m.links || []).map((l) =>
-      el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
-    )
-  );
+  fill("contact-list", (m.links || []).map((l) =>
+    el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
+  ));
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   document.getElementById("footer-name").textContent = m.name || "";
