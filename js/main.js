@@ -22,6 +22,13 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+function toggleSection(id, hasContent) {
+  const section = document.getElementById(id);
+  if (section) section.hidden = !hasContent;
+  const navLink = document.querySelector(`#site-nav .nav-links a[href="#${id}"]`);
+  if (navLink) navLink.parentElement.hidden = !hasContent;
+}
+
 function renderContent(data) {
   const m = data.meta || {};
   document.title = [m.name, m.title].filter(Boolean).join(" — ") || "Personal website";
@@ -66,6 +73,8 @@ function renderContent(data) {
   if (m.scholar_url) scholar.href = safeUrl(m.scholar_url);
 
   const teaching = data.teaching || {};
+  toggleSection("teaching",
+    Boolean(teaching.philosophy) || (teaching.courses || []).length > 0);
   document.getElementById("teaching-philosophy").replaceChildren(
     el("p", { textContent: teaching.philosophy || "" })
   );
@@ -73,6 +82,7 @@ function renderContent(data) {
     ...(teaching.courses || []).map((c) => el("li", { textContent: c }))
   );
 
+  toggleSection("awards", (data.awards || []).length > 0);
   document.getElementById("awards-list").replaceChildren(
     ...(data.awards || []).map((a) =>
       el("li", {}, [el("strong", { textContent: `${a.year} ` }), a.description])
