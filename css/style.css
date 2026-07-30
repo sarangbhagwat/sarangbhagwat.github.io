@@ -23,8 +23,8 @@ h1, h2, h3 { font-family: "Site Serif", Georgia, serif; color: var(--accent); li
 h1 { font-size: 2rem; margin: 0.2rem 0; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; }
-a { color: var(--accent-soft); text-decoration: none; }
-a:hover { text-decoration: underline; }
+a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent); }
 .muted { color: var(--muted); }
 
 /* Sticky nav */
@@ -37,9 +37,11 @@ a:hover { text-decoration: underline; }
   display: flex; justify-content: space-between; align-items: center;
   gap: 1rem; max-width: var(--max); margin: 0 auto; padding: 0.75rem 1rem;
 }
-.nav-name { font-family: "Site Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); }
+.nav-name { font-family: "Site Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+.nav-name:hover { color: var(--accent-soft); }
 .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
-.nav-links a { color: var(--muted); font-size: 0.95rem; }
+.nav-links a { color: var(--muted); font-size: 0.95rem; text-decoration: none; }
+.nav-links a:hover { color: var(--accent); }
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
@@ -57,8 +59,9 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 .button {
   display: inline-block; background: var(--accent); color: #fff;
   padding: 0.55rem 1.1rem; border-radius: 6px; font-weight: 600;
+  text-decoration: none;
 }
-.button:hover { background: var(--accent-soft); text-decoration: none; }
+.button:hover { background: var(--accent-soft); color: #fff; }
 .icon-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin: 1rem 0 0; }
 
 #education-list { list-style: none; padding: 0; }
