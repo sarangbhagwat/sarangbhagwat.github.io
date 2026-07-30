@@ -81,13 +81,73 @@ function renderContent(data) {
   document.getElementById("footer-name").textContent = m.name || "";
 }
 
+async function loadPublications() {
+  const res = await fetch("data/publications.json", { cache: "no-cache" });
+  if (!res.ok) throw new Error(`publications.json HTTP ${res.status}`);
+  return res.json();
+}
+
+function authorsFragment(authors, selfName) {
+  const frag = document.createDocumentFragment();
+  authors.forEach((name, i) => {
+    if (i > 0) frag.append(", ");
+    const isSelf = selfName && name.toLowerCase() === selfName.toLowerCase();
+    frag.append(el(isSelf ? "strong" : "span", { textContent: name }));
+  });
+  return frag;
+}
+
+function renderPublications(doc, selfName) {
+  const list = document.getElementById("publications-list");
+  const pubs = (doc && doc.publications) || [];
+  if (pubs.length === 0) {
+    list.replaceChildren(el("p", { className: "muted", textContent:
+      "Publications will appear here once the ORCID sync runs." }));
+    return;
+  }
+  const byYear = new Map();
+  for (const p of pubs) {
+    const y = p.year || "Undated";
+    if (!byYear.has(y)) byYear.set(y, []);
+    byYear.get(y).push(p);
+  }
+  const years = [...byYear.keys()].sort((a, b) => {
+    if (a === "Undated") return 1;
+    if (b === "Undated") return -1;
+    return b - a;
+  });
+  const blocks = [];
+  for (const y of years) {
+    blocks.push(el("h3", { className: "pub-year", textContent: String(y) }));
+    const items = byYear.get(y).map((p) => {
+      const li = el("li", { className: "pub-item" });
+      li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
+      if (p.authors && p.authors.length) {
+        li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
+      }
+      const meta = [p.venue, p.year].filter(Boolean).join(", ");
+      if (meta) li.append(el("div", { className: "pub-venue", textContent: meta }));
+      if (p.url) li.append(el("a", { className: "pub-doi", href: p.url, textContent: "DOI" }));
+      return li;
+    });
+    blocks.push(el("ul", { className: "pub-list" }, items));
+  }
+  list.replaceChildren(...blocks);
+}
+
 async function init() {
   try {
     const data = await loadContent();
     renderContent(data);
-    // Task 5 will call renderPublications() here.
+    window.__content = data;
+    try {
+      const pubs = await loadPublications();
+      renderPublications(pubs, (data.meta || {}).name);
+    } catch (pubErr) {
+      console.error(pubErr);
+      renderPublications({ publications: [] }, (data.meta || {}).name);
+    }
     // Task 7 will initialize nav behavior here.
-    window.__content = data; // exposed for later tasks
   } catch (err) {
     console.error(err);
   }
