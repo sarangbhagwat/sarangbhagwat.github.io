@@ -135,6 +135,29 @@ function renderPublications(doc, selfName) {
   list.replaceChildren(...blocks);
 }
 
+function initNav() {
+  const links = new Map(
+    [...document.querySelectorAll("#site-nav .nav-links a")].map((a) => [
+      a.getAttribute("href").slice(1), a,
+    ])
+  );
+  const sections = [...document.querySelectorAll("main section[id]")];
+  const observer = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        const link = links.get(entry.target.id);
+        if (!link) continue;
+        if (entry.isIntersecting) {
+          links.forEach((l) => l.classList.remove("active"));
+          link.classList.add("active");
+        }
+      }
+    },
+    { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+  );
+  sections.forEach((s) => observer.observe(s));
+}
+
 async function init() {
   try {
     const data = await loadContent();
@@ -147,7 +170,7 @@ async function init() {
       console.error(pubErr);
       renderPublications({ publications: [] }, (data.meta || {}).name);
     }
-    // Task 7 will initialize nav behavior here.
+    initNav();
   } catch (err) {
     console.error(err);
   }
