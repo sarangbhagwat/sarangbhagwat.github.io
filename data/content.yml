@@ -11,7 +11,7 @@ meta:
   links:
     - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=tX_qxfEAAAAJ&hl=en" }
     - { label: "ORCID", url: "https://orcid.org/0000-0002-2620-2829" }
-    - { label: "Email", url: "sarangbhagwat@berkeley.edu" }
+    - { label: "Email", url: "mailto: sarangbhagwat@berkeley.edu" }
 about:
   - "I am currently a postdoctoral researcher with Dr. Corinne Scown at the University of California, Berkeley. I work on advanced computational methods for process simulation and evaluation under uncertainty, with applications in biomanufacturing, catalysis, and wastewater resource recovery."
   - "I completed my Ph.D. in 2025 with Prof. Jeremy Guest at the University of Illinois Urbana-Champaign."
