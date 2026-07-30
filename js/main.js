@@ -22,6 +22,21 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+function richText(text) {
+  // Renders markdown-style links [label](url) as anchors; everything else as plain text.
+  const frag = document.createDocumentFragment();
+  const s = String(text == null ? "" : text);
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  let last = 0, match;
+  while ((match = re.exec(s)) !== null) {
+    if (match.index > last) frag.append(s.slice(last, match.index));
+    frag.append(el("a", { href: safeUrl(match[2]), textContent: match[1] }));
+    last = match.index + match[0].length;
+  }
+  if (last < s.length) frag.append(s.slice(last));
+  return frag;
+}
+
 function fill(id, nodes) {
   const target = document.getElementById(id);
   if (target) target.replaceChildren(...nodes);
@@ -57,7 +72,7 @@ function renderContent(data) {
 
   const about = data.about || [];
   const education = data.education || [];
-  fill("about-body", about.map((p) => el("p", { textContent: p })));
+  fill("about-body", about.map((p) => el("p", {}, richText(p))));
   fill("education-list", education.map((e) =>
     el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
   ));
@@ -68,7 +83,7 @@ function renderContent(data) {
   fill("research-list", research.map((r) =>
     el("div", { className: "research-item" }, [
       el("h3", { textContent: r.heading }),
-      el("p", { textContent: r.body }),
+      el("p", {}, richText(r.body)),
     ])
   ));
   show("research", research.length > 0);
@@ -79,14 +94,14 @@ function renderContent(data) {
   const teaching = data.teaching || {};
   const courses = teaching.courses || [];
   fill("teaching-philosophy",
-    teaching.philosophy ? [el("p", { textContent: teaching.philosophy })] : []);
+    teaching.philosophy ? [el("p", {}, richText(teaching.philosophy))] : []);
   fill("teaching-courses", courses.map((c) => el("li", { textContent: c })));
   show("teaching", Boolean(teaching.philosophy) || courses.length > 0);
   show("courses-heading", courses.length > 0);
 
   const awards = data.awards || [];
   fill("awards-list", awards.map((a) =>
-    el("li", {}, [el("strong", { textContent: `${a.year} ` }), a.description])
+    el("li", {}, [el("strong", { textContent: `${a.year} ` }), richText(a.description)])
   ));
   show("awards", awards.length > 0);
 
