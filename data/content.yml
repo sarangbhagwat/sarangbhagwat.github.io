@@ -1,32 +1,25 @@
 # Edit this file to update your website. After saving, refresh the page.
 # The publications list is generated automatically from ORCID — do not edit it here.
 meta:
-  name: "Your Name"
+  name: "Sarang S. Bhagwat"
   title: "Postdoctoral Researcher"
-  institution: "Your University"
+  institution: "University of California, Berkeley"
   tagline: "One-line summary of your research focus."
-  email: "you@example.com"
-  orcid_id: "0000-0002-1825-0097"          # your ORCID iD — drives the publications sync
-  scholar_url: "https://scholar.google.com/citations?user=REPLACE_ME"
+  email: "sarangbhagwat@berkeley.edu"
+  orcid_id: "0000-0002-2620-2829"          # your ORCID iD — drives the publications sync
+  scholar_url: "https://scholar.google.com/citations?user=tX_qxfEAAAAJ&hl=en"
   links:
-    - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=REPLACE_ME" }
-    - { label: "ORCID", url: "https://orcid.org/0000-0002-1825-0097" }
-    - { label: "Email", url: "mailto:you@example.com" }
+    - { label: "Google Scholar", url: "https://scholar.google.com/citations?user=tX_qxfEAAAAJ&hl=en" }
+    - { label: "ORCID", url: "https://orcid.org/0000-0002-2620-2829" }
+    - { label: "Email", url: "sarangbhagwat@berkeley.edu" }
 about:
-  - "First paragraph about you: your current role, where, and your overarching research vision."
-  - "Second paragraph: your trajectory and what motivates your work."
+  - "I am currently a postdoctoral researcher with Dr. Corinne Scown at the University of California, Berkeley. I work on advanced computational methods for process simulation and evaluation under uncertainty, with applications in biomanufacturing, catalysis, and wastewater resource recovery."
+  - "I completed my Ph.D. in 2025 with Prof. Jeremy Guest at the University of Illinois Urbana-Champaign."
 education:
-  - { degree: "Ph.D., Chemical Engineering", institution: "University Name", year: "20XX" }
-  - { degree: "B.S., Chemical Engineering", institution: "University Name", year: "20XX" }
+  - { degree: "Ph.D., Civil & Environmental Engineering", institution: "University of Illinois Urbana-Champaign", year: "2025" }
+  - { degree: "M.S., Civil & Environmental Engineering", institution: "North Carolina State University", year: "2019" }
+  - { degree: "B.S., Chemical Technology (Oils, Oleochemicals, and Surfactants)", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
 research_interests:
   - { heading: "Research theme one", body: "One or two sentences describing this theme." }
   - { heading: "Research theme two", body: "One or two sentences describing this theme." }
   - { heading: "Research theme three", body: "One or two sentences describing this theme." }
-teaching:
-  philosophy: "A short paragraph on your teaching philosophy and approach to mentoring."
-  courses:
-    - "Course you have taught or could teach"
-    - "Another course"
-awards:
-  - { year: "20XX", description: "Fellowship, award, or honor" }
-  - { year: "20XX", description: "Another award" }
