@@ -110,9 +110,13 @@ function isSelfAuthor(name, selfName) {
   const a = toks(name), self = toks(selfName);
   if (a.length < 1 || self.length < 2) return false;
   const first = self[0], last = self[self.length - 1];
-  const hasLast = a.includes(last);
-  const hasFirst = a.some((t) => t === first || t === first[0]);
-  return hasLast && hasFirst;
+  if (!a.includes(last)) return false;
+  // Only the primary given name decides: a full name must match exactly;
+  // a bare initial may match the first initial. Middle initials never count.
+  const given = a.filter((t) => t !== last);
+  if (given.length === 0) return false;
+  const g = given[0];
+  return g === first || (g.length === 1 && g === first[0]);
 }
 
 function authorsFragment(authors, selfName) {
