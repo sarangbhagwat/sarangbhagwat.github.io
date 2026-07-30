@@ -4,8 +4,12 @@ Standard library only (urllib, json, re). No third-party dependencies.
 """
 from __future__ import annotations
 
+import datetime
 import json
+import pathlib
 import re
+import sys
+import urllib.request
 
 
 def read_orcid_id(content_yml_text: str) -> str:
@@ -68,3 +72,88 @@ def parse_works_summary_response(raw: dict) -> list[dict]:
         pubs.append(pub)
     pubs.sort(key=lambda p: (p["year"] is not None, p["year"] or 0), reverse=True)
     return pubs
+
+
+ORCID_API = "https://pub.orcid.org/v3.0"
+
+
+def fetch_json(url: str, timeout: int = 20) -> dict:
+    req = urllib.request.Request(url, headers={"Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=timeout) as resp:
+        return json.loads(resp.read().decode("utf-8"))
+
+
+def parse_contributors(work_detail: dict) -> list[str]:
+    contributors = (work_detail.get("contributors") or {}).get("contributor", []) or []
+    names = []
+    for c in contributors:
+        name = (c.get("credit-name") or {}).get("value")
+        if name:
+            names.append(name)
+    return names
+
+
+def build_publications(orcid_id: str, *, opener=fetch_json) -> dict:
+    raw = opener(f"{ORCID_API}/{orcid_id}/works")
+    pubs = parse_works_summary_response(raw)
+    for pub in pubs:
+        put_code = pub.get("put_code")
+        if not put_code:
+            continue
+        try:
+            detail = opener(f"{ORCID_API}/{orcid_id}/work/{put_code}")
+            pub["authors"] = parse_contributors(detail)
+        except Exception:
+            pub["authors"] = []  # authors are best-effort
+    return {
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        "orcid_id": orcid_id,
+        "publications": pubs,
+    }
+
+
+def _comparable(doc: dict) -> str:
+    return json.dumps({k: v for k, v in doc.items() if k != "generated_at"},
+                      sort_keys=True)
+
+
+def write_publications_atomic(doc: dict, out_path) -> bool:
+    out_path = pathlib.Path(out_path)
+    if out_path.exists():
+        try:
+            existing = json.loads(out_path.read_text(encoding="utf-8"))
+            if _comparable(existing) == _comparable(doc):
+                return False
+        except Exception:
+            pass
+    tmp = out_path.with_suffix(".json.tmp")
+    tmp.write_text(json.dumps(doc, indent=2, ensure_ascii=False) + "\n",
+                   encoding="utf-8")
+    tmp.replace(out_path)
+    return True
+
+
+def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    root = pathlib.Path(__file__).resolve().parents[1]
+    content_path = root / "data" / "content.yml"
+    out_path = root / "data" / "publications.json"
+
+    orcid_id = argv[0] if argv else read_orcid_id(
+        content_path.read_text(encoding="utf-8"))
+
+    try:
+        doc = build_publications(orcid_id)
+    except Exception as err:  # fail-safe: never clobber the live list
+        print(f"sync failed, keeping existing publications.json: {err}",
+              file=sys.stderr)
+        return 0
+
+    changed = write_publications_atomic(doc, out_path)
+    print(f"{'updated' if changed else 'no change'}: "
+          f"{len(doc['publications'])} publications")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

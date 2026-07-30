@@ -143,3 +143,37 @@ def test_parse_response_uses_first_work_summary_in_group():
     assert len(pubs) == 1
     assert pubs[0]["put_code"] == 111
     assert pubs[0]["title"] == "Preferred title"
+
+
+def test_parse_contributors_reads_credit_names():
+    detail = load_fixture("orcid_work_detail.json")
+    assert sync_orcid.parse_contributors(detail) == ["Your Name", "Coauthor One", "Coauthor Two"]
+
+
+def test_parse_contributors_empty_when_absent():
+    assert sync_orcid.parse_contributors({}) == []
+
+
+def test_build_publications_assembles_document():
+    works = load_fixture("orcid_works_summary.json")
+    detail = load_fixture("orcid_work_detail.json")
+
+    def fake_opener(url, timeout=20):
+        if url.endswith("/works"):
+            return works
+        return detail  # any per-work detail request
+
+    doc = sync_orcid.build_publications("0000-0002-1825-0097", opener=fake_opener)
+    assert doc["orcid_id"] == "0000-0002-1825-0097"
+    assert "generated_at" in doc
+    assert doc["publications"][0]["put_code"] == 111
+    assert doc["publications"][0]["authors"][0] == "Your Name"
+
+
+def test_write_publications_atomic_only_writes_on_change(tmp_path):
+    out = tmp_path / "publications.json"
+    doc = {"orcid_id": "x", "publications": [], "generated_at": "t"}
+    assert sync_orcid.write_publications_atomic(doc, out) is True
+    # Second identical write (ignoring generated_at) should be a no-op.
+    doc2 = {"orcid_id": "x", "publications": [], "generated_at": "different-time"}
+    assert sync_orcid.write_publications_atomic(doc2, out) is False
