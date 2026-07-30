@@ -4,7 +4,7 @@ meta:
   name: "Sarang S. Bhagwat"
   title: "Postdoctoral Researcher"
   institution: "University of California, Berkeley"
-  tagline: "One-line summary of your research focus."
+  tagline: "My work advances agile and predictive process systems engineering through numerical and stochastic analyses."
   email: "sarangbhagwat@berkeley.edu"
   orcid_id: "0000-0002-2620-2829"          # your ORCID iD — drives the publications sync
   scholar_url: "https://scholar.google.com/citations?user=tX_qxfEAAAAJ&hl=en"
@@ -13,13 +13,15 @@ meta:
     - { label: "ORCID", url: "https://orcid.org/0000-0002-2620-2829" }
     - { label: "Email", url: "mailto: sarangbhagwat@berkeley.edu" }
 about:
-  - "I am currently a postdoctoral researcher with Dr. Corinne Scown at the University of California, Berkeley. I work on advanced computational methods for process simulation and evaluation under uncertainty, with applications in biomanufacturing, catalysis, and wastewater resource recovery."
-  - "I completed my Ph.D. in 2025 with Prof. Jeremy Guest at the University of Illinois Urbana-Champaign."
+  - "I am currently a postdoctoral researcher with Dr. Corinne Scown at the University of California, Berkeley and an affiliate at the Joint Bioenergy Institute (JBEI) at Lawrence Berkeley National Lab. I work on advanced computational methods for process simulation and evaluation under uncertainty, with applications in biomanufacturing, catalysis, separations, and wastewater resource recovery. I am the lead developer of NSKinetics and the PISCES Standard Flowsheet Format (SFF) and a core developer of BioSTEAM."
+  - "I completed my Ph.D. in 2025 with Prof. Jeremy Guest at the University of Illinois Urbana-Champaign. My doctoral research focused on creating an inter-disciplinary platform that drives large-scale team science at the DOE Center for Advanced Bioenergy and Bioproducts Innovation (CABBI) by integrating process engineering with rigorous uncertainty and sensitivity analyses. I create tools to design, simulate, and evaluate (through techno-economic analysis, TEA, and life cycle assessment, LCA) emerging technologies under uncertainty. I leverage these tools to actively shape design-build-test-learn cycles and quantitatively prioritize R&D needs."
 education:
   - { degree: "Ph.D., Civil & Environmental Engineering", institution: "University of Illinois Urbana-Champaign", year: "2025" }
   - { degree: "M.S., Civil & Environmental Engineering", institution: "North Carolina State University", year: "2019" }
   - { degree: "B.S., Chemical Technology (Oils, Oleochemicals, and Surfactants)", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
 research_interests:
-  - { heading: "Research theme one", body: "One or two sentences describing this theme." }
-  - { heading: "Research theme two", body: "One or two sentences describing this theme." }
-  - { heading: "Research theme three", body: "One or two sentences describing this theme." }
+  - { heading: "Process Systems Engineering; Data Analytics; Circular Economy; Biomanufacturing" }
+  - { body: "Process synthesis, design, and simulation under uncertainty" }
+  - { body: "Discover and prioritize biomanufacturing pathways through physics-informed AI & ML" }
+  - { body: "Develop open-source tools for techno-economic analysis (TEA) and life cycle assessment (LCA)" }
+  - { body: "Navigate economic and environmental trade-offs in R&D decisions" }
