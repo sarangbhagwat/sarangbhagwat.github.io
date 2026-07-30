@@ -149,10 +149,12 @@ function renderPublications(doc, selfName) {
     return b - a;
   });
   const blocks = [];
+  let num = pubs.length; // reverse numbering: oldest = 1, newest = highest
   for (const y of years) {
     blocks.push(el("h3", { className: "pub-year", textContent: String(y) }));
     const items = byYear.get(y).map((p) => {
       const li = el("li", { className: "pub-item" });
+      li.append(el("span", { className: "pub-num", textContent: `${num--}.` }));
       li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
       if (p.authors && p.authors.length) {
         li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));

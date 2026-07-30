@@ -70,7 +70,8 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 /* Publications */
 .pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
 .pub-list { list-style: none; padding: 0; margin: 0; }
-.pub-item { margin-bottom: 1.1rem; }
+.pub-item { margin-bottom: 1.1rem; padding-left: 2.2rem; }
+.pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }
 .pub-title { font-weight: 600; }
 .pub-authors { color: var(--text); font-size: 0.95rem; }
 .pub-venue { color: var(--muted); font-style: italic; font-size: 0.95rem; }
