@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-30T22:37:17.421567+00:00",
+  "generated_at": "2026-07-31T06:17:39.090301+00:00",
   "orcid_id": "0000-0002-2620-2829",
   "publications": [
     {
@@ -215,8 +215,8 @@
       "venue": "Biofuels, Bioproducts and Biorefining",
       "year": 2023,
       "type": "journal-article",
-      "doi": null,
-      "url": null,
+      "doi": "https://doi.org/10.1002/bbb.2427",
+      "url": "https://doi.org/10.1002/bbb.2427",
       "put_code": 134517266,
       "authors": [
         "Singh, Ramkrishna",
@@ -236,8 +236,8 @@
       "venue": "Metabolic Engineering",
       "year": 2023,
       "type": "journal-article",
-      "doi": null,
-      "url": null,
+      "doi": "https://doi.org/10.1016/j.ymben.2023.01.003",
+      "url": "https://doi.org/10.1016/j.ymben.2023.01.003",
       "put_code": 134517270,
       "authors": [
         "Yan, Qiang",
@@ -258,8 +258,8 @@
       "venue": "Chemical Engineering Journal",
       "year": 2023,
       "type": "journal-article",
-      "doi": null,
-      "url": null,
+      "doi": "https://doi.org/10.1016/j.cej.2022.138886",
+      "url": "https://doi.org/10.1016/j.cej.2022.138886",
       "put_code": 134517267,
       "authors": [
         "Lee, Jae Won",
@@ -280,8 +280,8 @@
       "venue": "ACS Sustainable Chemistry & Engineering",
       "year": 2021,
       "type": "journal-article",
-      "doi": null,
-      "url": null,
+      "doi": "https://doi.org/10.1021/acssuschemeng.0c08055",
+      "url": "https://doi.org/10.1021/acssuschemeng.0c08055",
       "put_code": 134517451,
       "authors": [
         "Li, Yalin",
@@ -298,8 +298,8 @@
       "venue": "ACS Sustainable Chemistry and Engineering",
       "year": 2021,
       "type": "journal-article",
-      "doi": null,
-      "url": null,
+      "doi": "https://doi.org/10.1021/acssuschemeng.1c05441",
+      "url": "https://doi.org/10.1021/acssuschemeng.1c05441",
       "put_code": 134517452,
       "authors": [
         "Bhagwat, Sarang S.",
