@@ -288,7 +288,11 @@ function initReveal() {
 }
 
 async function init() {
-  initReveal(); // sync, before the content fetch: hero reveals immediately
+  try {
+    initReveal(); // sync, before the content fetch: hero reveals immediately
+  } catch (e) {
+    console.error(e);
+  }
   try {
     const data = await loadContent();
     renderContent(data);
