@@ -22,6 +22,70 @@ function el(tag, props = {}, children = []) {
   return node;
 }
 
+// Parses trusted, static inline SVG markup (authored below, never user/network data)
+// into a real SVGElement — <template> parsing switches to foreign-content mode for
+// <svg>, giving proper namespacing without manual createElementNS calls per node.
+function svgIcon(inner) {
+  const tpl = document.createElement("template");
+  tpl.innerHTML = `<svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false">${inner}</svg>`;
+  return tpl.content.firstChild;
+}
+
+// Monochrome, currentColor icons keyed by normalized (lowercased) link label.
+const ICONS = {
+  "google scholar": () => svgIcon(
+    '<path d="M12 3 1 9l11 6 11-6-11-6Z"/>' +
+    '<path d="M5 11.5v4.8c0 1.7 3.1 3.2 7 3.2s7-1.5 7-3.2v-4.8l-7 3.8-7-3.8Z"/>'
+  ),
+  orcid: () => svgIcon(
+    '<circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
+    '<circle cx="8.3" cy="8.2" r="1.1"/>' +
+    '<g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">' +
+    '<line x1="8.3" y1="10.6" x2="8.3" y2="16.4"/>' +
+    '<line x1="11.8" y1="10.6" x2="15.6" y2="10.6"/>' +
+    '<line x1="11.8" y1="13.3" x2="15.6" y2="13.3"/>' +
+    '<line x1="11.8" y1="16" x2="14.2" y2="16"/></g>'
+  ),
+  email: () => svgIcon(
+    '<rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
+    '<path d="M3.5 6.5 12 13 20.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+  ),
+  github: () => svgIcon(
+    '<path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.38 6.84 9.74.5.1.68-.22.68-.49 ' +
+    '0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.19-3.37-1.19-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 ' +
+    '1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 ' +
+    '0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 ' +
+    '2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 ' +
+    '0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>'
+  ),
+  linkedin: () => svgIcon(
+    '<rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
+    '<circle cx="7.7" cy="7.8" r="1.3"/>' +
+    '<rect x="6.6" y="10.3" width="2.2" height="8"/>' +
+    '<path d="M11.6 18.3v-5.4c0-1.7 1.1-2.9 2.7-2.9 1.7 0 2.9 1.1 2.9 3.1v5.2h-2.2v-4.8c0-1-.4-1.7-1.3-1.7-.7 ' +
+    '0-1.2.5-1.4 1-.1.2-.1.5-.1.8v4.7h-2.2Z"/>'
+  ),
+};
+
+// Looks up an icon by case-insensitive label, falling back to the mailto: scheme
+// (contact's email link uses the address itself as its label, not "Email").
+function iconFor(label, url) {
+  const byLabel = ICONS[(label || "").trim().toLowerCase()];
+  if (byLabel) return byLabel();
+  if (/^mailto:/i.test((url || "").trim())) return ICONS.email();
+  return null;
+}
+
+// Shared anchor builder for hero links and the contact link: icon (if known) + label.
+// The visible label remains the accessible name, so the icon stays aria-hidden.
+function iconLink(label, url) {
+  const a = el("a", { className: "icon-link", href: safeUrl(url) });
+  const icon = iconFor(label, url);
+  if (icon) a.append(icon);
+  a.append(label);
+  return el("li", {}, a);
+}
+
 function richText(text) {
   // Renders markdown-style links [label](url) as anchors; everything else as plain text.
   const frag = document.createDocumentFragment();
@@ -64,11 +128,7 @@ function renderContent(data) {
   cv.setAttribute("download", "");
 
   const heroLinks = document.getElementById("hero-links");
-  heroLinks.replaceChildren(
-    ...(m.links || []).map((l) =>
-      el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
-    )
-  );
+  heroLinks.replaceChildren(...(m.links || []).map((l) => iconLink(l.label, l.url)));
 
   const about = data.about || [];
   const education = data.education || [];
@@ -108,9 +168,7 @@ function renderContent(data) {
   show("awards", awards.length > 0);
 
   const email = (m.email || "").trim();
-  fill("contact-list", email
-    ? [el("li", {}, el("a", { href: safeUrl(`mailto:${email}`), textContent: email }))]
-    : []);
+  fill("contact-list", email ? [iconLink(email, `mailto:${email}`)] : []);
   show("contact", Boolean(email));
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
