@@ -6,19 +6,6 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import detect_cv  # noqa: E402
 
 
-def test_read_name_part_handles_quotes_and_comments():
-    text = (
-        'meta:\n'
-        '  first_name: "Sarang"\n'
-        "  last_name: 'Bhagwat'\n"
-        "  title: Postdoctoral Researcher  # a comment\n"
-    )
-    assert detect_cv.read_name_part(text, "first_name") == "Sarang"
-    assert detect_cv.read_name_part(text, "last_name") == "Bhagwat"
-    assert detect_cv.read_name_part(text, "title") == "Postdoctoral Researcher"
-    assert detect_cv.read_name_part(text, "middle_name") is None
-
-
 def test_cv_prefix_is_last_first():
     assert detect_cv.cv_prefix("Sarang", "Bhagwat") == "Bhagwat-Sarang_CV"
 

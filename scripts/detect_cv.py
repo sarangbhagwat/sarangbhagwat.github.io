@@ -10,26 +10,11 @@ from __future__ import annotations
 
 import json
 import pathlib
-import re
 import sys
 
+from site_meta import read_meta_value
+
 ASSETS_DIRNAME = "assets"
-
-
-def read_name_part(content_text: str, key: str) -> str | None:
-    """Extract a scalar meta value (e.g. first_name) from content.yml text.
-
-    Handles double-quoted, single-quoted, and bare values with optional inline
-    comments — enough for the flat name fields, without a YAML dependency.
-    """
-    k = re.escape(key)
-    for pat in (rf'^[ \t]*{k}:[ \t]*"([^"]*)"',
-                rf"^[ \t]*{k}:[ \t]*'([^']*)'",
-                rf'^[ \t]*{k}:[ \t]*([^"\'#\n][^#\n]*?)[ \t]*(?:#.*)?$'):
-        m = re.search(pat, content_text, re.MULTILINE)
-        if m:
-            return m.group(1).strip()
-    return None
 
 
 def cv_prefix(first: str, last: str) -> str:
@@ -74,8 +59,8 @@ def main(argv=None) -> int:
     out_path = root / "data" / "cv.json"
 
     text = content_path.read_text(encoding="utf-8")
-    first = read_name_part(text, "first_name")
-    last = read_name_part(text, "last_name")
+    first = read_meta_value(text, "first_name")
+    last = read_meta_value(text, "last_name")
 
     if not (first and last):
         print("warning: first_name/last_name missing in content.yml; cannot detect CV",
