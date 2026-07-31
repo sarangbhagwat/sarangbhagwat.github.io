@@ -117,12 +117,18 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 /* Publications */
 .pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
 .pub-list { list-style: none; padding: 0; margin: 0; }
-.pub-item { margin-bottom: 1.1rem; padding-left: 2.2rem; }
+.pub-item { margin-bottom: 1.5rem; padding-left: 2.2rem; }
 .pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }
 .pub-title { font-weight: 600; }
 .pub-authors { color: var(--text); font-size: 0.95rem; }
-.pub-venue { color: var(--muted); font-style: italic; font-size: 0.95rem; }
-.pub-doi { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; }
+.pub-venue { color: var(--muted); font-style: italic; font-size: 0.9rem; }
+.pub-doi {
+  display: inline-block; margin-top: 0.4rem;
+  padding: 0.1rem 0.5rem; border: 1px solid var(--accent2); border-radius: 999px;
+  color: var(--accent2); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+  text-decoration: none; transition: background-color 0.15s ease, color 0.15s ease;
+}
+.pub-doi:hover, .pub-doi:focus-visible { background: var(--accent2); color: var(--surface); }
 
 #contact-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }
 #site-footer { max-width: var(--max); margin: 0 auto; padding: 2rem 1rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
