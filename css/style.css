@@ -48,6 +48,20 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
 section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
 #hero { border-top: none; text-align: center; padding-top: 2.5rem; }
 
+/* Top row: hero + education side by side, stacking on narrow screens */
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+.hero-col { display: flex; flex-direction: column; align-items: center; }
+.edu-col { text-align: left; }
+.edu-col #education-heading { margin-top: 0; }
+
+@media (min-width: 720px) {
+  .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; }
+  .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
+  .hero-grid.has-education .hero-col .icon-links,
+  .hero-grid.has-education .hero-col .hero-actions { justify-content: flex-start; align-self: stretch; }
+  .hero-grid.has-education #hero-tagline { margin-left: 0; }
+}
+
 #hero-photo {
   width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
   border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--line); margin-bottom: 1rem;

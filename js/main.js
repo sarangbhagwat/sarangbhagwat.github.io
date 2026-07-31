@@ -76,8 +76,10 @@ function renderContent(data) {
   fill("education-list", education.map((e) =>
     el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
   ));
-  show("about", about.length > 0 || education.length > 0);
-  show("education-heading", education.length > 0);
+  show("about", about.length > 0);
+  show("education", education.length > 0);
+  const heroGrid = document.querySelector(".hero-grid");
+  if (heroGrid) heroGrid.classList.toggle("has-education", education.length > 0);
 
   const research = data.research_interests || [];
   fill("research-list", research.map((r) =>
