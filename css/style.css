@@ -36,8 +36,9 @@ a { color: var(--accent-soft); text-decoration: underline; text-underline-offset
 a:hover { color: var(--accent); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 
-/* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus */
-#about-body a, .research-item p a, .pub-authors a, #awards-list a {
+/* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus.
+   About links keep the default underline at rest (ochre tint on hover only). */
+.research-item p a, .pub-authors a, #awards-list a {
   text-decoration: none;
 }
 #about-body a:hover, #about-body a:focus-visible,
@@ -117,6 +118,8 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 .icon-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin: 1rem 0 0; }
 .icon-link { display: inline-flex; align-items: center; gap: 0.4rem; }
 .icon-link svg { flex: none; }
+/* Ochre tint on hover/focus; icons use currentColor, so label + icon shift together */
+.icon-link:hover, .icon-link:focus-visible { color: var(--accent2); }
 
 #education-list { list-style: none; padding: 0; }
 #education-list li { padding: 0.3rem 0; }
