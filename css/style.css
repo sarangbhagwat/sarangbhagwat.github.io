@@ -84,11 +84,12 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 .edu-col { text-align: left; }
 .edu-col #education-heading { margin-top: 0; }
 
+/* CV button + links, in a single centered column (two rows) below both columns */
+.hero-footer { display: flex; flex-direction: column; align-items: center; margin-top: 1.5rem; }
+
 @media (min-width: 720px) {
   .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; align-items: start; }
   .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
-  .hero-grid.has-education .hero-col .icon-links,
-  .hero-grid.has-education .hero-col .hero-actions { justify-content: flex-start; align-self: stretch; }
   .hero-grid.has-education #hero-tagline { margin-left: 0; }
   h1 { font-size: 2.1rem; }
 }
