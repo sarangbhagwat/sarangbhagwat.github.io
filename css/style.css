@@ -10,7 +10,7 @@
   --text: #1c1c1a;
   --muted: #5f5e5a;
   --line: #e6e3dc;
-  --max: 720px;
+  --max: 1080px;
 }
 
 * { box-sizing: border-box; }
