@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T06:17:39.090301+00:00",
+  "generated_at": "2026-07-31T06:22:58.251906+00:00",
   "orcid_id": "0000-0002-2620-2829",
   "publications": [
     {
@@ -110,6 +110,35 @@
       ]
     },
     {
+      "title": "A scalable acetate-to-food biomanufacturing platform using synthetic consortia",
+      "venue": null,
+      "year": 2026,
+      "type": "preprint",
+      "doi": "10.2139/ssrn.6595420",
+      "url": "https://doi.org/10.2139/ssrn.6595420",
+      "put_code": 222347292,
+      "authors": [
+        "Somesh Mishra",
+        "Luiz Augusto",
+        "Sarang  S. Bhagwat",
+        "Joshua Ye",
+        "Nayeem Bari",
+        "Diep Nguyen",
+        "Xie Zifang",
+        "Zhou Zhengyong",
+        "Munmi Das",
+        "Yuyao Jia",
+        "Kristen  K. Eilts",
+        "Chandan Mahata",
+        "Christopher  V. Rao",
+        "Keith  R. Cadwallader",
+        "Ting Lu",
+        "Yong-Su Jin",
+        "Jeremy Guest",
+        "Vijay Singh"
+      ]
+    },
+    {
       "title": "Sustainable Triacetic Acid Lactone Production from Sugarcane by Fermentation and Crystallization",
       "venue": "ACS Sustainable Chemistry & Engineering",
       "year": 2025,
@@ -165,24 +194,6 @@
         "Xiaolei Shi",
         "Kyuhyeok Choi",
         "Jeremy S. Guest",
-        "George W. Huber"
-      ]
-    },
-    {
-      "title": "Catalytic Production of Biomass-Based Food Preservative in Food-Grade Solvents",
-      "venue": null,
-      "year": 2024,
-      "type": "preprint",
-      "doi": "10.2139/ssrn.4911012",
-      "url": "https://doi.org/10.2139/ssrn.4911012",
-      "put_code": 222144761,
-      "authors": [
-        "Min Soo Kim",
-        "Sarang Bhagwat",
-        "Leoncio Santiago-Martinez",
-        "Xiaolei Shi",
-        "Kyuhyeok Choi",
-        "Jeremy Guest",
         "George W. Huber"
       ]
     },
