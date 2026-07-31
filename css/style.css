@@ -7,6 +7,10 @@
   --accent-soft: #33456b;
   --accent2: #a2662c;
   --accent2-soft: #c0894a;
+  /* Single source of truth for every hover state: any link, nav item, button,
+     or icon shifts to this color on hover/focus. Defined once as var(--accent2)
+     so the dark-mode override of --accent2 flows through automatically. */
+  --hover: var(--accent2);
   --bg: #fbfaf7;
   --surface: #ffffff;
   --text: #1c1c1a;
@@ -33,7 +37,7 @@ main section h2::after {
   margin-top: 0.5rem; background: var(--accent2);
 }
 a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
-a:hover { color: var(--accent); }
+a:hover { color: var(--hover); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 
 /* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus.
@@ -46,7 +50,7 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 .pub-authors a:hover, .pub-authors a:focus-visible,
 #awards-list a:hover, #awards-list a:focus-visible {
   text-decoration: underline;
-  color: var(--accent2);
+  color: var(--hover);
 }
 .muted { color: var(--muted); }
 
@@ -61,7 +65,7 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
   gap: 1rem; max-width: var(--max); margin: 0 auto; padding: 0.75rem 1rem;
 }
 .nav-name { font-family: "Site Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
-.nav-name:hover { color: var(--accent-soft); }
+.nav-name:hover { color: var(--hover); }
 .nav-right { display: flex; align-items: center; gap: 1rem; }
 .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
 
@@ -72,11 +76,11 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
   background: none; border: none; border-radius: 6px;
   color: var(--muted); cursor: pointer; transition: color 0.15s ease, background-color 0.15s ease;
 }
-.theme-toggle:hover { color: var(--accent); background: var(--line); }
+.theme-toggle:hover { color: var(--hover); background: var(--line); }
 .theme-toggle:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 .theme-toggle svg { display: block; }
 .nav-links a { color: var(--muted); font-size: 0.95rem; text-decoration: none; letter-spacing: 0.02em; }
-.nav-links a:hover { color: var(--accent); }
+.nav-links a:hover { color: var(--hover); }
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent2); }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
@@ -126,12 +130,12 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
   padding: 0.55rem 1.1rem; border-radius: 6px; font-weight: 600;
   text-decoration: none;
 }
-.button:hover { background: var(--accent-soft); color: #fff; }
+.button:hover { background: var(--hover); color: #fff; }
 .icon-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin: 1rem 0 0; }
 .icon-link { display: inline-flex; align-items: center; gap: 0.4rem; }
 .icon-link svg { flex: none; }
 /* Ochre tint on hover/focus; icons use currentColor, so label + icon shift together */
-.icon-link:hover, .icon-link:focus-visible { color: var(--accent2); }
+.icon-link:hover, .icon-link:focus-visible { color: var(--hover); }
 
 #education-list { list-style: none; padding: 0; }
 #education-list li { padding: 0.3rem 0; }
@@ -157,7 +161,7 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
   color: var(--accent2); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
   text-decoration: none; transition: background-color 0.15s ease, color 0.15s ease;
 }
-.pub-doi:hover, .pub-doi:focus-visible { background: var(--accent2); color: var(--surface); }
+.pub-doi:hover, .pub-doi:focus-visible { background: var(--hover); color: var(--surface); }
 
 #contact-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 1rem; }
 #site-footer { max-width: var(--max); margin: 0 auto; padding: 2rem 1rem; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); }
@@ -190,7 +194,9 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
    bg instead of following the token (rest darker, hover lighter, mirroring
    the light-mode relationship). */
 :root[data-theme="dark"] .button { background: #2a3a5c; color: #fff; }
-:root[data-theme="dark"] .button:hover { background: #33456b; color: #fff; }
+/* Rest state above outranks the base .button:hover, so hover needs its own
+   dark-mode rule; it routes through --hover like every other hover state. */
+:root[data-theme="dark"] .button:hover { background: var(--hover); color: #fff; }
 
 /* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
 :root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }
