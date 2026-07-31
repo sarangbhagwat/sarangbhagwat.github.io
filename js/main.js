@@ -105,9 +105,11 @@ function renderContent(data) {
   ));
   show("awards", awards.length > 0);
 
-  fill("contact-list", (m.links || []).map((l) =>
-    el("li", {}, el("a", { href: safeUrl(l.url), textContent: l.label }))
-  ));
+  const email = (m.email || "").trim();
+  fill("contact-list", email
+    ? [el("li", {}, el("a", { href: safeUrl(`mailto:${email}`), textContent: email }))]
+    : []);
+  show("contact", Boolean(email));
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   document.getElementById("footer-name").textContent = m.name || "";
