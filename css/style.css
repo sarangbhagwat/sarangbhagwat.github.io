@@ -5,6 +5,8 @@
 :root {
   --accent: #1a2a4a;
   --accent-soft: #33456b;
+  --accent2: #a2662c;
+  --accent2-soft: #c0894a;
   --bg: #fbfaf7;
   --surface: #ffffff;
   --text: #1c1c1a;
@@ -25,6 +27,19 @@ h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; }
 a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 a:hover { color: var(--accent); }
+a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+
+/* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus */
+#about-body a, .research-item p a, .pub-authors a, #awards-list a {
+  text-decoration: none;
+}
+#about-body a:hover, #about-body a:focus-visible,
+.research-item p a:hover, .research-item p a:focus-visible,
+.pub-authors a:hover, .pub-authors a:focus-visible,
+#awards-list a:hover, #awards-list a:focus-visible {
+  text-decoration: underline;
+  color: var(--accent2);
+}
 .muted { color: var(--muted); }
 
 /* Sticky nav */
@@ -42,7 +57,7 @@ a:hover { color: var(--accent); }
 .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
 .nav-links a { color: var(--muted); font-size: 0.95rem; text-decoration: none; }
 .nav-links a:hover { color: var(--accent); }
-.nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+.nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent2); }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
 section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
