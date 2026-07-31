@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "assets/**"
+      - "data/content.yml"
       - "scripts/detect_cv.py"
       - ".github/workflows/update-cv.yml"
   workflow_dispatch: {}       # manual "Run workflow" button

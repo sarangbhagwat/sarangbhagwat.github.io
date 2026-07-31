@@ -6,22 +6,47 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import detect_cv  # noqa: E402
 
 
+def test_read_name_part_handles_quotes_and_comments():
+    text = (
+        'meta:\n'
+        '  first_name: "Sarang"\n'
+        "  last_name: 'Bhagwat'\n"
+        "  title: Postdoctoral Researcher  # a comment\n"
+    )
+    assert detect_cv.read_name_part(text, "first_name") == "Sarang"
+    assert detect_cv.read_name_part(text, "last_name") == "Bhagwat"
+    assert detect_cv.read_name_part(text, "title") == "Postdoctoral Researcher"
+    assert detect_cv.read_name_part(text, "middle_name") is None
+
+
+def test_cv_prefix_is_last_first():
+    assert detect_cv.cv_prefix("Sarang", "Bhagwat") == "Bhagwat-Sarang_CV"
+
+
 def test_find_cv_returns_matching_file(tmp_path):
     (tmp_path / "Bhagwat-Sarang_CV.pdf").write_bytes(b"%PDF-")
     (tmp_path / "headshot.jpg").write_bytes(b"x")
-    assert detect_cv.find_cv(tmp_path) == "Bhagwat-Sarang_CV.pdf"
+    assert detect_cv.find_cv(tmp_path, "Bhagwat-Sarang_CV") == "Bhagwat-Sarang_CV.pdf"
 
 
 def test_find_cv_prefers_lexicographically_greatest(tmp_path):
     (tmp_path / "Bhagwat-Sarang_CV_2025.pdf").write_bytes(b"%PDF-")
     (tmp_path / "Bhagwat-Sarang_CV_2026.pdf").write_bytes(b"%PDF-")
-    assert detect_cv.find_cv(tmp_path) == "Bhagwat-Sarang_CV_2026.pdf"
+    assert detect_cv.find_cv(tmp_path, "Bhagwat-Sarang_CV") == \
+        "Bhagwat-Sarang_CV_2026.pdf"
 
 
 def test_find_cv_ignores_non_matching_names(tmp_path):
     (tmp_path / "cv.pdf").write_bytes(b"%PDF-")
     (tmp_path / "Bhagwat-Sarang_Resume.pdf").write_bytes(b"%PDF-")
-    assert detect_cv.find_cv(tmp_path) is None
+    assert detect_cv.find_cv(tmp_path, "Bhagwat-Sarang_CV") is None
+
+
+def test_find_cv_uses_a_different_name_prefix(tmp_path):
+    # Nothing is tied to a specific person: a different name yields its own prefix.
+    prefix = detect_cv.cv_prefix("Ada", "Lovelace")
+    (tmp_path / f"{prefix}.pdf").write_bytes(b"%PDF-")
+    assert detect_cv.find_cv(tmp_path, prefix) == "Lovelace-Ada_CV.pdf"
 
 
 def test_render_cv_json_shapes_path_and_null():

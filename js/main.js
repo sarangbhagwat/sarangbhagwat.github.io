@@ -123,15 +123,23 @@ function show(id, visible) {
   if (navLink) navLink.parentElement.hidden = !visible;
 }
 
+// Full display name assembled from the structured name parts in content.yml.
+// Middle is optional and rendered as written — a full name or an initial ("S.").
+function fullName(meta) {
+  return [meta.first_name, meta.middle_name, meta.last_name]
+    .filter(Boolean).join(" ").trim();
+}
+
 function renderContent(data) {
   const m = data.meta || {};
-  document.title = [m.name, m.title].filter(Boolean).join(" — ") || "Personal website";
-  document.querySelector(".nav-name").textContent = m.name || "";
-  document.getElementById("hero-name").textContent = m.name || "";
+  const name = fullName(m);
+  document.title = [name, m.title].filter(Boolean).join(" — ") || "Personal website";
+  document.querySelector(".nav-name").textContent = name;
+  document.getElementById("hero-name").textContent = name;
   document.getElementById("hero-title").textContent =
     [m.title, m.institution].filter(Boolean).join(", ");
   document.getElementById("hero-tagline").textContent = m.tagline || "";
-  document.getElementById("hero-photo").alt = m.name || "";
+  document.getElementById("hero-photo").alt = name;
 
   const heroLinks = document.getElementById("hero-links");
   heroLinks.replaceChildren(...(m.links || []).map((l) => iconLink(l.label, l.url)));
@@ -178,7 +186,7 @@ function renderContent(data) {
   show("contact", Boolean(email));
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
-  document.getElementById("footer-name").textContent = m.name || "";
+  document.getElementById("footer-name").textContent = name;
 }
 
 async function loadPublications() {
@@ -368,12 +376,13 @@ async function init() {
   try {
     const data = await loadContent();
     renderContent(data);
+    const selfName = fullName(data.meta || {});
     try {
       const pubs = await loadPublications();
-      renderPublications(pubs, (data.meta || {}).name);
+      renderPublications(pubs, selfName);
     } catch (pubErr) {
       console.error(pubErr);
-      renderPublications({ publications: [] }, (data.meta || {}).name);
+      renderPublications({ publications: [] }, selfName);
     }
     initNav();
   } catch (err) {

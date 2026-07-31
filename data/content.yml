@@ -1,7 +1,12 @@
 # Edit this file to update your website. After saving, refresh the page.
 # The publications list is generated automatically from ORCID — do not edit it here.
 meta:
-  name: "Sarang S. Bhagwat"
+  # Your name, in parts. The site builds your full display name as
+  # "first middle last" (middle is optional; write a full name or an initial
+  # like "S."). The CV filename prefix is derived as "last-first_CV".
+  first_name: "Sarang"
+  middle_name: "S."
+  last_name: "Bhagwat"
   title: "Postdoctoral Researcher"
   institution: "University of California, Berkeley"
   tagline: "My work advances agile and predictive process systems engineering through numerical and stochastic analyses."
