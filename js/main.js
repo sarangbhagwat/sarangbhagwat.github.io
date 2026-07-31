@@ -133,7 +133,7 @@ function fullName(meta) {
 function renderContent(data) {
   const m = data.meta || {};
   const name = fullName(m);
-  document.title = [name, m.title].filter(Boolean).join(" — ") || "Personal website";
+  document.title = name || "Personal website";
   document.querySelector(".nav-name").textContent = name;
   document.getElementById("hero-name").textContent = name;
   document.getElementById("hero-title").textContent =
