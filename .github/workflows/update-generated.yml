@@ -1,4 +1,4 @@
-name: Detect CV file
+name: Update generated files
 
 on:
   push:
@@ -7,14 +7,16 @@ on:
       - "assets/**"
       - "data/content.yml"
       - "scripts/detect_cv.py"
-      - ".github/workflows/update-cv.yml"
+      - "scripts/sync_head.py"
+      - "scripts/site_meta.py"
+      - ".github/workflows/update-generated.yml"
   workflow_dispatch: {}       # manual "Run workflow" button
 
 permissions:
   contents: write
 
 jobs:
-  detect:
+  generate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -26,14 +28,17 @@ jobs:
       - name: Detect CV file and update cv.json
         run: python scripts/detect_cv.py
 
+      - name: Sync index.html head from content.yml
+        run: python scripts/sync_head.py
+
       - name: Commit changes if any
         run: |
-          if [[ -n "$(git status --porcelain data/cv.json)" ]]; then
+          if [[ -n "$(git status --porcelain data/cv.json index.html)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/cv.json
-            git commit -m "chore: update detected CV filename"
+            git add data/cv.json index.html
+            git commit -m "chore: update generated files from content.yml"
             git push
           else
-            echo "No CV change."
+            echo "No changes."
           fi

@@ -16,6 +16,13 @@ page. Replace these two files with your own:
   `data/cv.json`, which `scripts/detect_cv.py` regenerates in CI whenever
   `assets/` or `content.yml` changes — do not edit it by hand.
 
+The page title and meta description in `index.html` are generated too.
+`scripts/sync_head.py` builds them from your name, title, and institution in
+`content.yml` and rewrites those two tags in place, so do not edit them by
+hand. CI runs it whenever `content.yml` changes; run
+`python scripts/sync_head.py` yourself if you want them updated before you
+push.
+
 Your name goes in the `meta:` block of `data/content.yml` as `first_name`,
 `middle_name` (optional), and `last_name`. Everything that shows your name —
 the page, the title, the CV filename — is built from those parts. Also set your
