@@ -269,7 +269,26 @@ function initNav() {
   sections.forEach((s) => observer.observe(s));
 }
 
+// Fade/rise-in as sections scroll into view. Gated behind .js-reveal (added
+// here, before observing) so no-JS users get the default, fully-visible CSS.
+function initReveal() {
+  document.documentElement.classList.add("js-reveal");
+  const sections = [...document.querySelectorAll("main section[id]")];
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("revealed");
+        obs.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.1 }
+  );
+  sections.forEach((s) => observer.observe(s));
+}
+
 async function init() {
+  initReveal(); // sync, before the content fetch: hero reveals immediately
   try {
     const data = await loadContent();
     renderContent(data);

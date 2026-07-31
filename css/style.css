@@ -69,6 +69,15 @@ main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
 section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
 #hero { border-top: none; text-align: center; padding-top: 2.5rem; }
 
+/* Scroll reveal: gated behind .js-reveal (set by main.js before it starts
+   observing) so no-JS users always see full-opacity, untransformed sections. */
+.js-reveal main section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease, transform 0.35s ease; }
+.js-reveal main section.revealed { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal main section { opacity: 1; transform: none; transition: none; }
+}
+
 /* Top row: hero + education side by side, stacking on narrow screens */
 .hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
 .hero-col { display: flex; flex-direction: column; align-items: center; }
