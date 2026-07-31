@@ -272,7 +272,6 @@ function initNav() {
 // Fade/rise-in as sections scroll into view. Gated behind .js-reveal (added
 // here, before observing) so no-JS users get the default, fully-visible CSS.
 function initReveal() {
-  document.documentElement.classList.add("js-reveal");
   const sections = [...document.querySelectorAll("main section[id]")];
   const observer = new IntersectionObserver(
     (entries, obs) => {
@@ -284,6 +283,7 @@ function initReveal() {
     },
     { threshold: 0.1 }
   );
+  document.documentElement.classList.add("js-reveal");
   sections.forEach((s) => observer.observe(s));
 }
 
