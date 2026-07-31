@@ -25,6 +25,12 @@ h1, h2, h3 { font-family: "Site Serif", Georgia, serif; color: var(--accent); li
 h1 { font-size: 2rem; margin: 0.2rem 0; letter-spacing: -0.01em; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.15rem; }
+
+/* Section headers: small ochre accent rule beneath each h2 */
+main section h2::after {
+  content: ""; display: block; width: 2.5rem; height: 3px;
+  margin-top: 0.5rem; background: var(--accent2);
+}
 a { color: var(--accent-soft); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px; }
 a:hover { color: var(--accent); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
@@ -70,7 +76,7 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 .edu-col #education-heading { margin-top: 0; }
 
 @media (min-width: 720px) {
-  .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; }
+  .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; align-items: start; }
   .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
   .hero-grid.has-education .hero-col .icon-links,
   .hero-grid.has-education .hero-col .hero-actions { justify-content: flex-start; align-self: stretch; }
@@ -80,11 +86,16 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 
 #hero-photo {
   width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
-  border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--line); margin-bottom: 1rem;
+  border: 3px solid var(--surface); margin-bottom: 1rem;
+  box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line), 0 6px 20px rgba(0, 0, 0, 0.08);
   background: var(--line);
 }
 #hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; }
-#hero-tagline { font-size: 1.15rem; max-width: 40ch; margin: 0.6rem auto 1.2rem; }
+#hero-tagline {
+  font-family: "Site Serif", Georgia, serif; font-style: italic;
+  font-size: 1.25rem; color: var(--accent-soft);
+  max-width: 40ch; margin: 0.6rem auto 1.2rem;
+}
 .hero-actions { margin: 1rem 0; }
 .button {
   display: inline-block; background: var(--accent); color: #fff;
