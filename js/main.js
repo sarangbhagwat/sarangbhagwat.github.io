@@ -31,6 +31,16 @@ function svgIcon(inner) {
   return tpl.content.firstChild;
 }
 
+const moonIcon = () => svgIcon('<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z"/>');
+const sunIcon = () => svgIcon(
+  '<circle cx="12" cy="12" r="4.3" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+  '<g stroke="currentColor" stroke-width="1.6" stroke-linecap="round">' +
+  '<line x1="12" y1="2.6" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="21.4"/>' +
+  '<line x1="2.6" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="21.4" y2="12"/>' +
+  '<line x1="4.9" y1="4.9" x2="6.6" y2="6.6"/><line x1="17.4" y1="17.4" x2="19.1" y2="19.1"/>' +
+  '<line x1="4.9" y1="19.1" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"/></g>'
+);
+
 // Monochrome, currentColor icons keyed by normalized (lowercased) link label.
 const ICONS = {
   "google scholar": () => svgIcon(
@@ -287,9 +297,49 @@ function initReveal() {
   sections.forEach((s) => observer.observe(s));
 }
 
+// Light/dark toggle. The pre-paint script in index.html has already set
+// data-theme; here we render the button to match, flip it on click (saving the
+// choice), and keep following the OS while no explicit choice is saved.
+function currentTheme() {
+  return document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+}
+
+function updateToggle(btn) {
+  const goingDark = currentTheme() === "light";
+  const label = goingDark ? "Switch to dark mode" : "Switch to light mode";
+  btn.replaceChildren(goingDark ? moonIcon() : sunIcon());
+  btn.setAttribute("aria-label", label);
+  btn.title = label;
+}
+
+function initThemeToggle() {
+  const btn = document.getElementById("theme-toggle");
+  if (!btn) return;
+  updateToggle(btn);
+  btn.addEventListener("click", () => {
+    const next = currentTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("theme", next); } catch (e) { /* ignore */ }
+    updateToggle(btn);
+  });
+  // Follow the OS while the visitor hasn't made an explicit choice.
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+    let saved = null;
+    try { saved = localStorage.getItem("theme"); } catch (_) { /* ignore */ }
+    if (saved) return;
+    document.documentElement.dataset.theme = e.matches ? "dark" : "light";
+    updateToggle(btn);
+  });
+}
+
 async function init() {
   try {
     initReveal(); // sync, before the content fetch: hero reveals immediately
+  } catch (e) {
+    console.error(e);
+  }
+  try {
+    initThemeToggle();
   } catch (e) {
     console.error(e);
   }

@@ -62,7 +62,19 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 }
 .nav-name { font-family: "Site Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
 .nav-name:hover { color: var(--accent-soft); }
+.nav-right { display: flex; align-items: center; gap: 1rem; }
 .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
+
+/* Theme toggle: borderless icon button that inherits nav-link colors */
+.theme-toggle {
+  display: inline-flex; align-items: center; justify-content: center;
+  flex: none; width: 2rem; height: 2rem; padding: 0;
+  background: none; border: none; border-radius: 6px;
+  color: var(--muted); cursor: pointer; transition: color 0.15s ease, background-color 0.15s ease;
+}
+.theme-toggle:hover { color: var(--accent); background: var(--line); }
+.theme-toggle:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
+.theme-toggle svg { display: block; }
 .nav-links a { color: var(--muted); font-size: 0.95rem; text-decoration: none; letter-spacing: 0.02em; }
 .nav-links a:hover { color: var(--accent); }
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent2); }
@@ -158,26 +170,27 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 }
 
 /* ------------------------------------------------------------------ */
-/* Dark mode: system preference only, no manual toggle */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --accent: #b7c6e8;
-    --accent-soft: #cdd8ef;
-    --accent2: #d3a45f;
-    --accent2-soft: #e2bb80;
-    --bg: #141821;
-    --surface: #1c212c;
-    --text: #e9e7e2;
-    --muted: #a7abb5;
-    --line: #2b313d;
-  }
-
-  /* CV button: --accent is now light, so white text needs a fixed dark-navy
-     bg instead of following the token (rest darker, hover lighter, mirroring
-     the light-mode relationship). */
-  .button { background: #2a3a5c; color: #fff; }
-  .button:hover { background: #33456b; color: #fff; }
-
-  /* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
-  #site-header { background: rgba(20, 24, 33, 0.92); }
+/* Dark mode: applied via [data-theme="dark"] on <html>, which the inline
+   script in index.html sets before first paint (from the saved choice, else
+   the OS preference). js/main.js flips it on toggle and follows the OS while
+   no explicit choice is saved. */
+:root[data-theme="dark"] {
+  --accent: #b7c6e8;
+  --accent-soft: #cdd8ef;
+  --accent2: #d3a45f;
+  --accent2-soft: #e2bb80;
+  --bg: #141821;
+  --surface: #1c212c;
+  --text: #e9e7e2;
+  --muted: #a7abb5;
+  --line: #2b313d;
 }
+
+/* CV button: --accent is now light, so white text needs a fixed dark-navy
+   bg instead of following the token (rest darker, hover lighter, mirroring
+   the light-mode relationship). */
+:root[data-theme="dark"] .button { background: #2a3a5c; color: #fff; }
+:root[data-theme="dark"] .button:hover { background: #33456b; color: #fff; }
+
+/* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
+:root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }

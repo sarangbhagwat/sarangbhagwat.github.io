@@ -5,20 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Faculty Candidate — Personal Website</title>
   <meta name="description" content="Personal website of a Chemical Engineering faculty candidate." />
+  <script>
+    // Set the theme before first paint to avoid a flash of the wrong palette.
+    // Uses the saved choice if present, otherwise the OS preference. The toggle
+    // and live OS-following are wired up later in js/main.js.
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        var dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.dataset.theme = saved || (dark ? "dark" : "light");
+      } catch (e) {
+        document.documentElement.dataset.theme = "light";
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
   <header id="site-header">
     <nav id="site-nav" aria-label="Primary">
       <a class="nav-name" href="#hero">Your Name</a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#research">Research</a></li>
-        <li><a href="#publications">Publications</a></li>
-        <li><a href="#teaching">Teaching</a></li>
-        <li><a href="#awards">Awards</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="nav-right">
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#research">Research</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#teaching">Teaching</a></li>
+          <li><a href="#awards">Awards</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch theme"></button>
+      </div>
     </nav>
   </header>
 
