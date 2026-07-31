@@ -133,10 +133,6 @@ function renderContent(data) {
   document.getElementById("hero-tagline").textContent = m.tagline || "";
   document.getElementById("hero-photo").alt = m.name || "";
 
-  const cv = document.getElementById("hero-cv");
-  cv.href = "assets/cv.pdf";
-  cv.setAttribute("download", "");
-
   const heroLinks = document.getElementById("hero-links");
   heroLinks.replaceChildren(...(m.links || []).map((l) => iconLink(l.label, l.url)));
 
@@ -332,6 +328,31 @@ function initThemeToggle() {
   });
 }
 
+// Points the CV button at the file detected by scripts/detect_cv.py (recorded
+// in data/cv.json), so the PDF can be renamed without editing any code. Hides
+// the button if no CV is found, rather than linking to a 404.
+async function initCvButton() {
+  const cv = document.getElementById("hero-cv");
+  if (!cv) return;
+  let path = null;
+  try {
+    const res = await fetch("data/cv.json", { cache: "no-cache" });
+    if (res.ok) {
+      const doc = await res.json();
+      path = doc && doc.file ? doc.file : null;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+  if (path) {
+    cv.href = safeUrl(path);
+    cv.setAttribute("download", "");
+    cv.hidden = false;
+  } else {
+    cv.hidden = true;
+  }
+}
+
 async function init() {
   try {
     initReveal(); // sync, before the content fetch: hero reveals immediately
@@ -343,6 +364,7 @@ async function init() {
   } catch (e) {
     console.error(e);
   }
+  initCvButton(); // async + self-contained: independent of content/publications
   try {
     const data = await loadContent();
     renderContent(data);
