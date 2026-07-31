@@ -2,7 +2,7 @@ name: Update publications from ORCID
 
 on:
   schedule:
-    - cron: "0 6 * * 1"      # 06:00 UTC every Monday
+    - cron: "0 6 * * *"      # 06:00 UTC every day
   workflow_dispatch: {}       # manual "Run workflow" button
 
 permissions:
