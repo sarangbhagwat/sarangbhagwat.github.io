@@ -13,6 +13,7 @@
   --muted: #5f5e5a;
   --line: #e6e3dc;
   --max: 1080px;
+  --measure: 42rem; /* reading width for prose sections; font-independent so headings + body align */
 }
 
 * { box-sizing: border-box; }
@@ -124,7 +125,8 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 .research-item p { margin: 0; }
 
 /* Reading measure: cap prose width for comfortable line length */
-#about-body, #about-body p, .research-item p { max-width: 68ch; }
+#about h2, #about-body, #about-body p,
+#research h2, .research-item h3, .research-item p { max-width: var(--measure); margin-inline: auto; }
 
 /* Publications */
 .pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
