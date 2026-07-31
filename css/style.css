@@ -150,3 +150,28 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
   .nav-links { gap: 0.75rem; }
   h1 { font-size: 1.6rem; }
 }
+
+/* ------------------------------------------------------------------ */
+/* Dark mode: system preference only, no manual toggle */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --accent: #b7c6e8;
+    --accent-soft: #cdd8ef;
+    --accent2: #d3a45f;
+    --accent2-soft: #e2bb80;
+    --bg: #141821;
+    --surface: #1c212c;
+    --text: #e9e7e2;
+    --muted: #a7abb5;
+    --line: #2b313d;
+  }
+
+  /* CV button: --accent is now light, so white text needs a fixed dark-navy
+     bg instead of following the token (rest darker, hover lighter, mirroring
+     the light-mode relationship). */
+  .button { background: #2a3a5c; color: #fff; }
+  .button:hover { background: #33456b; color: #fff; }
+
+  /* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
+  #site-header { background: rgba(20, 24, 33, 0.92); }
+}
