@@ -25,6 +25,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: "Site Sans", system-ui, sans-serif; font-size: 17px; line-height: 1.65;
+  overflow-x: hidden;
 }
 h1, h2, h3 { font-family: "Site Serif", Georgia, serif; color: var(--accent); line-height: 1.25; }
 h1 { font-size: 2rem; margin: 0.2rem 0; letter-spacing: -0.01em; }
@@ -40,13 +41,13 @@ a { color: var(--accent-soft); text-decoration: underline; text-underline-offset
 a:hover { color: var(--hover); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 
-/* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus.
-   About links keep the default underline at rest (ochre tint on hover only). */
-.research-item p a, .pub-authors a, #awards-list a {
+/* Body-copy links share one convention: no underline at rest, underline +
+   ochre tint (--hover) revealed on hover/focus. */
+#about-body a, .research-list a, .pub-authors a, #awards-list a {
   text-decoration: none;
 }
 #about-body a:hover, #about-body a:focus-visible,
-.research-item p a:hover, .research-item p a:focus-visible,
+.research-list a:hover, .research-list a:focus-visible,
 .pub-authors a:hover, .pub-authors a:focus-visible,
 #awards-list a:hover, #awards-list a:focus-visible {
   text-decoration: underline;
@@ -84,8 +85,19 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent2); }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
-section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
+section { padding: 3rem 0; scroll-margin-top: 4rem; }
 #hero { border-top: none; text-align: center; padding-top: 2.5rem; }
+
+/* Alternating full-bleed bands: cream (page --bg) ↔ white (--surface). The
+   band is painted by a viewport-wide pseudo-element behind the content, so the
+   centered max-width column is untouched. body has overflow-x:hidden so the
+   100vw width can't trigger a horizontal scrollbar. */
+main section.section-alt { position: relative; }
+main section.section-alt::before {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+  width: 100vw; background: var(--surface); z-index: -1;
+}
 
 /* Scroll reveal: gated behind .js-reveal (set by main.js before it starts
    observing) so no-JS users always see full-opacity, untransformed sections. */
@@ -110,6 +122,9 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
   .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
   .hero-grid.has-education #hero-tagline { margin-left: 0; }
   h1 { font-size: 2.1rem; }
+  /* .hero-col prefix outranks the base #hero-photo rule, which sits later in
+     the source with equal specificity and would otherwise win. */
+  .hero-col #hero-photo { width: 176px; height: 176px; }
 }
 
 #hero-photo {
@@ -118,7 +133,7 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line), 0 6px 20px rgba(0, 0, 0, 0.08);
   background: var(--line);
 }
-#hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; }
+#hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
 #hero-tagline {
   font-family: "Site Serif", Georgia, serif; font-style: italic;
   font-size: 1.25rem; color: var(--accent-soft);
@@ -137,18 +152,32 @@ section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-to
 /* Ochre tint on hover/focus; icons use currentColor, so label + icon shift together */
 .icon-link:hover, .icon-link:focus-visible { color: var(--hover); }
 
-#education-list { list-style: none; padding: 0; }
-#education-list li { padding: 0.3rem 0; }
-.research-item { margin-bottom: 1.2rem; }
-.research-item h3 { margin: 0 0 0.2rem; }
-.research-item p { margin: 0; }
+#education-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.edu-item { position: relative; padding: 0 0 1.1rem 1.15rem; }
+.edu-item:last-child { padding-bottom: 0; }
+/* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
+.edu-item::before {
+  content: ""; position: absolute; left: -7px; top: 0.35rem;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
+}
+.edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.edu-degree { color: var(--text); }
+.edu-inst { color: var(--muted); font-size: 0.9rem; }
+.research-lead { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.1rem; line-height: 1.7; }
+.research-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.research-list li { position: relative; padding-left: 1.1rem; }
+.research-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent2-soft);
+}
 
 /* Reading measure: cap prose width for comfortable line length */
 #about h2, #about-body, #about-body p,
-#research h2, .research-item h3, .research-item p { max-width: var(--measure); margin-inline: auto; }
+#research h2, #research .research-lead, #research .research-list { max-width: var(--measure); margin-inline: auto; }
 
 /* Publications */
-.pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
+.pub-year { border-bottom: 1px solid var(--accent2-soft); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
 .pub-list { list-style: none; padding: 0; margin: 0; }
 .pub-item { margin-bottom: 1.5rem; padding-left: 2.2rem; }
 .pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }

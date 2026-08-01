@@ -130,6 +130,16 @@ function fullName(meta) {
     .filter(Boolean).join(" ").trim();
 }
 
+// Paints alternating full-bleed bands on the visible sections (skipping the
+// hero). Computed over :not([hidden]) so sections hidden for lack of content
+// (teaching/awards) don't break the cream/white alternation. The first visible
+// section after the hero gets the white band, so About pops against the hero.
+function assignBands() {
+  const sections = [...document.querySelectorAll("main section:not([hidden])")]
+    .filter((s) => s.id !== "hero");
+  sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
+}
+
 function renderContent(data) {
   const m = data.meta || {};
   const name = fullName(m);
@@ -147,21 +157,33 @@ function renderContent(data) {
   const about = data.about || [];
   const education = data.education || [];
   fill("about-body", about.map((p) => el("p", {}, richText(p))));
-  fill("education-list", education.map((e) =>
-    el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
-  ));
+  fill("education-list", education.map((e) => {
+    const li = el("li", { className: "edu-item" });
+    li.append(el("span", { className: "edu-year", textContent: String(e.year || "") }));
+    li.append(el("div", { className: "edu-degree", textContent: e.degree || "" }));
+    li.append(el("div", { className: "edu-inst", textContent: e.institution || "" }));
+    return li;
+  }));
   show("about", about.length > 0);
   show("education", education.length > 0);
   const heroGrid = document.querySelector(".hero-grid");
   if (heroGrid) heroGrid.classList.toggle("has-education", education.length > 0);
 
   const research = data.research_interests || [];
-  fill("research-list", research.map((r) =>
-    el("div", { className: "research-item" }, [
-      el("h3", { textContent: r.heading }),
-      el("p", {}, richText(r.body)),
-    ])
-  ));
+  const leads = research.filter((r) => r.heading);
+  const bodies = research.filter((r) => r.body);
+  const researchNodes = [];
+  for (const r of leads) {
+    researchNodes.push(el("p", {
+      className: "research-lead",
+      textContent: String(r.heading).split(";").map((s) => s.trim()).filter(Boolean).join(" · "),
+    }));
+  }
+  if (bodies.length) {
+    researchNodes.push(el("ul", { className: "research-list" },
+      bodies.map((r) => el("li", {}, richText(r.body)))));
+  }
+  fill("research-list", researchNodes);
   show("research", research.length > 0);
 
   const scholar = document.getElementById("scholar-link");
@@ -187,6 +209,8 @@ function renderContent(data) {
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   document.getElementById("footer-name").textContent = name;
+
+  assignBands();
 }
 
 async function loadPublications() {
