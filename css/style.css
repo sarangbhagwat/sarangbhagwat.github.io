@@ -149,8 +149,18 @@ main section.section-alt::before {
 /* Ochre tint on hover/focus; icons use currentColor, so label + icon shift together */
 .icon-link:hover, .icon-link:focus-visible { color: var(--hover); }
 
-#education-list { list-style: none; padding: 0; }
-#education-list li { padding: 0.3rem 0; }
+#education-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.edu-item { position: relative; padding: 0 0 1.1rem 1.15rem; }
+.edu-item:last-child { padding-bottom: 0; }
+/* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
+.edu-item::before {
+  content: ""; position: absolute; left: -7px; top: 0.35rem;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
+}
+.edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.edu-degree { color: var(--text); }
+.edu-inst { color: var(--muted); font-size: 0.9rem; }
 .research-item { margin-bottom: 1.2rem; }
 .research-item h3 { margin: 0 0 0.2rem; }
 .research-item p { margin: 0; }

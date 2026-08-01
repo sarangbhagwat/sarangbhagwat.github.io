@@ -157,9 +157,13 @@ function renderContent(data) {
   const about = data.about || [];
   const education = data.education || [];
   fill("about-body", about.map((p) => el("p", {}, richText(p))));
-  fill("education-list", education.map((e) =>
-    el("li", { textContent: `${e.degree}, ${e.institution} (${e.year})` })
-  ));
+  fill("education-list", education.map((e) => {
+    const li = el("li", { className: "edu-item" });
+    li.append(el("span", { className: "edu-year", textContent: String(e.year || "") }));
+    li.append(el("div", { className: "edu-degree", textContent: e.degree || "" }));
+    li.append(el("div", { className: "edu-inst", textContent: e.institution || "" }));
+    return li;
+  }));
   show("about", about.length > 0);
   show("education", education.length > 0);
   const heroGrid = document.querySelector(".hero-grid");
