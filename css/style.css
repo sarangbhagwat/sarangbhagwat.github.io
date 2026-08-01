@@ -41,13 +41,13 @@ a { color: var(--accent-soft); text-decoration: underline; text-underline-offset
 a:hover { color: var(--hover); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 
-/* Body-copy links: no underline at rest, reveal + ochre tint on hover/focus.
-   About links keep the default underline at rest (ochre tint on hover only). */
-.research-item p a, .pub-authors a, #awards-list a {
+/* Body-copy links share one convention: no underline at rest, underline +
+   ochre tint (--hover) revealed on hover/focus. */
+#about-body a, .research-list a, .pub-authors a, #awards-list a {
   text-decoration: none;
 }
 #about-body a:hover, #about-body a:focus-visible,
-.research-item p a:hover, .research-item p a:focus-visible,
+.research-list a:hover, .research-list a:focus-visible,
 .pub-authors a:hover, .pub-authors a:focus-visible,
 #awards-list a:hover, #awards-list a:focus-visible {
   text-decoration: underline;
@@ -161,13 +161,17 @@ main section.section-alt::before {
 .edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .edu-degree { color: var(--text); }
 .edu-inst { color: var(--muted); font-size: 0.9rem; }
-.research-item { margin-bottom: 1.2rem; }
-.research-item h3 { margin: 0 0 0.2rem; }
-.research-item p { margin: 0; }
+.research-lead { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin: 0 0 1.1rem; line-height: 1.7; }
+.research-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+.research-list li { position: relative; padding-left: 1.1rem; }
+.research-list li::before {
+  content: ""; position: absolute; left: 0; top: 0.62em;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent2-soft);
+}
 
 /* Reading measure: cap prose width for comfortable line length */
 #about h2, #about-body, #about-body p,
-#research h2, .research-item h3, .research-item p { max-width: var(--measure); margin-inline: auto; }
+#research h2, #research .research-lead, #research .research-list { max-width: var(--measure); margin-inline: auto; }
 
 /* Publications */
 .pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }

@@ -170,12 +170,20 @@ function renderContent(data) {
   if (heroGrid) heroGrid.classList.toggle("has-education", education.length > 0);
 
   const research = data.research_interests || [];
-  fill("research-list", research.map((r) =>
-    el("div", { className: "research-item" }, [
-      el("h3", { textContent: r.heading }),
-      el("p", {}, richText(r.body)),
-    ])
-  ));
+  const leads = research.filter((r) => r.heading);
+  const bodies = research.filter((r) => r.body);
+  const researchNodes = [];
+  for (const r of leads) {
+    researchNodes.push(el("p", {
+      className: "research-lead",
+      textContent: String(r.heading).split(";").map((s) => s.trim()).filter(Boolean).join(" · "),
+    }));
+  }
+  if (bodies.length) {
+    researchNodes.push(el("ul", { className: "research-list" },
+      bodies.map((r) => el("li", {}, richText(r.body)))));
+  }
+  fill("research-list", researchNodes);
   show("research", research.length > 0);
 
   const scholar = document.getElementById("scholar-link");
