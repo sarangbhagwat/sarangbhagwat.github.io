@@ -121,6 +121,9 @@ main section.section-alt::before {
 @media (min-width: 720px) {
   .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; align-items: start; }
   .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
+  /* Nudge Education down so it reads as vertically centered against the
+     taller hero column (photo + name + title + tagline). */
+  .hero-grid.has-education .edu-col { margin-top: 3rem; }
   .hero-grid.has-education #hero-tagline { margin-left: 0; }
   h1 { font-size: 2.1rem; }
   /* .hero-col prefix outranks the base #hero-photo rule, which sits later in
