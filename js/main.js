@@ -130,6 +130,16 @@ function fullName(meta) {
     .filter(Boolean).join(" ").trim();
 }
 
+// Paints alternating full-bleed bands on the visible sections (skipping the
+// hero). Computed over :not([hidden]) so sections hidden for lack of content
+// (teaching/awards) don't break the cream/white alternation. The first visible
+// section after the hero gets the white band, so About pops against the hero.
+function assignBands() {
+  const sections = [...document.querySelectorAll("main section:not([hidden])")]
+    .filter((s) => s.id !== "hero");
+  sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
+}
+
 function renderContent(data) {
   const m = data.meta || {};
   const name = fullName(m);
@@ -187,6 +197,8 @@ function renderContent(data) {
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   document.getElementById("footer-name").textContent = name;
+
+  assignBands();
 }
 
 async function loadPublications() {

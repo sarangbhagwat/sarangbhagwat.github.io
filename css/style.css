@@ -25,6 +25,7 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--text);
   font-family: "Site Sans", system-ui, sans-serif; font-size: 17px; line-height: 1.65;
+  overflow-x: hidden;
 }
 h1, h2, h3 { font-family: "Site Serif", Georgia, serif; color: var(--accent); line-height: 1.25; }
 h1 { font-size: 2rem; margin: 0.2rem 0; letter-spacing: -0.01em; }
@@ -84,8 +85,19 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 .nav-links a.active { color: var(--accent); border-bottom: 2px solid var(--accent2); }
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
-section { padding: 2.5rem 0; border-top: 1px solid var(--line); scroll-margin-top: 4rem; }
+section { padding: 3rem 0; scroll-margin-top: 4rem; }
 #hero { border-top: none; text-align: center; padding-top: 2.5rem; }
+
+/* Alternating full-bleed bands: cream (page --bg) ↔ white (--surface). The
+   band is painted by a viewport-wide pseudo-element behind the content, so the
+   centered max-width column is untouched. body has overflow-x:hidden so the
+   100vw width can't trigger a horizontal scrollbar. */
+main section.section-alt { position: relative; }
+main section.section-alt::before {
+  content: ""; position: absolute; top: 0; bottom: 0;
+  left: 50%; transform: translateX(-50%);
+  width: 100vw; background: var(--surface); z-index: -1;
+}
 
 /* Scroll reveal: gated behind .js-reveal (set by main.js before it starts
    observing) so no-JS users always see full-opacity, untransformed sections. */
