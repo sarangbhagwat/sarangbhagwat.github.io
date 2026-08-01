@@ -174,8 +174,16 @@ main section.section-alt::before {
 }
 
 /* Reading measure: cap prose width for comfortable line length */
-#about h2, #about-body, #about-body p,
 #research h2, #research .research-lead, #research .research-list { max-width: var(--measure); margin-inline: auto; }
+
+/* About: two prose columns across the full content width (matching
+   Publications). Single column on narrow screens; the reading measure no
+   longer applies since each column is naturally narrow. */
+#about-body { display: grid; grid-template-columns: 1fr; gap: 1.5rem 2.5rem; }
+#about-body p { margin: 0; }
+@media (min-width: 720px) {
+  #about-body { grid-template-columns: 1fr 1fr; }
+}
 
 /* Publications */
 .pub-year { border-bottom: 1px solid var(--accent2-soft); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
