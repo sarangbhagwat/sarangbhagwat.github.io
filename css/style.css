@@ -41,9 +41,10 @@ a { color: var(--accent-soft); text-decoration: underline; text-underline-offset
 a:hover { color: var(--hover); }
 a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outline-offset: 2px; }
 
-/* Body-copy links share one convention: no underline at rest, underline +
-   ochre tint (--hover) revealed on hover/focus. */
-#about-body a, .research-list a, .pub-authors a, #awards-list a {
+/* Research / authors / awards links: no underline at rest, underline + ochre
+   tint (--hover) revealed on hover/focus. About links keep the default
+   underline at rest; only their color shifts to ochre on hover. */
+.research-list a, .pub-authors a, #awards-list a {
   text-decoration: none;
 }
 #about-body a:hover, #about-body a:focus-visible,
