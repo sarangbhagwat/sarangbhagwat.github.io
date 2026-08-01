@@ -122,6 +122,9 @@ main section.section-alt::before {
   .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
   .hero-grid.has-education #hero-tagline { margin-left: 0; }
   h1 { font-size: 2.1rem; }
+  /* .hero-col prefix outranks the base #hero-photo rule, which sits later in
+     the source with equal specificity and would otherwise win. */
+  .hero-col #hero-photo { width: 176px; height: 176px; }
 }
 
 #hero-photo {
@@ -130,7 +133,7 @@ main section.section-alt::before {
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line), 0 6px 20px rgba(0, 0, 0, 0.08);
   background: var(--line);
 }
-#hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; }
+#hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
 #hero-tagline {
   font-family: "Site Serif", Georgia, serif; font-style: italic;
   font-size: 1.25rem; color: var(--accent-soft);
@@ -174,7 +177,7 @@ main section.section-alt::before {
 #research h2, #research .research-lead, #research .research-list { max-width: var(--measure); margin-inline: auto; }
 
 /* Publications */
-.pub-year { border-bottom: 1px solid var(--line); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
+.pub-year { border-bottom: 1px solid var(--accent2-soft); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
 .pub-list { list-style: none; padding: 0; margin: 0; }
 .pub-item { margin-bottom: 1.5rem; padding-left: 2.2rem; }
 .pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }
