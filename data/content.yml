@@ -132,8 +132,11 @@ talks:
 # Fellowships and competitive awards are a committee's closest proxy for funding
 # potential — lead with those.
 awards:
-  - { year: "TODO", description: "TODO: fellowship / award name, granting body" }
-  # - { year: "2023", description: "..." }
+  - { year: "2026", description: "Outstanding Doctoral Dissertation Award (Honorable Mention), Jacobs Engineering Group, Association of Environmental Engineering & Science Professors (AEESP)" }
+  - { year: "2023–24", description: "Mavis Future Faculty Fellowship (MF3), Grainger College of Engineering, University of Illinois Urbana-Champaign" }
+  - { year: "2023–24", description: "Ravindar K. and Kavita Kinra Fellowship, Department of Civil & Environmental Engineering, University of Illinois Urbana-Champaign" }
+  - { year: "2023", description: "Chester P. Siess Award for Outstanding Graduate Students in Civil & Environmental Engineering, University of Illinois Urbana-Champaign" }
+  - { year: "2022", description: "Outstanding Podium Presentation Award (1st place), 27th Annual Environmental Engineering & Science Symposium, University of Illinois Urbana-Champaign" }
 
 # --- Teaching & mentoring -----------------------------------------------------
 # Removed for now — the section and its nav link hide themselves while these keys
