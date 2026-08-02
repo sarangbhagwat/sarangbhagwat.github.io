@@ -281,7 +281,6 @@ main section.section-alt::before {
 .software-link:hover, .software-link:focus-visible { color: var(--hover); text-decoration: underline; }
 
 /* Selected publications lead-in */
-.pub-selected-heading { margin: 0 0 1rem; }
 .pub-selected .pub-item { padding-left: 0; }
 .pub-role {
   display: inline-block; margin-left: 0.5rem; vertical-align: middle;

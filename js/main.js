@@ -411,17 +411,16 @@ function renderPublications(doc, selfName, options = {}) {
   }
 
   // Only the curated Selected list is rendered; the full list is represented by
-  // the count above, which links out to Google Scholar. Selected shows every
-  // tagged paper in the publication list's own newest-first order (de-duping
-  // multi-role entries).
+  // the count above, which links out to Google Scholar. The section's own
+  // heading names it, so no sub-heading here — just the list, in the publication
+  // list's own newest-first order (de-duping multi-role entries).
   const picks = pubs.filter(isSelected);
-  const blocks = [];
   if (picks.length) {
-    blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
-    blocks.push(el("ul", { className: "pub-list pub-selected" },
+    list.replaceChildren(el("ul", { className: "pub-list pub-selected" },
       picks.map((p) => pubItem(p, null, selfName, rolesFor(p)))));
+  } else {
+    list.replaceChildren();
   }
-  list.replaceChildren(...blocks);
 }
 
 function initNav() {
