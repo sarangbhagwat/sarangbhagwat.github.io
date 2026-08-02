@@ -102,8 +102,10 @@ awards:
   # - { year: "2023", description: "..." }
 
 # --- Teaching & mentoring -----------------------------------------------------
-teaching:
-  philosophy: "TODO: 2-3 sentence teaching philosophy (kept modest for a research-focused role)."
-  courses:
-    - "TODO: course / guest lecture / TA role"
-mentoring: "TODO: 1-2 sentences on students/junior researchers mentored and cross-disciplinary teams coordinated (e.g. team science at CABBI)."
+# Removed for now — the section and its nav link hide themselves while these keys
+# are empty. Uncomment and fill in to bring the section back.
+# teaching:
+#   philosophy: "TODO: 2-3 sentence teaching philosophy (kept modest for a research-focused role)."
+#   courses:
+#     - "TODO: course / guest lecture / TA role"
+# mentoring: "TODO: 1-2 sentences on students/junior researchers mentored and cross-disciplinary teams coordinated (e.g. team science at CABBI)."
