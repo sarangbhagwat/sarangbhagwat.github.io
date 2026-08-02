@@ -57,15 +57,17 @@ software:
     url: "https://biosteam.readthedocs.io/"
 
 # --- Research vision (thematic thrusts, NOT the research statement) ------------
-# Keep these vision-level: the "what" and "why it matters", not the mechanisms,
-# hypotheses, or preliminary results you want to save for the statement/talk.
-research_vision:
-  - heading: "TODO: Thrust 1 title (e.g. 'Predictive process design under deep uncertainty')"
-    body: "TODO: One or two sentences on the direction and why it matters. No specifics you want to reserve for the research statement."
-  - heading: "TODO: Thrust 2 title"
-    body: "TODO: One or two sentences."
-  - heading: "TODO: Thrust 3 title"
-    body: "TODO: One or two sentences."
+# Optional accent-bordered thrust cards above the interests list. Left empty for
+# now in favor of the note below; re-add {heading, body} entries to bring them
+# back (keep them vision-level — the "what" and "why it matters", not the
+# mechanisms or preliminary results you want to save for the statement/talk).
+# research_vision:
+#   - heading: "Predictive process design under deep uncertainty"
+#     body: "One or two sentences on the direction and why it matters."
+
+# Short closing note under the research interests. Points readers to the full
+# statement without reproducing it here. Remove to hide it.
+research_note: "Complete research statement available on request."
 
 # --- Selected publications ----------------------------------------------------
 # Authorship-role tags, by DOI (lowercase, matching a `doi` in

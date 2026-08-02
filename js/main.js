@@ -277,7 +277,9 @@ function renderContent(data, softwareMetrics) {
       bodies.map((r) => el("li", {}, richText(r.body)))));
   }
   fill("research-list", researchNodes);
-  show("research", research.length > 0 || vision.length > 0);
+  const researchNote = String(data.research_note || "").trim();
+  fill("research-note", researchNote ? [richText(researchNote)] : []);
+  show("research", research.length > 0 || vision.length > 0 || Boolean(researchNote));
 
   const scholar = document.getElementById("scholar-link");
   if (scholar && m.scholar_url) scholar.href = safeUrl(m.scholar_url);

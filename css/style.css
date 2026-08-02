@@ -177,7 +177,9 @@ main section.section-alt::before {
 }
 
 /* Reading measure: cap prose width for comfortable line length */
-#research h2, #research .research-lead, #research .research-list { max-width: var(--measure); margin-inline: auto; }
+#research h2, #research .research-lead, #research .research-list, #research .research-note { max-width: var(--measure); margin-inline: auto; }
+#research .research-note { margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; font-style: italic; }
+#research .research-note:empty { display: none; }
 
 /* About: two prose columns across the full content width (matching
    Publications). Single column on narrow screens; the reading measure no
