@@ -359,8 +359,15 @@ function pubItem(p, num, selfName, roles = []) {
   if (p.authors && p.authors.length) {
     li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
   }
-  const meta = [p.venue, p.year].filter(Boolean).join(", ");
-  if (meta) li.append(el("div", { className: "pub-venue", textContent: meta }));
+  // Venue line: italic journal · upright year, separated by the same middle dot
+  // used elsewhere. The dot only appears when both parts are present.
+  if (p.venue || p.year) {
+    const venue = el("div", { className: "pub-venue" });
+    if (p.venue) venue.append(el("span", { className: "pub-journal", textContent: p.venue }));
+    if (p.venue && p.year) venue.append(el("span", { className: "pub-venue-sep", textContent: "·" }));
+    if (p.year) venue.append(el("span", { className: "pub-pubyear", textContent: String(p.year) }));
+    li.append(venue);
+  }
   if (p.url) li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: "DOI" }));
   return li;
 }

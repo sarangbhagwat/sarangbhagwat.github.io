@@ -200,6 +200,8 @@ main section.section-alt::before {
 .pub-title { font-weight: 600; }
 .pub-authors { color: var(--text); font-size: 0.95rem; }
 .pub-venue { color: var(--muted); font-style: italic; font-size: 0.9rem; }
+.pub-venue-sep { font-style: normal; margin: 0 0.55rem; }
+.pub-pubyear { font-style: normal; }
 .pub-doi {
   display: inline-block; margin-top: 0.4rem;
   padding: 0.1rem 0.5rem; border: 1px solid var(--accent2); border-radius: 999px;
