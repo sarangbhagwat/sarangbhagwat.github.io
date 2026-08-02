@@ -321,14 +321,55 @@ function authorsFragment(authors, selfName) {
   return frag;
 }
 
-function renderPublications(doc, selfName) {
+function normDoi(doi) {
+  return (doi == null ? "" : String(doi)).trim().toLowerCase();
+}
+
+// Builds one <li> for a publication. `num` is the reverse-count label (or null
+// to omit it, as in the Selected block). `isCorresponding` adds the badge.
+function pubItem(p, num, selfName, isCorresponding) {
+  const li = el("li", { className: "pub-item" });
+  if (num != null) li.append(el("span", { className: "pub-num", textContent: `${num}.` }));
+  li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
+  if (isCorresponding) {
+    li.append(el("span", { className: "pub-corresponding", textContent: "Corresponding author" }));
+  }
+  if (p.authors && p.authors.length) {
+    li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
+  }
+  const meta = [p.venue, p.year].filter(Boolean).join(", ");
+  if (meta) li.append(el("div", { className: "pub-venue", textContent: meta }));
+  if (p.url) li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: "DOI" }));
+  return li;
+}
+
+function renderPublications(doc, selfName, options = {}) {
   const list = document.getElementById("publications-list");
   const pubs = (doc && doc.publications) || [];
+  const corresponding = new Set((options.correspondingDois || []).map(normDoi));
+  const isCorr = (p) => corresponding.has(normDoi(p.doi));
+
   if (pubs.length === 0) {
     list.replaceChildren(el("p", { className: "muted", textContent:
       "Publications will appear here once the ORCID sync runs." }));
     return;
   }
+
+  const blocks = [];
+
+  // Selected lead-in: curated, in the order the DOIs are listed in content.yml.
+  const selected = (options.selectedDois || []).map(normDoi);
+  if (selected.length) {
+    const byDoi = new Map(pubs.map((p) => [normDoi(p.doi), p]));
+    const picks = selected.map((d) => byDoi.get(d)).filter(Boolean);
+    if (picks.length) {
+      blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
+      blocks.push(el("ul", { className: "pub-list pub-selected" },
+        picks.map((p) => pubItem(p, null, selfName, isCorr(p)))));
+    }
+  }
+
+  // Full list, grouped by year, reverse-numbered (oldest = 1).
   const byYear = new Map();
   for (const p of pubs) {
     const y = p.year || "Undated";
@@ -340,22 +381,13 @@ function renderPublications(doc, selfName) {
     if (b === "Undated") return -1;
     return b - a;
   });
-  const blocks = [];
-  let num = pubs.length; // reverse numbering: oldest = 1, newest = highest
+  if (selected.length) {
+    blocks.push(el("h3", { className: "pub-all-heading", textContent: "All publications" }));
+  }
+  let num = pubs.length;
   for (const y of years) {
     blocks.push(el("h3", { className: "pub-year", textContent: String(y) }));
-    const items = byYear.get(y).map((p) => {
-      const li = el("li", { className: "pub-item" });
-      li.append(el("span", { className: "pub-num", textContent: `${num--}.` }));
-      li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
-      if (p.authors && p.authors.length) {
-        li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
-      }
-      const meta = [p.venue, p.year].filter(Boolean).join(", ");
-      if (meta) li.append(el("div", { className: "pub-venue", textContent: meta }));
-      if (p.url) li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: "DOI" }));
-      return li;
-    });
+    const items = byYear.get(y).map((p) => pubItem(p, num--, selfName, isCorr(p)));
     blocks.push(el("ul", { className: "pub-list" }, items));
   }
   list.replaceChildren(...blocks);
@@ -486,10 +518,13 @@ async function init() {
     const selfName = fullName(data.meta || {});
     try {
       const pubs = await loadPublications();
-      renderPublications(pubs, selfName);
+      renderPublications(pubs, selfName, {
+        selectedDois: data.selected_publications || [],
+        correspondingDois: data.corresponding_dois || [],
+      });
     } catch (pubErr) {
       console.error(pubErr);
-      renderPublications({ publications: [] }, selfName);
+      renderPublications({ publications: [] }, selfName, {});
     }
     initNav();
   } catch (err) {
