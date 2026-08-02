@@ -285,7 +285,7 @@ main section.section-alt::before {
 .talk-title { font-weight: 600; color: var(--text); text-decoration: none; }
 a.talk-title:hover, a.talk-title:focus-visible { color: var(--hover); text-decoration: underline; }
 .talk-invited {
-  margin-left: 0.5rem; padding: 0.02rem 0.4rem; border: 1px solid var(--accent2); border-radius: 999px;
+  justify-self: start; padding: 0.02rem 0.4rem; border: 1px solid var(--accent2); border-radius: 999px;
   color: var(--accent2); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em;
   /* Balance the trailing letter-spacing so the text sits centered in the pill. */
   text-indent: 0.05em;
