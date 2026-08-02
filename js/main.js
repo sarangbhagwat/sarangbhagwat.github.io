@@ -347,13 +347,14 @@ function normDoi(doi) {
 }
 
 // Builds one <li> for a publication. `num` is the reverse-count label (or null
-// to omit it, as in the Selected block). `isCorresponding` adds the badge.
-function pubItem(p, num, selfName, isCorresponding) {
+// to omit it, as in the Selected block). `roles` is an ordered list of badge
+// labels (e.g. ["First author", "Corresponding author"]) to show on the entry.
+function pubItem(p, num, selfName, roles = []) {
   const li = el("li", { className: "pub-item" });
   if (num != null) li.append(el("span", { className: "pub-num", textContent: `${num}.` }));
   li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
-  if (isCorresponding) {
-    li.append(el("span", { className: "pub-corresponding", textContent: "Corresponding author" }));
+  for (const label of roles) {
+    li.append(el("span", { className: "pub-role", textContent: label }));
   }
   if (p.authors && p.authors.length) {
     li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
@@ -367,8 +368,26 @@ function pubItem(p, num, selfName, isCorresponding) {
 function renderPublications(doc, selfName, options = {}) {
   const list = document.getElementById("publications-list");
   const pubs = (doc && doc.publications) || [];
+
+  // Authorship-role tagging by DOI. Each set drives both a badge and membership
+  // in the Selected lead-in (a paper in any set is featured). ORCID can't tell
+  // these apart, so they are curated by hand in content.yml.
+  const firstAuthor = new Set((options.firstAuthorDois || []).map(normDoi));
+  const cofirst = new Set((options.cofirstDois || []).map(normDoi));
   const corresponding = new Set((options.correspondingDois || []).map(normDoi));
-  const isCorr = (p) => corresponding.has(normDoi(p.doi));
+  // Ordered so multi-role entries (e.g. first + corresponding) read consistently.
+  const rolesFor = (p) => {
+    const d = normDoi(p.doi);
+    const roles = [];
+    if (firstAuthor.has(d)) roles.push("First author");
+    if (cofirst.has(d)) roles.push("Co-first author");
+    if (corresponding.has(d)) roles.push("Corresponding author");
+    return roles;
+  };
+  const isSelected = (p) => {
+    const d = normDoi(p.doi);
+    return firstAuthor.has(d) || cofirst.has(d) || corresponding.has(d);
+  };
 
   if (pubs.length === 0) {
     list.replaceChildren(el("p", { className: "muted", textContent:
@@ -378,14 +397,13 @@ function renderPublications(doc, selfName, options = {}) {
 
   const blocks = [];
 
-  // Selected lead-in: curated, in the order the DOIs are listed in content.yml.
-  const selected = (options.selectedDois || []).map(normDoi);
-  const byDoi = new Map(pubs.map((p) => [normDoi(p.doi), p]));
-  const picks = selected.map((d) => byDoi.get(d)).filter(Boolean);
+  // Selected lead-in: every tagged paper, in the publication list's own
+  // newest-first order (which also de-dupes multi-role entries).
+  const picks = pubs.filter(isSelected);
   if (picks.length) {
     blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
     blocks.push(el("ul", { className: "pub-list pub-selected" },
-      picks.map((p) => pubItem(p, null, selfName, isCorr(p)))));
+      picks.map((p) => pubItem(p, null, selfName, rolesFor(p)))));
   }
 
   // Full list, grouped by year, reverse-numbered (oldest = 1).
@@ -406,7 +424,7 @@ function renderPublications(doc, selfName, options = {}) {
   let num = pubs.length;
   for (const y of years) {
     blocks.push(el("h3", { className: "pub-year", textContent: String(y) }));
-    const items = byYear.get(y).map((p) => pubItem(p, num--, selfName, isCorr(p)));
+    const items = byYear.get(y).map((p) => pubItem(p, num--, selfName, rolesFor(p)));
     blocks.push(el("ul", { className: "pub-list" }, items));
   }
   list.replaceChildren(...blocks);
@@ -538,7 +556,8 @@ async function init() {
     try {
       const pubs = await loadPublications();
       renderPublications(pubs, selfName, {
-        selectedDois: data.selected_publications || [],
+        firstAuthorDois: data.first_author_dois || [],
+        cofirstDois: data.cofirst_dois || [],
         correspondingDois: data.corresponding_dois || [],
       });
     } catch (pubErr) {

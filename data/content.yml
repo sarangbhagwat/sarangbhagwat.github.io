@@ -68,16 +68,27 @@ research_vision:
     body: "TODO: One or two sentences."
 
 # --- Selected publications ----------------------------------------------------
-# DOIs (lowercase) of the works to surface as a curated lead-in above the full
-# ORCID list. Must match a `doi` in data/publications.json.
-selected_publications:
-  - "10.1038/s41467-026-75285-1"           # first-author Nature Communications (2026)
-  # - "TODO: add 2-4 of your strongest first/corresponding-author DOIs"
+# Authorship-role tags, by DOI (lowercase, matching a `doi` in
+# data/publications.json). ORCID can't tell first/co-first/corresponding apart,
+# so tag them here. The "Selected publications" lead-in is composed automatically
+# from every DOI listed below, newest first, and each role adds its own badge.
+# A paper can appear in more than one list (e.g. first + corresponding).
 
-# DOIs where you are the corresponding author; renders a small "Corresponding
-# author" badge on those entries (in both the selected and full lists).
+# You are the (sole) first author.
+first_author_dois:
+  - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
+  - "10.1021/acssuschemeng.5c04797"        # Triacetic acid lactone from sugarcane (2025)
+  - "10.1021/acssuschemeng.1c05441"        # Acrylic acid via 3-HP (2021)
+
+# You are a co-first / equal-contribution author (the "*" footnote on the CV).
+cofirst_dois:
+  - "10.1038/s41467-025-67621-8"           # 3-HP in I. orientalis (Nat. Commun. 2026)
+  - "10.1038/s41467-023-41616-9"           # Succinic acid pipeline (Nat. Commun. 2023)
+  - "10.1002/bbb.2427"                     # TAL adsorptive separation (2022)
+
+# You are a (co-)corresponding author.
 corresponding_dois:
-  - "10.1038/s41467-026-75285-1"           # TODO: confirm / add your corresponding-author DOIs
+  - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
 
 # --- Selected talks -----------------------------------------------------------
 # Invited talks from the CV, most recent first. `invited: true` adds the tag;

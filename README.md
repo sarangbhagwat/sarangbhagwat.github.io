@@ -42,9 +42,13 @@ empty, so you can leave any of them out:
   yourself). Run it locally with `python scripts/sync_software.py`.
 - `research_vision:` — 2–3 `{heading, body}` thrusts shown above your research
   interests. Keep these vision-level; save the details for your statement.
-- `selected_publications:` — a list of DOIs (lowercase) to feature above the
-  full ORCID-generated list. `corresponding_dois:` adds a "Corresponding
-  author" badge to matching entries.
+- `first_author_dois:`, `cofirst_dois:`, `corresponding_dois:` — authorship-role
+  tags, by DOI (lowercase, matching a `doi` in the ORCID-generated
+  `publications.json`). ORCID can't tell these apart, so tag them here. The
+  "Selected publications" lead-in above the full list is built automatically
+  from every DOI in these lists (newest first), and each role adds its own badge
+  ("First author", "Co-first author", "Corresponding author"). A paper may appear
+  in more than one list.
 - `talks:` — `{year, title, venue, invited, url}` entries (`invited: true`
   adds a tag; `url` is optional).
 - `news:` — `{date, text}` one-liners shown below the hero.
