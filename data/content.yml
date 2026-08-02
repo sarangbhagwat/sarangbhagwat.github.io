@@ -80,13 +80,45 @@ corresponding_dois:
   - "10.1038/s41467-026-75285-1"           # TODO: confirm / add your corresponding-author DOIs
 
 # --- Selected talks -----------------------------------------------------------
+# Invited talks from the CV, most recent first. `invited: true` adds the tag;
+# add a `url:` to link slides or a recording.
 talks:
+  - year: "2026"
+    title: "Toward agile and predictive process systems engineering for circular economies"
+    venue: "Texas Tech University (Dept. of Chemical Engineering), Lubbock, TX"
+    invited: true
+  - year: "2026"
+    title: "Toward agile and predictive process systems engineering for circular economies"
+    venue: "Arizona State University (School of Sustainable Engineering and the Built Environment), Tempe, AZ"
+    invited: true
   - year: "2025"
-    title: "TODO: talk title"
-    venue: "TODO: conference / seminar, location"
-    invited: true                          # set true for invited talks/seminars
-    # url: "https://..."                    # optional slides/recording link
-  # - { year: "2024", title: "...", venue: "...", invited: false }
+    title: "Generating widely applicable systems-scale insights into fermentation titer-rate-yield"
+    venue: "SIMB 47th Symposium on Biomaterials, Fuels, and Chemicals (SBFC), Milwaukee, WI"
+    invited: true
+  - year: "2024"
+    title: "Charting development pathways for precision fermentation through agile system analyses"
+    venue: "SIMB Annual Meeting, Boston, MA"
+    invited: true
+  - year: "2024"
+    title: "Charting development pathways for precision fermentation through agile system analyses"
+    venue: "US DOE Bioenergy Technologies Office (BETO), virtual"
+    invited: true
+  - year: "2024"
+    title: "Charting development pathways for precision fermentation through agile system analyses"
+    venue: "LBNL Advanced Biofuels and Bioproducts Process Development Unit (ABPDU) SCIENCE Hour Seminar, virtual"
+    invited: true
+  - year: "2024"
+    title: "Charting development pathways for precision fermentation through agile system analyses"
+    venue: "SIMB 46th Symposium on Biomaterials, Fuels, and Chemicals (SBFC), Alexandria, VA"
+    invited: true
+  - year: "2023"
+    title: "Integrating process design, simulation, TEA, and LCA"
+    venue: "Integrated Bioprocessing Research Laboratory (IBRL) Fermentation Short Course, Champaign, IL"
+    invited: true
+  - year: "2023"
+    title: "Sustainable production of sorbic acid via triacetic acid lactone (TAL) from lignocellulosic biomass"
+    venue: "ACS Spring 2023: Crossroads of Chemistry, Indianapolis, IN"
+    invited: true
 
 # --- News / recent ------------------------------------------------------------
 # 3-5 dated one-liners; keeps the page current between automated pub updates.
