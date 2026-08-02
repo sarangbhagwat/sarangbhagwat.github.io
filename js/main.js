@@ -15,6 +15,16 @@ async function loadContent() {
   return window.jsyaml.load(text);
 }
 
+async function loadSoftware() {
+  try {
+    const res = await fetch("data/software.json", { cache: "no-cache" });
+    if (res.ok) return res.json();
+  } catch (e) {
+    console.error(e);
+  }
+  return { repos: {}, packages: {} };
+}
+
 function el(tag, props = {}, children = []) {
   const node = document.createElement(tag);
   Object.assign(node, props);
@@ -141,7 +151,49 @@ function assignBands() {
   sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
 }
 
-function renderContent(data) {
+// Renders the Software cards, merging live metrics (stars, monthly downloads)
+// keyed by the entry's repo slug and pypi name. Missing metrics are simply
+// omitted — the card still renders from the editorial content.
+function renderSoftware(software, metrics) {
+  const list = software || [];
+  const repos = (metrics && metrics.repos) || {};
+  const packages = (metrics && metrics.packages) || {};
+  const cards = list.map((s) => {
+    const card = el("div", { className: "software-card" });
+    const head = el("div", { className: "software-head" });
+    head.append(el("h3", { className: "software-name", textContent: s.name || "" }));
+    if (s.role) head.append(el("span", { className: "software-role", textContent: s.role }));
+    card.append(head);
+    if (s.description) card.append(el("p", { className: "software-desc" }, richText(s.description)));
+
+    const repoM = s.repo ? repos[s.repo] : null;
+    const pkgM = s.pypi ? packages[s.pypi] : null;
+    const stats = [];
+    if (repoM && typeof repoM.stars === "number" && repoM.stars > 0) {
+      stats.push(`★ ${repoM.stars.toLocaleString()} stars`);
+    }
+    if (pkgM && typeof pkgM.last_month === "number" && pkgM.last_month > 0) {
+      stats.push(`${pkgM.last_month.toLocaleString()} downloads/mo`);
+    }
+    if (stats.length) {
+      card.append(el("div", { className: "software-stats", textContent: stats.join("  ·  ") }));
+    }
+
+    const links = [];
+    if (s.repo) links.push(el("a", { className: "software-link", href: safeUrl(`https://github.com/${s.repo}`), textContent: "GitHub" }));
+    if (s.url) links.push(el("a", { className: "software-link", href: safeUrl(s.url), textContent: "Docs / site" }));
+    if (links.length) {
+      const wrap = el("div", { className: "software-links" });
+      links.forEach((a, i) => { if (i) wrap.append(document.createTextNode(" ")); wrap.append(a); });
+      card.append(wrap);
+    }
+    return card;
+  });
+  fill("software-list", cards);
+  show("software", list.length > 0);
+}
+
+function renderContent(data, softwareMetrics) {
   const m = data.meta || {};
   const name = fullName(m);
   document.title = name || "Personal website";
@@ -210,6 +262,8 @@ function renderContent(data) {
 
   document.getElementById("footer-year").textContent = new Date().getFullYear();
   document.getElementById("footer-name").textContent = name;
+
+  renderSoftware(data.software || [], softwareMetrics || { repos: {}, packages: {} });
 
   assignBands();
 }
@@ -400,7 +454,13 @@ async function init() {
   initCvButton(); // async + self-contained: independent of content/publications
   try {
     const data = await loadContent();
-    renderContent(data);
+    let softwareMetrics = { repos: {}, packages: {} };
+    try {
+      softwareMetrics = await loadSoftware();
+    } catch (e) {
+      console.error(e);
+    }
+    renderContent(data, softwareMetrics);
     const selfName = fullName(data.meta || {});
     try {
       const pubs = await loadPublications();
