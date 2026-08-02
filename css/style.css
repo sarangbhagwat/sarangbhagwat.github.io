@@ -287,6 +287,8 @@ a.talk-title:hover, a.talk-title:focus-visible { color: var(--hover); text-decor
 .talk-invited {
   margin-left: 0.5rem; padding: 0.02rem 0.4rem; border: 1px solid var(--accent2); border-radius: 999px;
   color: var(--accent2); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em;
+  /* Balance the trailing letter-spacing so the text sits centered in the pill. */
+  text-indent: 0.05em;
 }
 .talk-venue { grid-column: 2; color: var(--muted); font-style: italic; font-size: 0.9rem; }
 
