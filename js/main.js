@@ -147,7 +147,7 @@ function fullName(meta) {
 // section after the hero gets the white band, so About pops against the hero.
 function assignBands() {
   const sections = [...document.querySelectorAll("main section:not([hidden])")]
-    .filter((s) => s.id !== "hero");
+    .filter((s) => s.id !== "hero" && s.id !== "news");
   sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
 }
 
@@ -193,8 +193,22 @@ function renderSoftware(software, metrics) {
   show("software", list.length > 0);
 }
 
+// Compact dated updates shown as a strip below the hero. Each item is
+// "date — text", with markdown links in the text supported via richText().
+function renderNews(news) {
+  const list = news || [];
+  fill("news-list", list.map((n) => {
+    const li = el("li", { className: "news-item" });
+    if (n.date) li.append(el("span", { className: "news-date", textContent: String(n.date) }));
+    li.append(el("span", { className: "news-text" }, richText(n.text || "")));
+    return li;
+  }));
+  show("news", list.length > 0);
+}
+
 function renderContent(data, softwareMetrics) {
   const m = data.meta || {};
+  renderNews(data.news || []);
   const name = fullName(m);
   document.title = name || "Personal website";
   document.querySelector(".nav-name").textContent = name;
@@ -222,6 +236,14 @@ function renderContent(data, softwareMetrics) {
   const heroGrid = document.querySelector(".hero-grid");
   if (heroGrid) heroGrid.classList.toggle("has-education", education.length > 0);
 
+  const vision = data.research_vision || [];
+  fill("research-vision", vision.map((v) => {
+    const item = el("div", { className: "vision-item" });
+    if (v.heading) item.append(el("h3", { className: "vision-heading", textContent: v.heading }));
+    if (v.body) item.append(el("p", { className: "vision-body" }, richText(v.body)));
+    return item;
+  }));
+
   const research = data.research_interests || [];
   const leads = research.filter((r) => r.heading);
   const bodies = research.filter((r) => r.body);
@@ -237,7 +259,7 @@ function renderContent(data, softwareMetrics) {
       bodies.map((r) => el("li", {}, richText(r.body)))));
   }
   fill("research-list", researchNodes);
-  show("research", research.length > 0);
+  show("research", research.length > 0 || vision.length > 0);
 
   const scholar = document.getElementById("scholar-link");
   if (scholar && m.scholar_url) scholar.href = safeUrl(m.scholar_url);
