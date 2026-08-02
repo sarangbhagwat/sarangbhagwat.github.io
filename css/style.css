@@ -241,3 +241,55 @@ main section.section-alt::before {
 
 /* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
 :root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }
+
+/* News strip: compact, quiet, sits just under the hero */
+.news-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+.news-item { display: flex; gap: 0.75rem; align-items: baseline; }
+.news-date { flex: none; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); min-width: 4.5rem; }
+.news-text { color: var(--text); }
+
+/* Research vision: thrust cards above the interests list */
+#research-vision { max-width: var(--measure); margin-inline: auto; margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
+.vision-item { border-left: 3px solid var(--accent2-soft); padding-left: 0.9rem; }
+.vision-heading { margin: 0 0 0.25rem; font-size: 1.05rem; }
+.vision-body { margin: 0; color: var(--text); }
+
+/* Software cards */
+.software-list { display: grid; grid-template-columns: 1fr; gap: 1.25rem; }
+@media (min-width: 720px) { .software-list { grid-template-columns: 1fr 1fr; } }
+.software-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1.1rem 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.software-head { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+.software-name { margin: 0; font-size: 1.1rem; }
+.software-role { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent2); }
+.software-desc { margin: 0; color: var(--text); }
+.software-stats { color: var(--muted); font-size: 0.9rem; }
+.software-links { display: flex; gap: 0.75rem; }
+.software-link { font-size: 0.9rem; text-decoration: none; color: var(--accent-soft); }
+.software-link:hover, .software-link:focus-visible { color: var(--hover); text-decoration: underline; }
+
+/* Selected publications lead-in */
+.pub-selected-heading, .pub-all-heading { margin: 0 0 1rem; }
+.pub-all-heading { margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.pub-selected .pub-item { padding-left: 0; }
+.pub-corresponding {
+  display: inline-block; margin-left: 0.5rem; vertical-align: middle;
+  padding: 0.05rem 0.45rem; border-radius: 999px;
+  background: var(--accent2-soft); color: var(--surface);
+  font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
+}
+
+/* Selected talks */
+.talks-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 1rem; }
+.talk-item { display: grid; grid-template-columns: 3.5rem 1fr; column-gap: 0.75rem; align-items: baseline; }
+.talk-year { font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.talk-title { font-weight: 600; color: var(--text); text-decoration: none; }
+a.talk-title:hover, a.talk-title:focus-visible { color: var(--hover); text-decoration: underline; }
+.talk-invited {
+  margin-left: 0.5rem; padding: 0.02rem 0.4rem; border: 1px solid var(--accent2); border-radius: 999px;
+  color: var(--accent2); font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.05em;
+}
+.talk-venue { grid-column: 2; color: var(--muted); font-style: italic; font-size: 0.9rem; }
+
+/* Mentoring block under Teaching */
+#mentoring { max-width: var(--measure); margin-top: 1.25rem; }
+#mentoring p { margin: 0; }

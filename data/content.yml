@@ -32,3 +32,78 @@ research_interests:
   - { body: "Discover and prioritize biomanufacturing pathways through physics-informed AI & ML" }
   - { body: "Develop open-source tools for techno-economic analysis (TEA) and life cycle assessment (LCA)" }
   - { body: "Navigate economic and environmental trade-offs in R&D decisions" }
+
+# --- Software / research tools -------------------------------------------------
+# `repo` is "owner/name"; the software-metrics sync (scripts/sync_software.py)
+# reads repo:/pypi: lines here, fetches stars/downloads, and writes
+# data/software.json. Leave `pypi` off for tools not published to PyPI.
+software:
+  - name: "NSKinetics"
+    role: "Lead developer"
+    description: "Open-source toolkit for defining and simulating (bio)chemical reaction networks and non-steady-state kinetics."
+    repo: "sarangbhagwat/nskinetics"
+    pypi: "nskinetics"                      # TODO: confirm the PyPI package name
+    url: "https://github.com/sarangbhagwat/nskinetics"
+  - name: "Standard Flowsheet Format (SFF)"
+    role: "Lead developer"
+    description: "An interoperable format and export layer for process flowsheets, underlying [Project PISCES](https://projectpisces.org/)."
+    repo: "sustainability-software-lab/pisces-standard-flowsheet-format"
+    url: "https://projectpisces.org/"
+  - name: "BioSTEAM"
+    role: "Core developer"
+    description: "Fast, open-source platform for the design, simulation, and techno-economic analysis of biorefineries under uncertainty."
+    repo: "BioSTEAMDevelopmentGroup/biosteam"
+    pypi: "biosteam"
+    url: "https://biosteam.readthedocs.io/"
+
+# --- Research vision (thematic thrusts, NOT the research statement) ------------
+# Keep these vision-level: the "what" and "why it matters", not the mechanisms,
+# hypotheses, or preliminary results you want to save for the statement/talk.
+research_vision:
+  - heading: "TODO: Thrust 1 title (e.g. 'Predictive process design under deep uncertainty')"
+    body: "TODO: One or two sentences on the direction and why it matters. No specifics you want to reserve for the research statement."
+  - heading: "TODO: Thrust 2 title"
+    body: "TODO: One or two sentences."
+  - heading: "TODO: Thrust 3 title"
+    body: "TODO: One or two sentences."
+
+# --- Selected publications ----------------------------------------------------
+# DOIs (lowercase) of the works to surface as a curated lead-in above the full
+# ORCID list. Must match a `doi` in data/publications.json.
+selected_publications:
+  - "10.1038/s41467-026-75285-1"           # first-author Nature Communications (2026)
+  # - "TODO: add 2-4 of your strongest first/corresponding-author DOIs"
+
+# DOIs where you are the corresponding author; renders a small "Corresponding
+# author" badge on those entries (in both the selected and full lists).
+corresponding_dois:
+  - "10.1038/s41467-026-75285-1"           # TODO: confirm / add your corresponding-author DOIs
+
+# --- Selected talks -----------------------------------------------------------
+talks:
+  - year: "2025"
+    title: "TODO: talk title"
+    venue: "TODO: conference / seminar, location"
+    invited: true                          # set true for invited talks/seminars
+    # url: "https://..."                    # optional slides/recording link
+  # - { year: "2024", title: "...", venue: "...", invited: false }
+
+# --- News / recent ------------------------------------------------------------
+# 3-5 dated one-liners; keeps the page current between automated pub updates.
+news:
+  - { date: "2026-07", text: "TODO: e.g. 'New paper out in Nature Communications.' [optional [link](https://...)]" }
+  # - { date: "2026-05", text: "..." }
+
+# --- Awards and honors --------------------------------------------------------
+# Fellowships and competitive awards are a committee's closest proxy for funding
+# potential — lead with those.
+awards:
+  - { year: "TODO", description: "TODO: fellowship / award name, granting body" }
+  # - { year: "2023", description: "..." }
+
+# --- Teaching & mentoring -----------------------------------------------------
+teaching:
+  philosophy: "TODO: 2-3 sentence teaching philosophy (kept modest for a research-focused role)."
+  courses:
+    - "TODO: course / guest lecture / TA role"
+mentoring: "TODO: 1-2 sentences on students/junior researchers mentored and cross-disciplinary teams coordinated (e.g. team science at CABBI)."

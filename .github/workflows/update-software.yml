@@ -1,0 +1,36 @@
+name: Update software metrics
+
+on:
+  schedule:
+    - cron: "0 7 * * 1"      # 07:00 UTC every Monday
+  workflow_dispatch: {}       # manual "Run workflow" button
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch GitHub/PyPI metrics and update software.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/sync_software.py
+
+      - name: Commit changes if any
+        run: |
+          if [[ -n "$(git status --porcelain data/software.json)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add data/software.json
+            git commit -m "chore: refresh software metrics"
+            git push
+          else
+            echo "No software metric changes."
+          fi
