@@ -69,11 +69,12 @@ const ICONS = {
     '0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>'
   ),
   linkedin: () => svgIcon(
-    '<rect x="2.5" y="2.5" width="19" height="19" rx="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
-    '<circle cx="7.7" cy="7.8" r="1.3"/>' +
-    '<rect x="6.6" y="10.3" width="2.2" height="8"/>' +
-    '<path d="M11.6 18.3v-5.4c0-1.7 1.1-2.9 2.7-2.9 1.7 0 2.9 1.1 2.9 3.1v5.2h-2.2v-4.8c0-1-.4-1.7-1.3-1.7-.7 ' +
-    '0-1.2.5-1.4 1-.1.2-.1.5-.1.8v4.7h-2.2Z"/>'
+    '<rect x="2.5" y="2.5" width="19" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
+    '<circle cx="7" cy="7.5" r="1.35"/>' +
+    // "in" drawn as even-weight strokes so the i-stem and both n legs match.
+    '<path d="M7 17.9V10.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>' +
+    '<path d="M11.4 17.9V13a3 3 0 0 1 6 0v4.9" fill="none" stroke="currentColor" ' +
+    'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
   ),
 };
 
