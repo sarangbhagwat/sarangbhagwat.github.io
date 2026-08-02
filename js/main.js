@@ -267,10 +267,9 @@ function renderContent(data, softwareMetrics) {
   const bodies = research.filter((r) => r.body);
   const researchNodes = [];
   for (const r of leads) {
-    researchNodes.push(el("p", {
-      className: "research-lead",
-      textContent: String(r.heading).split(";").map((s) => s.trim()).filter(Boolean).join(" · "),
-    }));
+    const terms = String(r.heading).split(";").map((s) => s.trim()).filter(Boolean);
+    researchNodes.push(el("ul", { className: "research-pillars" },
+      terms.map((t) => el("li", { className: "pillar", textContent: t }))));
   }
   if (bodies.length) {
     researchNodes.push(el("ul", { className: "research-list" },

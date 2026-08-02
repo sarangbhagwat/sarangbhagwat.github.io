@@ -168,7 +168,12 @@ main section.section-alt::before {
 .edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .edu-degree { color: var(--text); }
 .edu-inst { color: var(--muted); font-size: 0.9rem; }
-.research-lead { font-size: 0.85rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); margin: 0 0 1.1rem; line-height: 1.7; }
+.research-pillars { list-style: none; margin: 0 0 1.35rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.55rem; }
+.pillar {
+  border: 1px solid var(--accent2-soft); color: var(--accent);
+  border-radius: 999px; padding: 0.4rem 0.9rem;
+  font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; line-height: 1.25;
+}
 .research-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
 .research-list li { position: relative; padding-left: 1.1rem; }
 .research-list li::before {
@@ -177,7 +182,7 @@ main section.section-alt::before {
 }
 
 /* Reading measure: cap prose width for comfortable line length */
-#research h2, #research .research-lead, #research .research-list, #research .research-note { max-width: var(--measure); margin-inline: auto; }
+#research h2, #research .research-pillars, #research .research-list, #research .research-note { max-width: var(--measure); margin-inline: auto; }
 #research .research-note { margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; font-style: italic; }
 #research .research-note:empty { display: none; }
 
