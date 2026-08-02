@@ -121,10 +121,12 @@ talks:
     invited: true
 
 # --- News / recent ------------------------------------------------------------
+# Removed for now — the section hides itself while this list is empty. Uncomment
+# and add dated one-liners to bring it back.
 # 3-5 dated one-liners; keeps the page current between automated pub updates.
-news:
-  - { date: "2026-07", text: "TODO: e.g. 'New paper out in Nature Communications.' [optional [link](https://...)]" }
-  # - { date: "2026-05", text: "..." }
+# news:
+#   - { date: "2026-07", text: "TODO: e.g. 'New paper out in Nature Communications.' [optional [link](https://...)]" }
+#   - { date: "2026-05", text: "..." }
 
 # --- Awards and honors --------------------------------------------------------
 # Fellowships and competitive awards are a committee's closest proxy for funding
