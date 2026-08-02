@@ -342,7 +342,8 @@ function authorsFragment(authors, selfName) {
 }
 
 function normDoi(doi) {
-  return (doi == null ? "" : String(doi)).trim().toLowerCase();
+  return (doi == null ? "" : String(doi)).trim().toLowerCase()
+    .replace(/^https?:\/\/(dx\.)?doi\.org\//, "");
 }
 
 // Builds one <li> for a publication. `num` is the reverse-count label (or null
@@ -379,14 +380,12 @@ function renderPublications(doc, selfName, options = {}) {
 
   // Selected lead-in: curated, in the order the DOIs are listed in content.yml.
   const selected = (options.selectedDois || []).map(normDoi);
-  if (selected.length) {
-    const byDoi = new Map(pubs.map((p) => [normDoi(p.doi), p]));
-    const picks = selected.map((d) => byDoi.get(d)).filter(Boolean);
-    if (picks.length) {
-      blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
-      blocks.push(el("ul", { className: "pub-list pub-selected" },
-        picks.map((p) => pubItem(p, null, selfName, isCorr(p)))));
-    }
+  const byDoi = new Map(pubs.map((p) => [normDoi(p.doi), p]));
+  const picks = selected.map((d) => byDoi.get(d)).filter(Boolean);
+  if (picks.length) {
+    blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
+    blocks.push(el("ul", { className: "pub-list pub-selected" },
+      picks.map((p) => pubItem(p, null, selfName, isCorr(p)))));
   }
 
   // Full list, grouped by year, reverse-numbered (oldest = 1).
@@ -401,7 +400,7 @@ function renderPublications(doc, selfName, options = {}) {
     if (b === "Undated") return -1;
     return b - a;
   });
-  if (selected.length) {
+  if (picks.length) {
     blocks.push(el("h3", { className: "pub-all-heading", textContent: "All publications" }));
   }
   let num = pubs.length;
