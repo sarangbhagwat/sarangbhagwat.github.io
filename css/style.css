@@ -189,7 +189,11 @@ main section.section-alt::before {
 }
 
 /* Publications */
-.pub-year { border-bottom: 1px solid var(--accent2-soft); padding-bottom: 0.3rem; margin: 1.5rem 0 0.8rem; }
+/* Count + Google Scholar link at the top of the section. The separator dot only
+   appears when the count is present, so an empty count leaves just the link. */
+.pub-summary { color: var(--muted); margin: 0 0 1.5rem; }
+.pub-count { color: var(--text); }
+.pub-count:not(:empty)::after { content: "·"; margin: 0 0.55rem; color: var(--muted); }
 .pub-list { list-style: none; padding: 0; margin: 0; }
 .pub-item { margin-bottom: 1.5rem; padding-left: 2.2rem; }
 .pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }
@@ -268,8 +272,7 @@ main section.section-alt::before {
 .software-link:hover, .software-link:focus-visible { color: var(--hover); text-decoration: underline; }
 
 /* Selected publications lead-in */
-.pub-selected-heading, .pub-all-heading { margin: 0 0 1rem; }
-.pub-all-heading { margin-top: 2.5rem; border-top: 1px solid var(--line); padding-top: 1.5rem; }
+.pub-selected-heading { margin: 0 0 1rem; }
 .pub-selected .pub-item { padding-left: 0; }
 .pub-role {
   display: inline-block; margin-left: 0.5rem; vertical-align: middle;

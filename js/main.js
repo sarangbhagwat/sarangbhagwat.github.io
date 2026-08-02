@@ -389,43 +389,29 @@ function renderPublications(doc, selfName, options = {}) {
     return firstAuthor.has(d) || cofirst.has(d) || corresponding.has(d);
   };
 
+  // Total count from the full ORCID-pulled list, shown at the top of the
+  // section beside the Google Scholar link. Empty when there is nothing to show.
+  const countEl = document.getElementById("pub-count");
+  if (countEl) {
+    countEl.textContent = pubs.length ? `Total: ${pubs.length}` : "";
+  }
+
   if (pubs.length === 0) {
     list.replaceChildren(el("p", { className: "muted", textContent:
       "Publications will appear here once the ORCID sync runs." }));
     return;
   }
 
-  const blocks = [];
-
-  // Selected lead-in: every tagged paper, in the publication list's own
-  // newest-first order (which also de-dupes multi-role entries).
+  // Only the curated Selected list is rendered; the full list is represented by
+  // the count above, which links out to Google Scholar. Selected shows every
+  // tagged paper in the publication list's own newest-first order (de-duping
+  // multi-role entries).
   const picks = pubs.filter(isSelected);
+  const blocks = [];
   if (picks.length) {
     blocks.push(el("h3", { className: "pub-selected-heading", textContent: "Selected publications" }));
     blocks.push(el("ul", { className: "pub-list pub-selected" },
       picks.map((p) => pubItem(p, null, selfName, rolesFor(p)))));
-  }
-
-  // Full list, grouped by year, reverse-numbered (oldest = 1).
-  const byYear = new Map();
-  for (const p of pubs) {
-    const y = p.year || "Undated";
-    if (!byYear.has(y)) byYear.set(y, []);
-    byYear.get(y).push(p);
-  }
-  const years = [...byYear.keys()].sort((a, b) => {
-    if (a === "Undated") return 1;
-    if (b === "Undated") return -1;
-    return b - a;
-  });
-  if (picks.length) {
-    blocks.push(el("h3", { className: "pub-all-heading", textContent: "All publications" }));
-  }
-  let num = pubs.length;
-  for (const y of years) {
-    blocks.push(el("h3", { className: "pub-year", textContent: String(y) }));
-    const items = byYear.get(y).map((p) => pubItem(p, num--, selfName, rolesFor(p)));
-    blocks.push(el("ul", { className: "pub-list" }, items));
   }
   list.replaceChildren(...blocks);
 }
