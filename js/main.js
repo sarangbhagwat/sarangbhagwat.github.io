@@ -206,6 +206,24 @@ function renderNews(news) {
   show("news", list.length > 0);
 }
 
+// Selected talks: year + title + venue, with an "Invited" tag when flagged and
+// an optional link on the title.
+function renderTalks(talks) {
+  const list = talks || [];
+  fill("talks-list", list.map((t) => {
+    const li = el("li", { className: "talk-item" });
+    if (t.year) li.append(el("span", { className: "talk-year", textContent: String(t.year) }));
+    const titleNode = t.url
+      ? el("a", { className: "talk-title", href: safeUrl(t.url), textContent: t.title || "" })
+      : el("span", { className: "talk-title", textContent: t.title || "" });
+    li.append(titleNode);
+    if (t.invited) li.append(el("span", { className: "talk-invited", textContent: "Invited" }));
+    if (t.venue) li.append(el("div", { className: "talk-venue", textContent: t.venue }));
+    return li;
+  }));
+  show("talks", list.length > 0);
+}
+
 function renderContent(data, softwareMetrics) {
   const m = data.meta || {};
   renderNews(data.news || []);
@@ -269,7 +287,8 @@ function renderContent(data, softwareMetrics) {
   fill("teaching-philosophy",
     teaching.philosophy ? [el("p", {}, richText(teaching.philosophy))] : []);
   fill("teaching-courses", courses.map((c) => el("li", { textContent: c })));
-  show("teaching", Boolean(teaching.philosophy) || courses.length > 0);
+  fill("mentoring", data.mentoring ? [el("p", {}, richText(data.mentoring))] : []);
+  show("teaching", Boolean(teaching.philosophy) || courses.length > 0 || Boolean(data.mentoring));
   show("courses-heading", courses.length > 0);
 
   const awards = data.awards || [];
@@ -286,6 +305,7 @@ function renderContent(data, softwareMetrics) {
   document.getElementById("footer-name").textContent = name;
 
   renderSoftware(data.software || [], softwareMetrics || { repos: {}, packages: {} });
+  renderTalks(data.talks || []);
 
   assignBands();
 }
