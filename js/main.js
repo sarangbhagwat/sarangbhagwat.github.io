@@ -127,6 +127,17 @@ function fill(id, nodes) {
   if (target) target.replaceChildren(...nodes);
 }
 
+// Opens off-site links in a new tab. On this single-page site every absolute
+// http(s) URL points off-site (internal nav uses #hash, the CV is a relative
+// path, contact is mailto:), so those are exactly the links to redirect. rel
+// keeps the opened page from reaching back through window.opener.
+function markExternalLinks(root = document) {
+  for (const a of root.querySelectorAll('a[href^="http://"], a[href^="https://"]')) {
+    a.target = "_blank";
+    a.rel = "noopener noreferrer";
+  }
+}
+
 function show(id, visible) {
   const target = document.getElementById(id);
   if (target) target.hidden = !visible;
@@ -309,6 +320,7 @@ function renderContent(data, softwareMetrics) {
   renderTalks(data.talks || []);
 
   assignBands();
+  markExternalLinks();
 }
 
 async function loadPublications() {
@@ -421,6 +433,7 @@ function renderPublications(doc, selfName, options = {}) {
   } else {
     list.replaceChildren();
   }
+  markExternalLinks(list);
 }
 
 function initNav() {
