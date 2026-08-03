@@ -417,7 +417,7 @@ function renderPublications(doc, selfName, options = {}) {
   const picks = pubs.filter(isSelected);
   if (picks.length) {
     list.replaceChildren(el("ul", { className: "pub-list pub-selected" },
-      picks.map((p) => pubItem(p, null, selfName, rolesFor(p)))));
+      picks.map((p, i) => pubItem(p, i + 1, selfName, rolesFor(p)))));
   } else {
     list.replaceChildren();
   }

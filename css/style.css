@@ -280,8 +280,7 @@ main section.section-alt::before {
 .software-link { font-size: 0.9rem; text-decoration: none; color: var(--accent-soft); }
 .software-link:hover, .software-link:focus-visible { color: var(--hover); text-decoration: underline; }
 
-/* Selected publications lead-in */
-.pub-selected .pub-item { padding-left: 0; }
+/* Selected publications: numbered, so keep the base hanging-number gutter. */
 .pub-role {
   display: inline-block; margin-left: 0.5rem; vertical-align: middle;
   padding: 0.05rem 0.45rem; border-radius: 999px;
