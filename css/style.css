@@ -277,8 +277,8 @@ main section.section-alt::before {
 .software-desc { margin: 0; color: var(--text); }
 .software-stats { color: var(--muted); font-size: 0.9rem; }
 .software-links { display: flex; gap: 0.75rem; }
-.software-link { font-size: 0.9rem; text-decoration: none; color: var(--accent-soft); }
-.software-link:hover, .software-link:focus-visible { color: var(--hover); text-decoration: underline; }
+.software-link { font-size: 0.9rem; text-decoration: underline; color: var(--accent-soft); }
+.software-link:hover, .software-link:focus-visible { color: var(--hover); }
 
 /* Selected publications: numbered, so keep the base hanging-number gutter. */
 .pub-role {
