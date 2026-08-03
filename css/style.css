@@ -256,10 +256,41 @@ main section.section-alt::before {
 :root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }
 
 /* News strip: compact, quiet, sits just under the hero */
-.news-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; }
-.news-item { display: flex; gap: 0.75rem; align-items: baseline; }
-.news-date { flex: none; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); min-width: 4.5rem; }
+/* News: a compact vertical timeline echoing the Education rail (newest on top),
+   so recent activity reads as an upward trajectory. The latest item is accented
+   with a solid, haloed bead and an ochre date to pull the eye to the most recent
+   win; items rise in a slight stagger on reveal to convey forward motion. */
+.news-list { list-style: none; margin: 0; padding: 0; max-width: var(--measure); border-left: 2px solid var(--line); }
+.news-item { position: relative; padding: 0 0 1.15rem 1.25rem; }
+.news-item:last-child { padding-bottom: 0; }
+/* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
+.news-item::before {
+  content: ""; position: absolute; left: -7px; top: 0.32rem;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
+}
+/* Latest item: solid, larger bead ringed by a soft ochre halo + an ochre date. */
+.news-item:first-child::before {
+  width: 13px; height: 13px; left: -8px;
+  background: var(--accent2); box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--accent2-soft);
+}
+.news-date { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+.news-item:first-child .news-date { color: var(--accent2); font-weight: 600; }
 .news-text { color: var(--text); }
+
+/* Staggered rise of the timeline items when the News section reveals. Gated
+   behind .js-reveal like the section-level reveal, so no-JS users see them
+   fully. Delays cover the current five items; extras simply appear undelayed. */
+.js-reveal #news .news-item { opacity: 0; transform: translateY(8px); transition: opacity 0.4s ease, transform 0.4s ease; }
+.js-reveal #news.revealed .news-item { opacity: 1; transform: none; }
+.js-reveal #news.revealed .news-item:nth-child(1) { transition-delay: 0.05s; }
+.js-reveal #news.revealed .news-item:nth-child(2) { transition-delay: 0.13s; }
+.js-reveal #news.revealed .news-item:nth-child(3) { transition-delay: 0.21s; }
+.js-reveal #news.revealed .news-item:nth-child(4) { transition-delay: 0.29s; }
+.js-reveal #news.revealed .news-item:nth-child(5) { transition-delay: 0.37s; }
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal #news .news-item { opacity: 1; transform: none; transition: none; }
+}
 
 /* Research vision: thrust cards above the interests list */
 #research-vision { max-width: var(--measure); margin-inline: auto; margin-bottom: 1.75rem; display: flex; flex-direction: column; gap: 1.1rem; }
