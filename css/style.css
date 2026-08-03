@@ -256,27 +256,33 @@ main section.section-alt::before {
 :root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }
 
 /* News strip: compact, quiet, sits just under the hero */
-/* News: a compact vertical timeline echoing the Education rail (newest on top),
-   so recent activity reads as an upward trajectory. The latest item is accented
-   with a solid, haloed bead and an ochre date to pull the eye to the most recent
-   win; items rise in a slight stagger on reveal to convey forward motion. */
+/* News: a compact timeline echoing the Education rail (newest on top). Each row
+   keeps its date beside the text so the strip stays tight and scannable, with
+   the latest item accented — solid haloed bead, ochre date, lightly weighted
+   text — to pull the eye to the most recent win. Items rise in a slight stagger
+   on reveal to convey forward motion. */
 .news-list { list-style: none; margin: 0; padding: 0; max-width: var(--measure); border-left: 2px solid var(--line); }
-.news-item { position: relative; padding: 0 0 1.15rem 1.25rem; }
+.news-item { position: relative; display: flex; gap: 0.85rem; align-items: baseline; padding: 0 0 0.75rem 1.2rem; }
 .news-item:last-child { padding-bottom: 0; }
 /* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
 .news-item::before {
-  content: ""; position: absolute; left: -7px; top: 0.32rem;
-  width: 11px; height: 11px; border-radius: 50%;
+  content: ""; position: absolute; left: -6px; top: 0.5rem;
+  width: 10px; height: 10px; border-radius: 50%;
   background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
 }
-/* Latest item: solid, larger bead ringed by a soft ochre halo + an ochre date. */
+/* Latest item: solid, larger bead ringed by a soft ochre halo. */
 .news-item:first-child::before {
-  width: 13px; height: 13px; left: -8px;
-  background: var(--accent2); box-shadow: 0 0 0 3px var(--bg), 0 0 0 6px var(--accent2-soft);
+  width: 12px; height: 12px; left: -7px;
+  background: var(--accent2); box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent2-soft);
 }
-.news-date { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.15rem; }
+.news-date { flex: none; min-width: 4.4rem; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .news-item:first-child .news-date { color: var(--accent2); font-weight: 600; }
 .news-text { color: var(--text); }
+.news-item:first-child .news-text { font-weight: 500; }
+/* Stack the date above the text on very narrow screens so the row never crams. */
+@media (max-width: 540px) {
+  .news-item { flex-direction: column; gap: 0.1rem; }
+}
 
 /* Staggered rise of the timeline items when the News section reveals. Gated
    behind .js-reveal like the section-level reveal, so no-JS users see them
