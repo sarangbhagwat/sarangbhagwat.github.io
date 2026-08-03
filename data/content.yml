@@ -138,9 +138,11 @@ talks:
     invited: true
 
 # --- News / recent ------------------------------------------------------------
-# 3-5 dated one-liners, newest first; keeps the page current between automated
-# pub updates. The date shows in a compact uppercase column, so "Mon YYYY" fits.
-# The section (and its nav link) hides itself whenever this list is empty.
+# Dated one-liners, newest first; keeps the page current between automated pub
+# updates. Only the 3 most recent render (see NEWS_LIMIT in js/main.js), so
+# older entries can stay here as an archive and drop off as you add newer ones.
+# The date shows in a compact uppercase column, so "Mon YYYY" fits. The section
+# (and its nav link) hides itself whenever this list is empty.
 news:
   - { date: "Jul 2026", text: "First- and corresponding-author study on a unifying titer–rate–yield equation for fermentation sustainability published in [Nature Communications](https://doi.org/10.1038/s41467-026-75285-1)." }
   - { date: "Jun 2026", text: "Received the AEESP Outstanding Doctoral Dissertation Award (Honorable Mention), sponsored by Jacobs Engineering Group." }

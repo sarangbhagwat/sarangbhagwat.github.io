@@ -206,8 +206,11 @@ function renderSoftware(software, metrics) {
 
 // Compact dated updates shown as a strip below the hero. Each item is
 // "date — text", with markdown links in the text supported via richText().
+// Only the most recent NEWS_LIMIT items render (authored newest-first in
+// content.yml), so the strip stays short and current as new items are added.
+const NEWS_LIMIT = 3;
 function renderNews(news) {
-  const list = news || [];
+  const list = (news || []).slice(0, NEWS_LIMIT);
   fill("news-list", list.map((n) => {
     const li = el("li", { className: "news-item" });
     if (n.date) li.append(el("span", { className: "news-date", textContent: String(n.date) }));
