@@ -139,7 +139,7 @@ talks:
 
 # --- News / recent ------------------------------------------------------------
 # Dated one-liners, newest first; keeps the page current between automated pub
-# updates. Only the 3 most recent render (see NEWS_LIMIT in js/main.js), so
+# updates. Only the 4 most recent render (see NEWS_LIMIT in js/main.js), so
 # older entries can stay here as an archive and drop off as you add newer ones.
 # The date shows in a compact uppercase column, so "Mon YYYY" fits. The section
 # (and its nav link) hides itself whenever this list is empty.
