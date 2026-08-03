@@ -87,7 +87,10 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 
 main { max-width: var(--max); margin: 0 auto; padding: 0 1rem; }
 section { padding: 3rem 0; scroll-margin-top: 4rem; }
-#hero { border-top: none; text-align: center; padding-top: 2.5rem; }
+#hero { border-top: none; text-align: center; padding-top: 2.5rem; padding-bottom: 1.5rem; }
+/* News sits directly under the hero (no band boundary between them), so trim the
+   hero's bottom padding and News's top padding to tighten the gap between them. */
+#news { padding-top: 0.5rem; }
 
 /* Alternating full-bleed bands: cream (page --bg) ↔ white (--surface). The
    band is painted by a viewport-wide pseudo-element behind the content, so the
