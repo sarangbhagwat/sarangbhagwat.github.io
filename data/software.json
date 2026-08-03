@@ -1,13 +1,17 @@
 {
-  "generated_at": "2026-08-02T06:05:39.033798+00:00",
+  "generated_at": "2026-08-03T00:22:02.669659+00:00",
   "repos": {
     "sarangbhagwat/nskinetics": {
       "stars": 4,
       "forks": 0
     },
     "sustainability-software-lab/pisces-standard-flowsheet-format": {
-      "stars": 1,
+      "stars": 2,
       "forks": 2
+    },
+    "sarangbhagwat/autosynthesis": {
+      "stars": 5,
+      "forks": 0
     },
     "BioSTEAMDevelopmentGroup/biosteam": {
       "stars": 261,
