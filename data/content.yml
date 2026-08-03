@@ -138,12 +138,15 @@ talks:
     invited: true
 
 # --- News / recent ------------------------------------------------------------
-# Removed for now — the section hides itself while this list is empty. Uncomment
-# and add dated one-liners to bring it back.
-# 3-5 dated one-liners; keeps the page current between automated pub updates.
-# news:
-#   - { date: "2026-07", text: "TODO: e.g. 'New paper out in Nature Communications.' [optional [link](https://...)]" }
-#   - { date: "2026-05", text: "..." }
+# 3-5 dated one-liners, newest first; keeps the page current between automated
+# pub updates. The date shows in a compact uppercase column, so "Mon YYYY" fits.
+# The section (and its nav link) hides itself whenever this list is empty.
+news:
+  - { date: "Jul 2026", text: "First- and corresponding-author study on a unifying titer–rate–yield equation for fermentation sustainability published in [Nature Communications](https://doi.org/10.1038/s41467-026-75285-1)." }
+  - { date: "Jun 2026", text: "Received the AEESP Outstanding Doctoral Dissertation Award (Honorable Mention), sponsored by Jacobs Engineering Group." }
+  - { date: "May 2026", text: "Invited seminar at Texas Tech University (Dept. of Chemical Engineering)." }
+  - { date: "Apr 2026", text: "Invited seminar at Arizona State University (School of Sustainable Engineering and the Built Environment)." }
+  - { date: "Jan 2026", text: "Co-first-author study on high-yield 3-hydroxypropionic acid production in Issatchenkia orientalis published in [Nature Communications](https://doi.org/10.1038/s41467-025-67621-8)." }
 
 # --- Awards and honors --------------------------------------------------------
 # Fellowships and competitive awards are a committee's closest proxy for funding
