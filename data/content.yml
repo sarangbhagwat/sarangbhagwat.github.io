@@ -40,11 +40,11 @@ research_interests:
 software:
   - name: "NSKinetics"
     role: "Lead developer"
-    description: "Open-source toolkit for defining and simulating (bio)chemical reaction networks and non-steady-state kinetics."
+    description: "Open-source toolkit for defining and simulating (bio)chemical reaction networks within process flowsheets. Propagates kinetic uncertainties to facility-scale outcomes."
     repo: "sarangbhagwat/nskinetics"
     pypi: "nskinetics"                      # TODO: confirm the PyPI package name
     url: "https://github.com/sarangbhagwat/nskinetics"
-  - name: "Standard Flowsheet Format (SFF)"
+  - name: "PISCES Standard Flowsheet Format (SFF)"
     role: "Lead developer"
     description: "An interoperable format and export layer for process flowsheets, underlying [Project PISCES](https://projectpisces.org/)."
     repo: "sustainability-software-lab/pisces-standard-flowsheet-format"
