@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-17T07:41:39.884129+00:00",
+  "generated_at": "2026-08-24T07:48:20.003040+00:00",
   "repos": {
     "sarangbhagwat/nskinetics": {
       "stars": 4,
@@ -20,7 +20,10 @@
   },
   "packages": {
     "nskinetics": {
-      "last_month": 338
+      "last_month": 367
+    },
+    "biosteam": {
+      "last_month": 14433
     }
   }
 }
