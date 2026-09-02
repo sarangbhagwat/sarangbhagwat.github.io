@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-31T06:22:58.251906+00:00",
+  "generated_at": "2026-09-02T10:36:06.025583+00:00",
   "orcid_id": "0000-0002-2620-2829",
   "publications": [
     {
@@ -291,17 +291,17 @@
       "venue": "ACS Sustainable Chemistry & Engineering",
       "year": 2021,
       "type": "journal-article",
-      "doi": "https://doi.org/10.1021/acssuschemeng.0c08055",
+      "doi": "10.1021/acssuschemeng.0c08055",
       "url": "https://doi.org/10.1021/acssuschemeng.0c08055",
-      "put_code": 134517451,
+      "put_code": 225474459,
       "authors": [
-        "Li, Yalin",
-        "Bhagwat, Sarang S",
-        "Cortés-Peña, Yoel R",
-        "Ki, Dongwon",
-        "Rao, Christopher V",
-        "Jin, Yong-Su",
-        "Guest, Jeremy S"
+        "Yalin Li",
+        "Sarang S. Bhagwat",
+        "Yoel R. Cortés-Peña",
+        "Dongwon Ki",
+        "Christopher V. Rao",
+        "Yong-Su Jin",
+        "Jeremy S. Guest"
       ]
     },
     {
