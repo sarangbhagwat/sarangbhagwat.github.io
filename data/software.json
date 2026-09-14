@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T13:05:59.711724+00:00",
+  "generated_at": "2026-09-14T13:27:15.030808+00:00",
   "repos": {
     "sarangbhagwat/nskinetics": {
       "stars": 4,
@@ -14,16 +14,9 @@
       "forks": 0
     },
     "BioSTEAMDevelopmentGroup/biosteam": {
-      "stars": 265,
+      "stars": 268,
       "forks": 65
     }
   },
-  "packages": {
-    "nskinetics": {
-      "last_month": 333
-    },
-    "biosteam": {
-      "last_month": 33106
-    }
-  }
+  "packages": {}
 }
