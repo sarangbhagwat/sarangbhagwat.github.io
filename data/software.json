@@ -16,6 +16,10 @@
     "BioSTEAMDevelopmentGroup/biosteam": {
       "stars": 271,
       "forks": 66
+    },
+    "BioSTEAMDevelopmentGroup/hensmith": {
+      "stars": 0,
+      "forks": 0
     }
   },
   "packages": {
@@ -24,6 +28,9 @@
     },
     "biosteam": {
       "last_month": 16966
+    },
+    "hensmith": {
+      "last_month": 1549
     }
   }
 }
