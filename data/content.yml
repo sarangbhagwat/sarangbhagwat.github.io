@@ -61,7 +61,7 @@ software:
     url: "https://biosteam.readthedocs.io/"
   - name: "HENSMITH"
     role: "Lead developer"
-    description: "Heat Exchanger Network Synthesis, Modeling, Integration, Thermodynamics, and Heuristics. Automated pinch analysis and heat exchanger network synthesis for [BioSTEAM](https://github.com/BioSTEAMDevelopmentGroup/biosteam) systems, reaching minimum energy requirement targets."
+    description: "Automated pinch analysis and heat exchanger network synthesis to reach minimum energy requirement targets. Plug-and-play with arbitrarily complex process flowsheets. Used by [BioSTEAM](https://github.com/BioSTEAMDevelopmentGroup/biosteam) as the HeatExchangerNetwork facility."
     repo: "BioSTEAMDevelopmentGroup/hensmith"
     pypi: "hensmith"
     url: "https://hensmith.readthedocs.io/"
