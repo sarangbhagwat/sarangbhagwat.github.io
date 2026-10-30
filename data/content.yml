@@ -28,11 +28,10 @@ education:
   - { degree: "B.S., Chemical Technology (Oils, Oleochemicals, and Surfactants)", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
 research_interests:
   - { heading: "Process Systems Engineering; Data Analytics; Circular Economy; Biomanufacturing" }
-  - { body: "Process synthesis, design, and simulation under uncertainty" }
-  - { body: "Discover and prioritize biomanufacturing pathways through physics-informed AI & ML" }
-  - { body: "Data-driven discovery of physically interpretable equations governing chemical process systems" }
+  - { body: "Process synthesis, design, and simulation under uncertainty to navigate trade-offs" }
+  - { body: "Prioritize R&D pathways through physics-informed AI & ML" }
   - { body: "Develop open-source tools for techno-economic analysis (TEA) and life cycle assessment (LCA)" }
-  - { body: "Navigate economic and environmental trade-offs in R&D decisions" }
+  - { body: "Data-driven discovery of physically interpretable equations governing chemical process systems" }
 
 # --- Software / research tools -------------------------------------------------
 # `repo` is "owner/name"; the software-metrics sync (scripts/sync_software.py)
