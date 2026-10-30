@@ -264,7 +264,7 @@ main section.section-alt::before {
    the latest item accented — solid haloed bead, ochre date, lightly weighted
    text — to pull the eye to the most recent win. Items rise in a slight stagger
    on reveal to convey forward motion. */
-.news-list { list-style: none; margin: 0; padding: 0; max-width: var(--measure); border-left: 2px solid var(--line); }
+.news-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
 .news-item { position: relative; display: flex; gap: 0.85rem; align-items: baseline; padding: 0 0 0.75rem 1.2rem; }
 .news-item:last-child { padding-bottom: 0; }
 /* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
@@ -297,6 +297,7 @@ main section.section-alt::before {
 .js-reveal #news.revealed .news-item:nth-child(3) { transition-delay: 0.21s; }
 .js-reveal #news.revealed .news-item:nth-child(4) { transition-delay: 0.29s; }
 .js-reveal #news.revealed .news-item:nth-child(5) { transition-delay: 0.37s; }
+.js-reveal #news.revealed .news-item:nth-child(6) { transition-delay: 0.45s; }
 @media (prefers-reduced-motion: reduce) {
   .js-reveal #news .news-item { opacity: 1; transform: none; transition: none; }
 }
