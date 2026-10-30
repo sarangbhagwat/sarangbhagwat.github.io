@@ -108,14 +108,17 @@ function iconLink(label, url) {
 }
 
 function richText(text) {
-  // Renders markdown-style links [label](url) as anchors; everything else as plain text.
+  // Renders markdown-style links [label](url) as anchors and *text* as italics
+  // (including inside link labels); everything else as plain text.
   const frag = document.createDocumentFragment();
   const s = String(text == null ? "" : text);
-  const re = /\[([^\]]+)\]\(([^)\s]+)\)/g;
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)|\*([^*]+)\*/g;
   let last = 0, match;
   while ((match = re.exec(s)) !== null) {
     if (match.index > last) frag.append(s.slice(last, match.index));
-    frag.append(el("a", { href: safeUrl(match[2]), textContent: match[1] }));
+    frag.append(match[3] !== undefined
+      ? el("em", { textContent: match[3] })
+      : el("a", { href: safeUrl(match[2]) }, richText(match[1])));
     last = match.index + match[0].length;
   }
   if (last < s.length) frag.append(s.slice(last));
@@ -205,7 +208,7 @@ function renderSoftware(software, metrics) {
 }
 
 // Compact dated updates shown as a strip below the hero. Each item is
-// "date — text", with markdown links in the text supported via richText().
+// "date — text", with markdown links and italics in the text supported via richText().
 // Only the most recent NEWS_LIMIT items render (authored newest-first in
 // content.yml), so the strip stays short and current as new items are added.
 const NEWS_LIMIT = 6;
