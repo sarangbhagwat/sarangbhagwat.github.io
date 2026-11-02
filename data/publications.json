@@ -1,7 +1,23 @@
 {
-  "generated_at": "2026-09-02T10:36:06.025583+00:00",
+  "generated_at": "2026-11-02T14:43:48.912561+00:00",
   "orcid_id": "0000-0002-2620-2829",
   "publications": [
+    {
+      "title": "Coupling kinetic and techno-economic models reveals hidden biodesign targets",
+      "venue": null,
+      "year": 2026,
+      "type": "preprint",
+      "doi": "10.26434/chemrxiv.15011481/v1",
+      "url": "https://doi.org/10.26434/chemrxiv.15011481/v1",
+      "put_code": 231958213,
+      "authors": [
+        "Sarang S. Bhagwat",
+        "Karthik Sankaranarayanan",
+        "Jay D. Keasling",
+        "Aindrila Mukhopadhyay",
+        "Corinne D. Scown"
+      ]
+    },
     {
       "title": "A unifying equation for fermentation sustainability across the titer-rate-yield landscape",
       "venue": "Nature Communications",
