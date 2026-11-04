@@ -108,17 +108,19 @@ function iconLink(label, url) {
 }
 
 function richText(text) {
-  // Renders markdown-style links [label](url) as anchors and *text* as italics
-  // (including inside link labels); everything else as plain text.
+  // Renders markdown-style links [label](url) as anchors, **text** as bold and
+  // *text* as italics (including inside link labels); everything else as plain text.
   const frag = document.createDocumentFragment();
   const s = String(text == null ? "" : text);
-  const re = /\[([^\]]+)\]\(([^)\s]+)\)|\*([^*]+)\*/g;
+  const re = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*|\*([^*]+)\*/g;
   let last = 0, match;
   while ((match = re.exec(s)) !== null) {
     if (match.index > last) frag.append(s.slice(last, match.index));
     frag.append(match[3] !== undefined
-      ? el("em", { textContent: match[3] })
-      : el("a", { href: safeUrl(match[2]) }, richText(match[1])));
+      ? el("strong", { textContent: match[3] })
+      : match[4] !== undefined
+        ? el("em", { textContent: match[4] })
+        : el("a", { href: safeUrl(match[2]) }, richText(match[1])));
     last = match.index + match[0].length;
   }
   if (last < s.length) frag.append(s.slice(last));
@@ -250,7 +252,7 @@ function renderContent(data, softwareMetrics) {
   document.getElementById("hero-name").textContent = name;
   document.getElementById("hero-title").textContent =
     [m.title, m.institution].filter(Boolean).join(", ");
-  document.getElementById("hero-tagline").textContent = m.tagline || "";
+  fill("hero-tagline", [richText(m.tagline)]);
   document.getElementById("hero-photo").alt = name;
 
   const heroLinks = document.getElementById("hero-links");
