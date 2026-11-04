@@ -16,7 +16,7 @@
   --text: #1c1c1a;
   --muted: #5f5e5a;
   --line: #e6e3dc;
-  --max: 1080px;
+  --max: 1280px;
   --measure: 42rem; /* reading width for prose sections; font-independent so headings + body align */
 }
 
