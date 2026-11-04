@@ -127,11 +127,11 @@ main section.section-alt::before {
   h1 { font-size: 2.1rem; }
   /* .hero-col prefix outranks the base #hero-photo rule, which sits later in
      the source with equal specificity and would otherwise win. */
-  .hero-col #hero-photo { width: 176px; height: 176px; }
+  .hero-col #hero-photo { width: 220px; height: 220px; }
 }
 
 #hero-photo {
-  width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+  width: 188px; height: 188px; border-radius: 50%; object-fit: cover;
   border: 3px solid var(--surface); margin-bottom: 1rem;
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line), 0 6px 20px rgba(0, 0, 0, 0.08);
   background: var(--line);
