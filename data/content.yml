@@ -27,11 +27,11 @@ education:
   - { degree: "M.S., Civil & Environmental Engineering", institution: "North Carolina State University", year: "2019" }
   - { degree: "B.S., Chemical Technology", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
 research_interests:
-  - { heading: "Process Systems Engineering; Data Analytics; Circular Economy; Biomanufacturing" }
-  - { body: "Process synthesis, design, and simulation under uncertainty to navigate trade-offs" }
-  - { body: "Prioritize R&D pathways through physics-informed AI & ML" }
-  - { body: "Develop open-source tools for techno-economic analysis (TEA) and life cycle assessment (LCA)" }
-  - { body: "Data-driven discovery of physically interpretable equations governing chemical process systems" }
+  - { heading: "Process Systems Engineering; Uncertainty Quantification; AI-Enabled Discovery; Circular Economy" }
+  - { body: "Process design and simulation under uncertainty to navigate cross-scale trade-offs" }
+  - { body: "Prioritize R&D pathways through global sensitivity analyses and cross-scale optimization" }
+  - { body: "Adaptable design to navigate trade-offs in costs, environmental impacts, and resilience" }
+  - { body: "Physics-informed AI & ML to discover interpretable equations that govern chemical process systems" }
 
 # --- Software / research tools -------------------------------------------------
 # `repo` is "owner/name"; the software-metrics sync (scripts/sync_software.py)
