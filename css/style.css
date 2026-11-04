@@ -144,7 +144,7 @@ main section.section-alt::before {
 #hero-tagline {
   font-family: "Site Serif", Georgia, serif;
   font-size: 1.25rem; color: var(--accent-soft);
-  max-width: 40ch; margin: 0.6rem auto 1.2rem;
+  max-width: 56ch; margin: 0.6rem auto 1.2rem;
 }
 .hero-actions { margin: 1rem 0; }
 .button {
