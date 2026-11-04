@@ -25,7 +25,7 @@ about:
 education:
   - { degree: "Ph.D., Civil & Environmental Engineering", institution: "University of Illinois Urbana-Champaign", year: "2025" }
   - { degree: "M.S., Civil & Environmental Engineering", institution: "North Carolina State University", year: "2019" }
-  - { degree: "B.S., Chemical Technology (Oils, Oleochemicals, and Surfactants)", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
+  - { degree: "B.S., Chemical Technology", institution: "Institute of Chemical Technology, Mumbai/Bombay", year: "2017" }
 research_interests:
   - { heading: "Process Systems Engineering; Data Analytics; Circular Economy; Biomanufacturing" }
   - { body: "Process synthesis, design, and simulation under uncertainty to navigate trade-offs" }

@@ -270,8 +270,6 @@ function renderContent(data, softwareMetrics) {
   }));
   show("about", about.length > 0);
   show("education", education.length > 0);
-  const heroGrid = document.querySelector(".hero-grid");
-  if (heroGrid) heroGrid.classList.toggle("has-education", education.length > 0);
 
   const vision = data.research_vision || [];
   fill("research-vision", vision.map((v) => {

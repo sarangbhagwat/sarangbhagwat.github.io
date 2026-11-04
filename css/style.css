@@ -112,22 +112,17 @@ main section.section-alt::before {
   .js-reveal main section { opacity: 1; transform: none; transition: none; }
 }
 
-/* Top row: hero + education side by side, stacking on narrow screens */
-.hero-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; align-items: center; }
+/* Hero: one centered column (photo, name, title, tagline, then CV button + links
+   on one row), with Education as a horizontal timeline beneath a hairline. */
 .hero-col { display: flex; flex-direction: column; align-items: center; }
-.edu-col { text-align: left; }
-.edu-col #education-heading { margin-top: 0; }
 
-/* CV button + links, in a single centered column (two rows) below both columns */
-.hero-footer { display: flex; flex-direction: column; align-items: center; margin-top: 1.5rem; }
+/* CV button + icon links share one centered row, wrapping on narrow screens */
+.hero-footer {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+  gap: 0.75rem 1.5rem; margin-top: 1.5rem;
+}
 
 @media (min-width: 720px) {
-  .hero-grid.has-education { grid-template-columns: 1.1fr 1fr; align-items: start; }
-  .hero-grid.has-education .hero-col { align-items: flex-start; text-align: left; }
-  /* Nudge Education down so it reads as vertically centered against the
-     taller hero column (photo + name + title + tagline). */
-  .hero-grid.has-education .edu-col { margin-top: 3rem; }
-  .hero-grid.has-education #hero-tagline { margin-left: 0; }
   h1 { font-size: 2.1rem; }
   /* .hero-col prefix outranks the base #hero-photo rule, which sits later in
      the source with equal specificity and would otherwise win. */
@@ -143,34 +138,65 @@ main section.section-alt::before {
 #hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
 #hero-tagline {
   font-size: 1.25rem; color: var(--accent-soft);
-  max-width: 56ch; margin: 0.6rem auto 1.2rem;
+  max-width: 56ch; margin: 1rem auto 0;
 }
-.hero-actions { margin: 1rem 0; }
+.hero-actions { margin: 0; }
 .button {
   display: inline-block; background: var(--accent); color: #fff;
   padding: 0.55rem 1.1rem; border-radius: 6px; font-weight: 600;
   text-decoration: none;
 }
 .button:hover { background: var(--hover); color: #fff; }
-.icon-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 1rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.icon-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 0.5rem 1rem; list-style: none; padding: 0; margin: 0; }
 .icon-link { display: inline-flex; align-items: center; gap: 0.4rem; }
 .icon-link svg { flex: none; }
 /* Ochre tint on hover/focus; icons use currentColor, so label + icon shift together */
 .icon-link:hover, .icon-link:focus-visible { color: var(--hover); }
 
-#education-list { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
-.edu-item { position: relative; padding: 0 0 1.1rem 1.15rem; }
-.edu-item:last-child { padding-bottom: 0; }
-/* Bead straddling the 2px rail; --bg ring lifts it off the line (adapts per theme). */
+/* Education: centered block under a hairline, with a small uppercase label in
+   place of the usual serif section heading (it belongs to the hero). */
+.edu-col {
+  max-width: 900px; margin: 2.75rem auto 0; padding-top: 2rem;
+  border-top: 1px solid var(--line); text-align: center;
+}
+#education-heading {
+  margin: 0 0 1.25rem; font-family: "Site Sans", system-ui, sans-serif;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
+}
+main section #education-heading::after { content: none; }
+
+/* Horizontal timeline: one column per degree. Each item draws its own slice of
+   the rail (half-gap overhang on both sides), trimmed to its bead on the first
+   and last items, so the rail runs bead-to-bead for any number of entries. */
+#education-list {
+  --edu-gap: 1.5rem;
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); column-gap: var(--edu-gap);
+}
+.edu-item { position: relative; padding-top: 1.4rem; line-height: 1.4; }
+.edu-item::after {
+  content: ""; position: absolute; top: 5px; height: 2px; background: var(--line);
+  left: calc(var(--edu-gap) / -2); right: calc(var(--edu-gap) / -2);
+}
+.edu-item:first-child::after { left: 50%; }
+.edu-item:last-child::after { right: 50%; }
+.edu-item:only-child::after { content: none; }
+/* Bead centered over the rail; --bg ring lifts it off the line (adapts per theme). */
 .edu-item::before {
-  content: ""; position: absolute; left: -7px; top: 0.35rem;
-  width: 11px; height: 11px; border-radius: 50%;
+  content: ""; position: absolute; z-index: 1; top: 0; left: calc(50% - 6px);
+  width: 12px; height: 12px; border-radius: 50%;
   background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
 }
-.edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.edu-year { display: block; margin-bottom: 0.15rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent2); }
 /* Institution leads; degree sits beneath it as a muted secondary line. */
 .edu-inst { color: var(--text); font-weight: 600; }
-.edu-degree { color: var(--muted); font-size: 0.9rem; }
+.edu-degree { color: var(--muted); font-size: 0.9rem; margin-top: 0.15rem; }
+
+/* Narrow screens: stack the degrees, dropping the horizontal rail. */
+@media (max-width: 640px) {
+  #education-list { grid-auto-flow: row; row-gap: 1.5rem; }
+  .edu-item::after { content: none; }
+}
 .research-pillars { list-style: none; margin: 0 0 1.35rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.55rem; }
 .pillar {
   border: 1px solid var(--accent2-soft); color: var(--accent);
