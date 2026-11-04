@@ -137,9 +137,9 @@ main section.section-alt::before {
   background: var(--line);
 }
 /* Hero name in the sans face at bold (700); other headings stay serif. */
-#hero-name { font-family: "Site Sans", system-ui, sans-serif; font-weight: 700; font-size: 2.25rem; letter-spacing: -0.015em; }
-@media (min-width: 720px) { #hero-name { font-size: 2.75rem; } }
-@media (max-width: 600px) { #hero-name { font-size: 2rem; } }
+#hero-name { font-family: "Site Sans", system-ui, sans-serif; font-weight: 700; font-size: 2.6rem; letter-spacing: -0.02em; line-height: 1.15; }
+@media (min-width: 720px) { #hero-name { font-size: 3.25rem; } }
+@media (max-width: 600px) { #hero-name { font-size: 2.25rem; } }
 #hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
 /* Matches .edu-inst so every institution on the hero reads the same way. */
 .hero-inst { color: var(--text); font-weight: 600; }
