@@ -168,8 +168,9 @@ main section.section-alt::before {
   background: var(--accent2-soft); box-shadow: 0 0 0 3px var(--bg);
 }
 .edu-year { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.edu-degree { color: var(--text); }
-.edu-inst { color: var(--muted); font-size: 0.9rem; }
+/* Institution leads; degree sits beneath it as a muted secondary line. */
+.edu-inst { color: var(--text); font-weight: 600; }
+.edu-degree { color: var(--muted); font-size: 0.9rem; }
 .research-pillars { list-style: none; margin: 0 0 1.35rem; padding: 0; display: flex; flex-wrap: wrap; gap: 0.55rem; }
 .pillar {
   border: 1px solid var(--accent2-soft); color: var(--accent);

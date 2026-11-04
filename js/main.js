@@ -264,8 +264,8 @@ function renderContent(data, softwareMetrics) {
   fill("education-list", education.map((e) => {
     const li = el("li", { className: "edu-item" });
     li.append(el("span", { className: "edu-year", textContent: String(e.year || "") }));
-    li.append(el("div", { className: "edu-degree", textContent: e.degree || "" }));
     li.append(el("div", { className: "edu-inst", textContent: e.institution || "" }));
+    li.append(el("div", { className: "edu-degree", textContent: e.degree || "" }));
     return li;
   }));
   show("about", about.length > 0);
