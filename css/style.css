@@ -1,6 +1,7 @@
 @font-face { font-family: "Site Serif"; src: url("../fonts/source-serif-4-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
 @font-face { font-family: "Site Sans"; src: url("../fonts/source-sans-3-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
 @font-face { font-family: "Site Sans"; src: url("../fonts/source-sans-3-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Site Sans"; src: url("../fonts/source-sans-3-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
 
 :root {
   --accent: #1a2a4a;
@@ -66,7 +67,7 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
   display: flex; justify-content: space-between; align-items: center;
   gap: 1rem; max-width: var(--max); margin: 0 auto; padding: 0.75rem 1rem;
 }
-.nav-name { font-family: "Site Serif", serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
+.nav-name { font-family: "Site Sans", system-ui, sans-serif; font-weight: 600; font-size: 1.1rem; color: var(--accent); text-decoration: none; }
 .nav-name:hover { color: var(--hover); }
 .nav-right { display: flex; align-items: center; gap: 1rem; }
 .nav-links { display: flex; flex-wrap: wrap; gap: 1rem; list-style: none; margin: 0; padding: 0; }
@@ -135,6 +136,10 @@ main section.section-alt::before {
   box-shadow: 0 0 0 4px var(--surface), 0 0 0 5px var(--line), 0 6px 20px rgba(0, 0, 0, 0.08);
   background: var(--line);
 }
+/* Hero name in the sans face at bold (700); other headings stay serif. */
+#hero-name { font-family: "Site Sans", system-ui, sans-serif; font-weight: 700; font-size: 2.25rem; letter-spacing: -0.015em; }
+@media (min-width: 720px) { #hero-name { font-size: 2.75rem; } }
+@media (max-width: 600px) { #hero-name { font-size: 2rem; } }
 #hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
 /* Matches .edu-inst so every institution on the hero reads the same way. */
 .hero-inst { color: var(--text); font-weight: 600; }
