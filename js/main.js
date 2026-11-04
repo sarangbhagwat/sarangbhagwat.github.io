@@ -250,8 +250,12 @@ function renderContent(data, softwareMetrics) {
   document.title = name || "Personal website";
   document.querySelector(".nav-name").textContent = name;
   document.getElementById("hero-name").textContent = name;
-  document.getElementById("hero-title").textContent =
-    [m.title, m.institution].filter(Boolean).join(", ");
+  // Institution gets its own span so it can be bolded like the Education entries.
+  const heroTitle = document.getElementById("hero-title");
+  heroTitle.replaceChildren();
+  if (m.title) heroTitle.append(m.title);
+  if (m.title && m.institution) heroTitle.append(", ");
+  if (m.institution) heroTitle.append(el("span", { className: "hero-inst", textContent: m.institution }));
   fill("hero-tagline", [richText(m.tagline)]);
   document.getElementById("hero-photo").alt = name;
 

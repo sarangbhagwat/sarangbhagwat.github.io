@@ -136,9 +136,14 @@ main section.section-alt::before {
   background: var(--line);
 }
 #hero-title { font-size: 1.1rem; color: var(--muted); margin: 0.2rem 0; letter-spacing: 0.03em; }
+/* Matches .edu-inst so every institution on the hero reads the same way. */
+.hero-inst { color: var(--text); font-weight: 600; }
 #hero-tagline {
   font-size: 1.25rem; color: var(--accent-soft);
-  max-width: 56ch; margin: 1rem auto 0;
+  /* Tuned to the current tagline at desktop width: 62ch gives three lines
+     breaking after "engineering," and "physics-informed AI" (60–63ch all do;
+     59ch drops to four lines). text-wrap: balance would push "AI" to line 3. */
+  max-width: 62ch; margin: 1rem auto 0;
 }
 .hero-actions { margin: 0; }
 .button {
