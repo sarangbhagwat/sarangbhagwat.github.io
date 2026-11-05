@@ -45,13 +45,13 @@ a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent2); outl
 /* Research / authors / awards links: no underline at rest, underline + ochre
    tint (--hover) revealed on hover/focus. About links keep the default
    underline at rest; only their color shifts to ochre on hover. */
-.research-list a, .pub-authors a, #awards-list a {
+.research-list a, .pub-authors a, .year-list a {
   text-decoration: none;
 }
 #about-body a:hover, #about-body a:focus-visible,
 .research-list a:hover, .research-list a:focus-visible,
 .pub-authors a:hover, .pub-authors a:focus-visible,
-#awards-list a:hover, #awards-list a:focus-visible {
+.year-list a:hover, .year-list a:focus-visible {
   text-decoration: underline;
   color: var(--hover);
 }
@@ -381,6 +381,3 @@ a.talk-title:hover, a.talk-title:focus-visible { color: var(--hover); text-decor
 }
 .talk-venue { grid-column: 2; color: var(--muted); font-style: italic; font-size: 0.9rem; }
 
-/* Mentoring block under Teaching */
-#mentoring { max-width: var(--measure); margin-top: 1.25rem; }
-#mentoring p { margin: 0; }

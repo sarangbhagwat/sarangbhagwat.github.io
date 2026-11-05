@@ -243,6 +243,17 @@ function renderTalks(talks) {
   show("talks", list.length > 0);
 }
 
+// Awards, teaching & outreach, and service share one shape: a list of
+// {year, description} entries rendered as a bold year followed by rich text.
+// The section (and its nav link) hides itself when the list is empty.
+function renderYearList(sectionId, items) {
+  const list = items || [];
+  fill(`${sectionId}-list`, list.map((a) =>
+    el("li", {}, [el("strong", { textContent: `${a.year} ` }), richText(a.description)])
+  ));
+  show(sectionId, list.length > 0);
+}
+
 function renderContent(data, softwareMetrics) {
   const m = data.meta || {};
   renderNews(data.news || []);
@@ -304,20 +315,9 @@ function renderContent(data, softwareMetrics) {
   const scholar = document.getElementById("scholar-link");
   if (scholar && m.scholar_url) scholar.href = safeUrl(m.scholar_url);
 
-  const teaching = data.teaching || {};
-  const courses = teaching.courses || [];
-  fill("teaching-philosophy",
-    teaching.philosophy ? [el("p", {}, richText(teaching.philosophy))] : []);
-  fill("teaching-courses", courses.map((c) => el("li", { textContent: c })));
-  fill("mentoring", data.mentoring ? [el("p", {}, richText(data.mentoring))] : []);
-  show("teaching", Boolean(teaching.philosophy) || courses.length > 0 || Boolean(data.mentoring));
-  show("courses-heading", courses.length > 0);
-
-  const awards = data.awards || [];
-  fill("awards-list", awards.map((a) =>
-    el("li", {}, [el("strong", { textContent: `${a.year} ` }), richText(a.description)])
-  ));
-  show("awards", awards.length > 0);
+  renderYearList("awards", data.awards);
+  renderYearList("teaching", data.teaching_outreach);
+  renderYearList("service", data.service);
 
   const email = (m.email || "").trim();
   fill("contact-list", email ? [iconLink(email, `mailto:${email}`)] : []);

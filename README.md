@@ -56,5 +56,7 @@ empty, so you can leave any of them out:
   adds a tag; `url` is optional).
 - `news:` — `{date, text}` one-liners shown below the hero.
 - `awards:` — `{year, description}` entries (fellowships and honors).
-- `teaching:` — `philosophy` plus a `courses` list; `mentoring:` is a short
-  paragraph shown in the same section.
+- `teaching_outreach:` — `{year, description}` entries for the "Selected
+  teaching & outreach" section (courses, mentoring, outreach events).
+- `service:` — `{year, description}` entries for the "Selected professional
+  service" section (editorial boards, session chairs, peer review).
