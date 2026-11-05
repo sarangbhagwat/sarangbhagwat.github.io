@@ -353,17 +353,14 @@ function normDoi(doi) {
 // Builds one <li> for a publication. `num` is the reverse-count label (or null
 // to omit it, as in the Selected block). `roles` is an ordered list of badge
 // labels (e.g. ["First author", "Corresponding author"]) to show on the entry.
-// A "Preprint" status badge follows the roles, driven by ORCID's work type, so
-// it disappears on its own once ORCID lists the published version instead.
+// Works ORCID types as preprints label their link "Preprint" instead of "DOI",
+// which reverts on its own once ORCID lists the published version instead.
 function pubItem(p, num, selfName, roles = []) {
   const li = el("li", { className: "pub-item" });
   if (num != null) li.append(el("span", { className: "pub-num", textContent: `${num}.` }));
   li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
   for (const label of roles) {
     li.append(el("span", { className: "pub-role", textContent: label }));
-  }
-  if (p.type === "preprint") {
-    li.append(el("span", { className: "pub-role pub-status", textContent: "Preprint" }));
   }
   if (p.authors && p.authors.length) {
     li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
@@ -377,7 +374,10 @@ function pubItem(p, num, selfName, roles = []) {
     if (p.year) venue.append(el("span", { className: "pub-pubyear", textContent: String(p.year) }));
     li.append(venue);
   }
-  if (p.url) li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: "DOI" }));
+  if (p.url) {
+    const linkLabel = p.type === "preprint" ? "Preprint" : "DOI";
+    li.append(el("a", { className: "pub-doi", href: safeUrl(p.url), textContent: linkLabel }));
+  }
   return li;
 }
 
