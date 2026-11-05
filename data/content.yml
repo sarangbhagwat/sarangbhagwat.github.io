@@ -94,11 +94,12 @@ research_note: "Complete research statement available on request."
 # Authorship-role tags, by DOI (lowercase, matching a `doi` in
 # data/publications.json). ORCID can't tell first/co-first/corresponding apart,
 # so tag them here. The "Selected publications" lead-in is composed automatically
-# from every DOI listed below, newest first, and each role adds its own badge.
+# from every DOI listed below: first-author papers, then co-first, then any other
+# role, newest first within each group. Each role adds its own badge.
 # A paper can appear in more than one list (e.g. first + corresponding).
 
 # Optional: DOIs listed here lead the Selected list in this order; every other
-# selected paper follows, newest first. Omit to order purely by date.
+# selected paper follows in the groups above. Omit to order by group and date.
 selected_order:
   - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
   - "10.26434/chemrxiv.15011481/v1"        # Kinetic + techno-economic models (ChemRxiv preprint 2026)

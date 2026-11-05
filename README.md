@@ -71,12 +71,13 @@ empty, so you can leave any of them out:
   tags, by DOI (lowercase, matching a `doi` in the ORCID-generated
   `publications.json`). ORCID can't tell these apart, so tag them here. The
   "Selected publications" lead-in above the full list is built automatically
-  from every DOI in these lists (newest first), and each role adds its own badge
-  ("First author", "Co-first author", "Corresponding author"). A paper may appear
-  in more than one list. Works that ORCID types as `preprint` label their
+  from every DOI in these lists: first-author papers, then co-first, then any
+  other role, newest first within each group. Each role adds its own badge
+  ("Corresponding author", "First author", "Co-first author", shown in that
+  order). A paper may appear in more than one list. Works that ORCID types as `preprint` label their
   link "Preprint" instead of "DOI" automatically; nothing to tag by hand.
 - `selected_order:` — optional DOIs pinned to the top of "Selected
-  publications" in the order listed; the rest follow newest first.
+  publications" in the order listed; the rest follow in the groups above.
 - `talks:` — `{year, title, venue, url}` entries for the "Invited talks"
   section (`url` is optional).
 - `news:` — `{date, text}` one-liners shown below the hero.

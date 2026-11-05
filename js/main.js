@@ -391,13 +391,13 @@ function renderPublications(doc, selfName, options = {}) {
   const firstAuthor = new Set((options.firstAuthorDois || []).map(normDoi));
   const cofirst = new Set((options.cofirstDois || []).map(normDoi));
   const corresponding = new Set((options.correspondingDois || []).map(normDoi));
-  // Ordered so multi-role entries (e.g. first + corresponding) read consistently.
+  // Ordered so multi-role entries read consistently: corresponding comes first.
   const rolesFor = (p) => {
     const d = normDoi(p.doi);
     const roles = [];
+    if (corresponding.has(d)) roles.push("Corresponding author");
     if (firstAuthor.has(d)) roles.push("First author");
     if (cofirst.has(d)) roles.push("Co-first author");
-    if (corresponding.has(d)) roles.push("Corresponding author");
     return roles;
   };
   const isSelected = (p) => {
@@ -422,14 +422,22 @@ function renderPublications(doc, selfName, options = {}) {
   // the count above, which links out to Google Scholar. The section's own
   // heading names it, so no sub-heading here — just the list, in the publication
   // list's own newest-first order (de-duping multi-role entries).
-  // Optional `selected_order` DOIs are pinned to the top in the order listed;
-  // everything else keeps the newest-first order (sort is stable).
+  // Optional `selected_order` DOIs are pinned to the top in the order listed.
+  // The rest are grouped first-author, then co-first, then any other role, and
+  // keep the newest-first order within each group (sort is stable).
   const pinned = (options.selectedOrder || []).map(normDoi);
   const rank = (p) => {
     const i = pinned.indexOf(normDoi(p.doi));
     return i === -1 ? pinned.length : i;
   };
-  const picks = pubs.filter(isSelected).sort((a, b) => rank(a) - rank(b));
+  const tier = (p) => {
+    const d = normDoi(p.doi);
+    if (firstAuthor.has(d)) return 0;
+    if (cofirst.has(d)) return 1;
+    return 2;
+  };
+  const picks = pubs.filter(isSelected)
+    .sort((a, b) => rank(a) - rank(b) || tier(a) - tier(b));
   if (picks.length) {
     list.replaceChildren(el("ul", { className: "pub-list pub-selected" },
       picks.map((p, i) => pubItem(p, i + 1, selfName, rolesFor(p)))));
