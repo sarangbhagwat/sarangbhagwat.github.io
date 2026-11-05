@@ -377,12 +377,17 @@ function normDoi(doi) {
 // Builds one <li> for a publication. `num` is the reverse-count label (or null
 // to omit it, as in the Selected block). `roles` is an ordered list of badge
 // labels (e.g. ["First author", "Corresponding author"]) to show on the entry.
+// A "Preprint" status badge follows the roles, driven by ORCID's work type, so
+// it disappears on its own once ORCID lists the published version instead.
 function pubItem(p, num, selfName, roles = []) {
   const li = el("li", { className: "pub-item" });
   if (num != null) li.append(el("span", { className: "pub-num", textContent: `${num}.` }));
   li.append(el("span", { className: "pub-title", textContent: p.title || "Untitled" }));
   for (const label of roles) {
     li.append(el("span", { className: "pub-role", textContent: label }));
+  }
+  if (p.type === "preprint") {
+    li.append(el("span", { className: "pub-role pub-status", textContent: "Preprint" }));
   }
   if (p.authors && p.authors.length) {
     li.append(el("div", { className: "pub-authors" }, authorsFragment(p.authors, selfName)));
@@ -441,7 +446,14 @@ function renderPublications(doc, selfName, options = {}) {
   // the count above, which links out to Google Scholar. The section's own
   // heading names it, so no sub-heading here — just the list, in the publication
   // list's own newest-first order (de-duping multi-role entries).
-  const picks = pubs.filter(isSelected);
+  // Optional `selected_order` DOIs are pinned to the top in the order listed;
+  // everything else keeps the newest-first order (sort is stable).
+  const pinned = (options.selectedOrder || []).map(normDoi);
+  const rank = (p) => {
+    const i = pinned.indexOf(normDoi(p.doi));
+    return i === -1 ? pinned.length : i;
+  };
+  const picks = pubs.filter(isSelected).sort((a, b) => rank(a) - rank(b));
   if (picks.length) {
     list.replaceChildren(el("ul", { className: "pub-list pub-selected" },
       picks.map((p, i) => pubItem(p, i + 1, selfName, rolesFor(p)))));
@@ -580,6 +592,7 @@ async function init() {
         firstAuthorDois: data.first_author_dois || [],
         cofirstDois: data.cofirst_dois || [],
         correspondingDois: data.corresponding_dois || [],
+        selectedOrder: data.selected_order || [],
       });
     } catch (pubErr) {
       console.error(pubErr);

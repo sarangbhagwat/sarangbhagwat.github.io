@@ -97,8 +97,15 @@ research_note: "Complete research statement available on request."
 # from every DOI listed below, newest first, and each role adds its own badge.
 # A paper can appear in more than one list (e.g. first + corresponding).
 
+# Optional: DOIs listed here lead the Selected list in this order; every other
+# selected paper follows, newest first. Omit to order purely by date.
+selected_order:
+  - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
+  - "10.26434/chemrxiv.15011481/v1"        # Kinetic + techno-economic models (ChemRxiv preprint 2026)
+
 # You are the (sole) first author.
 first_author_dois:
+  - "10.26434/chemrxiv.15011481/v1"        # Kinetic + techno-economic models (ChemRxiv preprint 2026)
   - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
   - "10.1021/acssuschemeng.5c04797"        # Triacetic acid lactone from sugarcane (2025)
   - "10.1021/acssuschemeng.1c05441"        # Acrylic acid via 3-HP (2021)
@@ -111,6 +118,7 @@ cofirst_dois:
 
 # You are a (co-)corresponding author.
 corresponding_dois:
+  - "10.26434/chemrxiv.15011481/v1"        # Kinetic + techno-economic models (ChemRxiv preprint 2026)
   - "10.1038/s41467-026-75285-1"           # Fermentation titer-rate-yield (Nat. Commun. 2026)
 
 # --- Invited talks ------------------------------------------------------------

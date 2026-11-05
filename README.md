@@ -65,7 +65,10 @@ empty, so you can leave any of them out:
   "Selected publications" lead-in above the full list is built automatically
   from every DOI in these lists (newest first), and each role adds its own badge
   ("First author", "Co-first author", "Corresponding author"). A paper may appear
-  in more than one list.
+  in more than one list. Works that ORCID types as `preprint` also get an
+  outlined "Preprint" badge automatically; nothing to tag by hand.
+- `selected_order:` — optional DOIs pinned to the top of "Selected
+  publications" in the order listed; the rest follow newest first.
 - `talks:` — `{year, title, venue, url}` entries for the "Invited talks"
   section (`url` is optional).
 - `news:` — `{date, text}` one-liners shown below the hero.
