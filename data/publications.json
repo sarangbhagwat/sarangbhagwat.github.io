@@ -136,7 +136,7 @@
       "authors": [
         "Somesh Mishra",
         "Luiz Augusto",
-        "Sarang  S. Bhagwat",
+        "Sarang S. Bhagwat",
         "Joshua Ye",
         "Nayeem Bari",
         "Diep Nguyen",
@@ -144,10 +144,10 @@
         "Zhou Zhengyong",
         "Munmi Das",
         "Yuyao Jia",
-        "Kristen  K. Eilts",
+        "Kristen K. Eilts",
         "Chandan Mahata",
-        "Christopher  V. Rao",
-        "Keith  R. Cadwallader",
+        "Christopher V. Rao",
+        "Keith R. Cadwallader",
         "Ting Lu",
         "Yong-Su Jin",
         "Jeremy Guest",
@@ -246,16 +246,16 @@
       "url": "https://doi.org/10.1002/bbb.2427",
       "put_code": 134517266,
       "authors": [
-        "Singh, Ramkrishna",
-        "Bhagwat, Sarang S",
-        "Viswanathan, Mothi Bharath",
-        "Cortés-Peña, Yoel R",
-        "Eilts, Kristen K",
-        "McDonough, Grace",
-        "Cao, Mingfeng",
-        "Guest, Jeremy S",
-        "Zhao, Huimin",
-        "Singh, Vijay"
+        "Ramkrishna Singh",
+        "Sarang S. Bhagwat",
+        "Mothi Bharath Viswanathan",
+        "Yoel R. Cortés-Peña",
+        "Kristen K. Eilts",
+        "Grace McDonough",
+        "Mingfeng Cao",
+        "Jeremy S. Guest",
+        "Huimin Zhao",
+        "Vijay Singh"
       ]
     },
     {
@@ -267,17 +267,16 @@
       "url": "https://doi.org/10.1016/j.ymben.2023.01.003",
       "put_code": 134517270,
       "authors": [
-        "Yan, Qiang",
-        "Jacobson, Tyler B",
-        "Ye, Zhou",
-        "Cortés-Pena, Yoel R",
-        "Bhagwat, Sarang S",
-        "Hubbard, Susan",
-        "Cordell, William T",
-        "Oleniczak, Rebecca E",
-        "Gambacorta, Francesca V",
-        "Vazquez, Julio Rivera",
-        "others"
+        "Qiang Yan",
+        "Tyler B. Jacobson",
+        "Zhou Ye",
+        "Yoel R. Cortés-Pena",
+        "Sarang S. Bhagwat",
+        "Susan Hubbard",
+        "William T. Cordell",
+        "Rebecca E. Oleniczak",
+        "Francesca V. Gambacorta",
+        "Julio Rivera Vazquez"
       ]
     },
     {
@@ -289,17 +288,16 @@
       "url": "https://doi.org/10.1016/j.cej.2022.138886",
       "put_code": 134517267,
       "authors": [
-        "Lee, Jae Won",
-        "Bhagwat, Sarang S",
-        "Kuanyshev, Nurzhan",
-        "Cho, Young B",
-        "Sun, Liang",
-        "Lee, Ye-Gi",
-        "Cortés-Peña, Yoel R",
-        "Li, Yalin",
-        "Rao, Christopher V",
-        "Guest, Jeremy S",
-        "others"
+        "Jae Won Lee",
+        "Sarang S. Bhagwat",
+        "Nurzhan Kuanyshev",
+        "Young B. Cho",
+        "Liang Sun",
+        "Ye-Gi Lee",
+        "Yoel R. Cortés-Peña",
+        "Yalin Li",
+        "Christopher V. Rao",
+        "Jeremy S. Guest"
       ]
     },
     {
@@ -329,13 +327,13 @@
       "url": "https://doi.org/10.1021/acssuschemeng.1c05441",
       "put_code": 134517452,
       "authors": [
-        "Bhagwat, Sarang S.",
-        "Li, Yalin",
-        "Cortés-Peña, Yoel R.",
-        "Brace, Emma C.",
-        "Martin, Teresa A.",
-        "Zhao, Huimin",
-        "Guest, Jeremy S."
+        "Sarang S. Bhagwat",
+        "Yalin Li",
+        "Yoel R. Cortés-Peña",
+        "Emma C. Brace",
+        "Teresa A. Martin",
+        "Huimin Zhao",
+        "Jeremy S. Guest"
       ]
     }
   ]

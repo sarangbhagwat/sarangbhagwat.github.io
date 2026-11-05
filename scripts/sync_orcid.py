@@ -83,14 +83,49 @@ def fetch_json(url: str, timeout: int = 20) -> dict:
         return json.loads(resp.read().decode("utf-8"))
 
 
+# --- Author-name normalization ------------------------------------------------
+# Works imported into ORCID from some sources (e.g. Google Scholar/BibTeX) list
+# contributors as "Family, Given" and end truncated lists with a literal
+# "others". The site shows "Given Family", so names are rewritten here, both for
+# fresh ORCID data and for names already in publications.json.
+
+_PLACEHOLDER_AUTHORS = {"others", "et al", "et al."}
+_NAME_SUFFIXES = {"jr", "jr.", "sr", "sr.", "ii", "iii", "iv"}
+
+
+def normalize_author(name) -> str | None:
+    """Return `name` as "Given Family", or None if it is not a real author.
+
+    "Bhagwat, Sarang S" -> "Sarang S. Bhagwat": bare initials in the given
+    names get a period, matching the rest of the list. Names already in display
+    order only have their whitespace collapsed.
+    """
+    name = " ".join(str(name or "").split())
+    if not name or name.casefold() in _PLACEHOLDER_AUTHORS:
+        return None
+    parts = [p.strip() for p in name.split(",")]
+    if len(parts) == 2 and all(parts) and parts[1].casefold() not in _NAME_SUFFIXES:
+        family, given = parts
+        given = " ".join(f"{t}." if len(t) == 1 and t.isupper() else t for t in given.split())
+        name = f"{given} {family}"
+    return name
+
+
+def normalize_authors(names) -> list[str]:
+    """Normalize every name, drop placeholders and duplicates, keep order."""
+    out: list[str] = []
+    seen: set[str] = set()
+    for n in names or []:
+        n = normalize_author(n)
+        if n and _norm_name(n) not in seen:
+            seen.add(_norm_name(n))
+            out.append(n)
+    return out
+
+
 def parse_contributors(work_detail: dict) -> list[str]:
     contributors = (work_detail.get("contributors") or {}).get("contributor", []) or []
-    names = []
-    for c in contributors:
-        name = (c.get("credit-name") or {}).get("value")
-        if name:
-            names.append(name)
-    return names
+    return normalize_authors((c.get("credit-name") or {}).get("value") for c in contributors)
 
 
 def build_publications(orcid_id: str, *, opener=fetch_json) -> dict:
@@ -146,9 +181,11 @@ def merge_authors(existing: list[str], incoming: list[str]) -> list[str]:
 
     If ORCID's list already includes everyone we have, take it as-is (it may add
     authors or fix their order). Otherwise keep ours and append ORCID's extras.
+    Both lists are normalized first, so "Family, Given" names already on the
+    site match their "Given Family" form and "others" placeholders drop out.
     """
-    existing = list(existing or [])
-    incoming = list(incoming or [])
+    existing = normalize_authors(existing)
+    incoming = normalize_authors(incoming)
     incoming_norm = {_norm_name(n) for n in incoming}
     if all(_norm_name(n) in incoming_norm for n in existing):
         return incoming
@@ -190,7 +227,8 @@ def merge_publications(existing: list[dict], incoming: list[dict]) -> list[dict]
         used.add(i)
         merged.append({**existing[i], **pub,
                        "authors": merge_authors(existing[i].get("authors"), pub.get("authors"))})
-    merged.extend(e for i, e in enumerate(existing) if i not in used)
+    merged.extend({**e, "authors": normalize_authors(e.get("authors"))}
+                  for i, e in enumerate(existing) if i not in used)
     merged.sort(key=lambda p: (p.get("year") is not None, p.get("year") or 0), reverse=True)
     return merged
 

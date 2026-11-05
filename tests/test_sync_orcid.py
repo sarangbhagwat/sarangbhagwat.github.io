@@ -299,3 +299,53 @@ def test_sync_creates_file_when_none_exists(tmp_path):
     detail = load_fixture("orcid_work_detail.json")
     assert sync_orcid.sync("x", out, opener=lambda url, timeout=20: works if url.endswith("/works") else detail) is True
     assert len(json.loads(out.read_text(encoding="utf-8"))["publications"]) == 3
+
+
+# --- Author-name normalization ----------------------------------------------
+
+def test_normalize_author_flips_family_given_and_adds_initial_period():
+    assert sync_orcid.normalize_author("Bhagwat, Sarang S") == "Sarang S. Bhagwat"
+    assert sync_orcid.normalize_author("Vazquez, Julio Rivera") == "Julio Rivera Vazquez"
+    assert sync_orcid.normalize_author("Cortés-Peña, Yoel R.") == "Yoel R. Cortés-Peña"
+
+
+def test_normalize_author_leaves_display_order_names_alone():
+    assert sync_orcid.normalize_author("Sarang S. Bhagwat") == "Sarang S. Bhagwat"
+    assert sync_orcid.normalize_author("Shih-I Tan") == "Shih-I Tan"
+    assert sync_orcid.normalize_author("Kristen  K. Eilts") == "Kristen K. Eilts"
+
+
+def test_normalize_author_keeps_name_suffix_after_comma():
+    assert sync_orcid.normalize_author("John Smith, Jr.") == "John Smith, Jr."
+
+
+def test_normalize_author_drops_placeholders():
+    for placeholder in ("others", "Others", " et al. ", "", None):
+        assert sync_orcid.normalize_author(placeholder) is None
+
+
+def test_normalize_authors_drops_placeholders_and_duplicates():
+    assert sync_orcid.normalize_authors(
+        ["Lee, Jae Won", "Bhagwat, Sarang S", "Sarang S. Bhagwat", "others"]
+    ) == ["Jae Won Lee", "Sarang S. Bhagwat"]
+
+
+def test_parse_contributors_normalizes_names():
+    detail = {"contributors": {"contributor": [
+        {"credit-name": {"value": "Singh, Ramkrishna"}},
+        {"credit-name": {"value": "Bhagwat, Sarang S"}},
+        {"credit-name": {"value": "others"}},
+    ]}}
+    assert sync_orcid.parse_contributors(detail) == ["Ramkrishna Singh", "Sarang S. Bhagwat"]
+
+
+def test_merge_authors_matches_existing_family_given_names_to_incoming():
+    existing = ["Yan, Qiang", "Bhagwat, Sarang S", "others"]
+    incoming = ["Qiang Yan", "Sarang S. Bhagwat", "Susan Hubbard"]
+    assert sync_orcid.merge_authors(existing, incoming) == incoming
+
+
+def test_merge_publications_normalizes_entries_missing_from_incoming():
+    existing = [_pub(1, "10.1/a", authors=["Guest, Jeremy S", "others"])]
+    merged = sync_orcid.merge_publications(existing, [])
+    assert merged[0]["authors"] == ["Jeremy S. Guest"]
