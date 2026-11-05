@@ -43,12 +43,12 @@ software:
     description: "Open-source toolkit for defining and simulating (bio)chemical reaction networks within process flowsheets. Propagates kinetic uncertainties to facility-scale outcomes."
     repo: "sarangbhagwat/nskinetics"
     pypi: "nskinetics"
-    url: "https://github.com/sarangbhagwat/nskinetics"
+    url: "https://nskinetics.readthedocs.io/"
   - name: "PISCES Standard Flowsheet Format (SFF)"
     role: "Lead developer"
     description: "An interoperable format and export layer for process flowsheets, underlying [Project PISCES](https://projectpisces.org/)."
     repo: "sustainability-software-lab/pisces-standard-flowsheet-format"
-    url: "https://projectpisces.org/"
+    url: "https://pisces-standard-flowsheet-format.readthedocs.io/"
   - name: "AutoSynthesis"
     role: "Lead developer"
     description: "Open-source package for automated process synthesis and design, systematically generating and evaluating candidate (bio)chemical process flowsheets."
@@ -65,6 +65,17 @@ software:
     repo: "BioSTEAMDevelopmentGroup/hensmith"
     pypi: "hensmith"
     url: "https://hensmith.readthedocs.io/"
+
+# --- Selected proposal development ---------------------------------------------
+# `{year, description}` entries (markdown allowed), most recent first. Keep each
+# role worded exactly as on the CV so nothing implies PI status. The section and
+# its nav link hide themselves when this list is empty.
+proposals:
+  - { year: "2026", description: "Senior Personnel & Co-Technical Lead; ideated and co-wrote the proposal. NSF PESOSE Track 1, “Toward an Open-Source Ecosystem for BioSTEAM to Accelerate Next-Generation Biomanufacturing” ($300K; PI: Y. Li; submitted)" }
+  - { year: "2024", description: "Proposed and co-wrote two technical sections on BioSTEAM software developments. NSF iBioFoundry for Basic and Applied Biology ($15M; PI: H. Zhao; awarded)" }
+  - { year: "2023", description: "Key Personnel; set quantitative development targets for fermentative 3-hydroxypropionic acid production, performed supporting analyses, and co-wrote a technical section. BioMADE Project Bluestem ($341K; PI: T. Autera; awarded)" }
+  - { year: "2022", description: "Responsible for ideating and co-writing Objective S2.1, one of three main objectives of the Sustainability Thrust. DOE Center for Advanced Bioenergy and Bioproducts Innovation (CABBI) 5-Year Renewal ($145M; PI: A. Leakey; awarded)" }
+  - { year: "2021", description: "Performed supporting analyses and co-wrote a technical section for each of two additional awarded proposals: BioMADE, “New Technologies for Industrial Production of Succinic Acid” ($1.0M; PI: H. Zhao), and DOE EERE, “Novel Modular Treatment System for Distributed Energy Recovery and Water Reclamation from Industrial Wastewaters” ($1.6M; PI: P. Novak)" }
 
 # --- Research vision (thematic thrusts, NOT the research statement) ------------
 # Optional accent-bordered thrust cards above the interests list. Left empty for
@@ -165,7 +176,7 @@ awards:
 # nav link hide themselves when this list is empty.
 teaching_outreach:
   - { year: "2022–23", description: "Graduate Student Instructor & Teaching Assistant, CEE 493: Sustainable Design of Engineered Technologies, University of Illinois Urbana-Champaign; delivered 6 lectures on techno-economic analysis and uncertainty & sensitivity analyses" }
-  - { year: "2021–26", description: "Research mentor to five undergraduate, M.S., and Ph.D. students, University of Illinois Urbana-Champaign" }
+  - { year: "2021–26", description: "Research mentor to five students (one B.S.-to-M.S., four Ph.D.), University of Illinois Urbana-Champaign. Ph.D. mentees first-authored two published papers, both selected as journal covers (*Environmental Science & Technology*, 2026; *ACS ES&T Engineering*, 2025); M.S. mentee placed as Process Engineer at Archer-Daniels-Midland" }
   - { year: "2024", description: "Panelist and research-fair presenter, Engineering Open House (annual outreach event), Grainger College of Engineering, University of Illinois Urbana-Champaign" }
   - { year: "2023–24", description: "Organizing subcommittee volunteer, Women Empowered in STEM (weSTEM) conference, GradSWE, University of Illinois Urbana-Champaign" }
   - { year: "2023", description: "Workshop speaker on writing and presenting preliminary Ph.D. proposals, American Association for Aerosol Research (AAAR) UIUC Student Chapter" }

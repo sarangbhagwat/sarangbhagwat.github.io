@@ -167,6 +167,12 @@ function assignBands() {
   sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
 }
 
+// Adoption metrics below these floors are left off the card: single-digit star
+// counts read as low uptake rather than evidence of impact. The data in
+// software.json is unaffected; a metric appears once it clears its floor.
+const MIN_STARS_SHOWN = 25;
+const MIN_MONTHLY_DOWNLOADS_SHOWN = 200;
+
 // Renders the Software cards, merging live metrics (stars, monthly downloads)
 // keyed by the entry's repo slug and pypi name. Missing metrics are simply
 // omitted — the card still renders from the editorial content.
@@ -185,10 +191,10 @@ function renderSoftware(software, metrics) {
     const repoM = s.repo ? repos[s.repo] : null;
     const pkgM = s.pypi ? packages[s.pypi] : null;
     const stats = [];
-    if (repoM && typeof repoM.stars === "number" && repoM.stars > 0) {
+    if (repoM && typeof repoM.stars === "number" && repoM.stars >= MIN_STARS_SHOWN) {
       stats.push(`★ ${repoM.stars.toLocaleString()} stars`);
     }
-    if (pkgM && typeof pkgM.last_month === "number" && pkgM.last_month > 0) {
+    if (pkgM && typeof pkgM.last_month === "number" && pkgM.last_month >= MIN_MONTHLY_DOWNLOADS_SHOWN) {
       stats.push(`${pkgM.last_month.toLocaleString()} downloads/mo`);
     }
     if (stats.length) {
@@ -313,6 +319,7 @@ function renderContent(data, softwareMetrics) {
   const scholar = document.getElementById("scholar-link");
   if (scholar && m.scholar_url) scholar.href = safeUrl(m.scholar_url);
 
+  renderYearList("proposals", data.proposals);
   renderYearList("awards", data.awards);
   renderYearList("teaching", data.teaching_outreach);
   renderYearList("service", data.service);
