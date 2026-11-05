@@ -242,8 +242,9 @@ main section #education-heading::after { content: none; }
 /* Count + Google Scholar link at the top of the section. The separator dot only
    appears when the count is present, so an empty count leaves just the link. */
 .pub-summary { color: var(--muted); margin: 0 0 1.5rem; }
-.pub-count { color: var(--text); }
-.pub-count:not(:empty)::after { content: "·"; margin: 0 0.55rem; color: var(--muted); }
+.pub-count { color: var(--text); font-weight: 700; }
+.pub-count:not(:empty)::after { content: "·"; margin: 0 0.55rem; color: var(--muted); font-weight: 400; }
+.pub-summary a { font-weight: 700; }
 .pub-list { list-style: none; padding: 0; margin: 0; }
 .pub-item { margin-bottom: 1.5rem; padding-left: 2.2rem; }
 .pub-num { display: inline-block; width: 2.2rem; margin-left: -2.2rem; color: var(--muted); font-weight: 600; }
