@@ -176,7 +176,8 @@ awards:
   - { year: "2023–24", description: "Mavis Future Faculty Fellowship (MF3), Grainger College of Engineering, University of Illinois Urbana-Champaign" }
   - { year: "2023–24", description: "Ravindar K. and Kavita Kinra Fellowship, Department of Civil & Environmental Engineering, University of Illinois Urbana-Champaign" }
   - { year: "2023", description: "Chester P. Siess Award for Outstanding Graduate Students in Civil & Environmental Engineering, University of Illinois Urbana-Champaign" }
-  - { year: "2022", description: "Outstanding Podium Presentation Award (1st place), 27th Annual Environmental Engineering & Science Symposium, University of Illinois Urbana-Champaign" }
+  - { year: "2023", description: "Outstanding Podium Presentation Award, Environmental Engineering & Science Symposium, University of Illinois Urbana-Champaign" }
+  - { year: "2022", description: "Outstanding Podium Presentation Award, 27th Annual Environmental Engineering & Science Symposium, University of Illinois Urbana-Champaign" }
 
 # --- Selected teaching & outreach --------------------------------------------
 # `{year, description}` entries (markdown allowed): teaching and mentoring
