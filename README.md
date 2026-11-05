@@ -52,8 +52,8 @@ empty, so you can leave any of them out:
   from every DOI in these lists (newest first), and each role adds its own badge
   ("First author", "Co-first author", "Corresponding author"). A paper may appear
   in more than one list.
-- `talks:` — `{year, title, venue, invited, url}` entries (`invited: true`
-  adds a tag; `url` is optional).
+- `talks:` — `{year, title, venue, url}` entries for the "Invited talks"
+  section (`url` is optional).
 - `news:` — `{date, text}` one-liners shown below the hero.
 - `awards:` — `{year, description}` entries (fellowships and honors).
 - `teaching_outreach:` — `{year, description}` entries for the "Selected

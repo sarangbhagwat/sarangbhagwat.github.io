@@ -225,8 +225,7 @@ function renderNews(news) {
   show("news", list.length > 0);
 }
 
-// Selected talks: year + title + venue, with an "Invited" tag when flagged and
-// an optional link on the title.
+// Invited talks: year + title + venue, with an optional link on the title.
 function renderTalks(talks) {
   const list = talks || [];
   fill("talks-list", list.map((t) => {
@@ -236,7 +235,6 @@ function renderTalks(talks) {
       ? el("a", { className: "talk-title", href: safeUrl(t.url), textContent: t.title || "" })
       : el("span", { className: "talk-title", textContent: t.title || "" });
     li.append(titleNode);
-    if (t.invited) li.append(el("span", { className: "talk-invited", textContent: "Invited" }));
     if (t.venue) li.append(el("div", { className: "talk-venue", textContent: t.venue }));
     return li;
   }));
