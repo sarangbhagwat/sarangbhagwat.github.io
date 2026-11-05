@@ -7,7 +7,10 @@ A single-page academic site. Publications update automatically from ORCID.
 Everything you write lives in `data/content.yml`. Edit it, save, and refresh the
 page. Replace these two files with your own:
 
-- `assets/headshot.jpg` — your photo (square works best)
+- `assets/headshot.jpg` — your photo, square, **440×440 px** (twice its
+  220 px display size, for sharp screens). A full-resolution camera photo
+  is roughly 25× heavier and slows every page load, so resize it first.
+  `assets/apple-touch-icon.png` is the same photo at 180×180 px.
 - `assets/<last>-<first>_CV*.pdf` — your CV. The site builds the expected
   prefix from your name in `content.yml`, so with `first_name: "Sarang"` and
   `last_name: "Bhagwat"` it looks for files starting with `Bhagwat-Sarang_CV`
@@ -16,12 +19,17 @@ page. Replace these two files with your own:
   `data/cv.json`, which `scripts/detect_cv.py` regenerates in CI whenever
   `assets/` or `content.yml` changes — do not edit it by hand.
 
-The page title and meta description in `index.html` are generated too.
-`scripts/sync_head.py` builds them from your name, title, and institution in
-`content.yml` and rewrites those two tags in place, so do not edit them by
-hand. CI runs it whenever `content.yml` changes; run
-`python scripts/sync_head.py` yourself if you want them updated before you
-push.
+The static parts of `index.html` are generated too, so the page reads
+correctly before JavaScript runs and in link previews (LinkedIn, Slack),
+which never run it. `scripts/sync_head.py` builds them from `content.yml`
+and `data/cv.json`: the title and meta description, the nav name, the hero
+(photo, name, title, tagline, CV button, links), the Scholar link, the
+footer, and the `generated:head` block (canonical URL from `CNAME`, favicon,
+Open Graph and Twitter card tags, schema.org Person data). It also writes
+`assets/favicon.svg` from your initials. Do not edit anything between the
+`<!-- generated:... -->` markers by hand. CI runs it whenever `content.yml`
+or `assets/` changes; run `python scripts/sync_head.py` yourself if you want
+them updated before you push.
 
 Your name goes in the `meta:` block of `data/content.yml` as `first_name`,
 `middle_name` (optional), and `last_name`. Everything that shows your name —

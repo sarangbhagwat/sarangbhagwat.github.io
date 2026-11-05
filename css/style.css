@@ -105,8 +105,12 @@ main section.section-alt::before {
 }
 
 /* Scroll reveal: gated behind .js-reveal (set by main.js before it starts
-   observing) so no-JS users always see full-opacity, untransformed sections. */
-.js-reveal main section { opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease, transform 0.35s ease; }
+   observing) so no-JS users always see full-opacity, untransformed sections.
+   The hero is exempt: it ships pre-rendered in index.html and is often painted
+   before main.js runs, so hiding it then would flash it out and back in.
+   :where() keeps the exemption at zero specificity; a bare :not(#hero) would
+   add ID weight and outrank the .revealed and reduced-motion rules below. */
+.js-reveal main section:where(:not(#hero)) { opacity: 0; transform: translateY(10px); transition: opacity 0.35s ease, transform 0.35s ease; }
 .js-reveal main section.revealed { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {

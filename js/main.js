@@ -51,49 +51,25 @@ const sunIcon = () => svgIcon(
   '<line x1="4.9" y1="19.1" x2="6.6" y2="17.4"/><line x1="17.4" y1="6.6" x2="19.1" y2="4.9"/></g>'
 );
 
-// Monochrome, currentColor icons keyed by normalized (lowercased) link label.
-const ICONS = {
-  "google scholar": () => svgIcon(
-    '<path d="M12 3 1 9l11 6 11-6-11-6Z"/>' +
-    '<path d="M5 11.5v4.8c0 1.7 3.1 3.2 7 3.2s7-1.5 7-3.2v-4.8l-7 3.8-7-3.8Z"/>'
-  ),
-  orcid: () => svgIcon(
-    '<circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
-    '<circle cx="8.3" cy="8.2" r="1.1"/>' +
-    '<g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">' +
-    '<line x1="8.3" y1="10.6" x2="8.3" y2="16.4"/>' +
-    '<line x1="11.8" y1="10.6" x2="15.6" y2="10.6"/>' +
-    '<line x1="11.8" y1="13.3" x2="15.6" y2="13.3"/>' +
-    '<line x1="11.8" y1="16" x2="14.2" y2="16"/></g>'
-  ),
-  email: () => svgIcon(
-    '<rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>' +
-    '<path d="M3.5 6.5 12 13 20.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
-  ),
-  github: () => svgIcon(
-    '<path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.38 6.84 9.74.5.1.68-.22.68-.49 ' +
-    '0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.19-3.37-1.19-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 ' +
-    '1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 ' +
-    '0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 ' +
-    '2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 ' +
-    '0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>'
-  ),
-  linkedin: () => svgIcon(
-    '<rect x="2.5" y="2.5" width="19" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>' +
-    '<circle cx="7" cy="7.5" r="1.35"/>' +
-    // "in" drawn as even-weight strokes so the i-stem and both n legs match.
-    '<path d="M7 17.9V10.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>' +
-    '<path d="M11.4 17.9V13a3 3 0 0 1 6 0v4.9" fill="none" stroke="currentColor" ' +
-    'stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>'
-  ),
+// Link icons live in assets/icons.svg, shared with the pre-rendered hero that
+// scripts/sync_head.py writes into index.html, so the markup JS renders matches
+// the static page exactly and nothing shifts when it replaces it. Keyed by
+// normalized (lowercased) link label; ICON_IDS in sync_head.py mirrors this.
+const ICON_IDS = {
+  "google scholar": "scholar",
+  orcid: "orcid",
+  email: "email",
+  github: "github",
+  linkedin: "linkedin",
 };
+const spriteIcon = (id) => svgIcon(`<use href="assets/icons.svg#${id}"/>`);
 
 // Looks up an icon by case-insensitive label, falling back to the mailto: scheme
 // (contact's email link uses the address itself as its label, not "Email").
 function iconFor(label, url) {
-  const byLabel = ICONS[(label || "").trim().toLowerCase()];
-  if (byLabel) return byLabel();
-  if (/^mailto:/i.test((url || "").trim())) return ICONS.email();
+  const id = ICON_IDS[(label || "").trim().toLowerCase()];
+  if (id) return spriteIcon(id);
+  if (/^mailto:/i.test((url || "").trim())) return spriteIcon(ICON_IDS.email);
   return null;
 }
 
@@ -576,18 +552,22 @@ async function init() {
     console.error(e);
   }
   initCvButton(); // async + self-contained: independent of content/publications
+  // All data files are requested at once rather than one after another; only
+  // content.yml is required, so the other two fall back to empty on failure.
+  const software = loadSoftware().catch((e) => {
+    console.error(e);
+    return { repos: {}, packages: {} };
+  });
+  const publications = loadPublications().catch((e) => {
+    console.error(e);
+    return { publications: [] };
+  });
   try {
-    const data = await loadContent();
-    let softwareMetrics = { repos: {}, packages: {} };
-    try {
-      softwareMetrics = await loadSoftware();
-    } catch (e) {
-      console.error(e);
-    }
+    const [data, softwareMetrics, pubs] =
+      await Promise.all([loadContent(), software, publications]);
     renderContent(data, softwareMetrics);
     const selfName = fullName(data.meta || {});
     try {
-      const pubs = await loadPublications();
       renderPublications(pubs, selfName, {
         firstAuthorDois: data.first_author_dois || [],
         cofirstDois: data.cofirst_dois || [],

@@ -31,3 +31,16 @@ def test_full_name_omits_absent_middle():
 
 def test_full_name_none_when_last_name_missing():
     assert site_meta.full_name('first_name: "Ada"\n') is None
+
+
+def test_read_meta_value_ignores_keys_outside_the_meta_block():
+    text = (
+        'meta:\n'
+        '  first_name: "Ada"\n'
+        '  # title: "commented out"\n'
+        'talks:\n'
+        '  - year: 2024\n'
+        '    title: "A talk title"\n'
+    )
+    assert site_meta.read_meta_value(text, "first_name") == "Ada"
+    assert site_meta.read_meta_value(text, "title") is None

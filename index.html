@@ -19,12 +19,37 @@
       }
     })();
   </script>
+  <!-- Fonts used above the fold, fetched alongside the CSS instead of after it. -->
+  <link rel="preload" href="fonts/source-sans-3-400.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/source-sans-3-600.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/source-sans-3-700.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="fonts/source-serif-4-600.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="css/style.css" />
+  <!-- Fetch the YAML parser with main.js rather than after it is parsed. -->
+  <link rel="modulepreload" href="js/main.js" />
+  <link rel="modulepreload" href="js/vendor/js-yaml.min.js" />
+  <!-- generated:head (scripts/sync_head.py from content.yml; do not edit) -->
+  <link rel="canonical" href="https://sarangbhagwat.com/" />
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:title" content="Sarang S. Bhagwat" />
+  <meta property="og:description" content="My work advances agile and predictive process systems engineering, building uncertainty-aware design frameworks and physics-informed AI for sustainable, resilient systems that enable circular economies." />
+  <meta property="og:url" content="https://sarangbhagwat.com/" />
+  <meta property="og:image" content="https://sarangbhagwat.com/assets/headshot.jpg" />
+  <meta property="og:image:width" content="440" />
+  <meta property="og:image:height" content="440" />
+  <meta property="og:image:alt" content="Sarang S. Bhagwat" />
+  <meta property="profile:first_name" content="Sarang" />
+  <meta property="profile:last_name" content="Bhagwat" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Sarang S. Bhagwat","givenName":"Sarang","familyName":"Bhagwat","jobTitle":"Postdoctoral Researcher","affiliation":{"@type":"Organization","name":"University of California, Berkeley"},"description":"My work advances agile and predictive process systems engineering, building uncertainty-aware design frameworks and physics-informed AI for sustainable, resilient systems that enable circular economies.","url":"https://sarangbhagwat.com/","image":"https://sarangbhagwat.com/assets/headshot.jpg","email":"mailto:sarangbhagwat@berkeley.edu","sameAs":["https://scholar.google.com/citations?user=tX_qxfEAAAAJ\u0026hl=en","https://orcid.org/0000-0002-2620-2829","https://www.linkedin.com/in/sarangbhagwat/","https://github.com/sarangbhagwat"],"alumniOf":[{"@type":"CollegeOrUniversity","name":"University of Illinois Urbana-Champaign"},{"@type":"CollegeOrUniversity","name":"North Carolina State University"},{"@type":"CollegeOrUniversity","name":"Institute of Chemical Technology, Mumbai/Bombay"}]}</script>
+  <!-- /generated:head -->
 </head>
 <body>
   <header id="site-header">
     <nav id="site-nav" aria-label="Primary">
-      <a class="nav-name" href="#hero">Your Name</a>
+      <a class="nav-name" href="#hero">Sarang S. Bhagwat</a>
       <div class="nav-right">
         <ul class="nav-links">
           <li><a href="#research">Research</a></li>
@@ -45,20 +70,34 @@
   <main>
     <section id="hero">
       <div class="hero-col">
-        <img id="hero-photo" src="assets/headshot.jpg" alt="" />
-        <h1 id="hero-name"></h1>
-        <p id="hero-title"></p>
-        <p id="hero-tagline"></p>
+        <!-- generated:hero (scripts/sync_head.py from content.yml; do not edit) -->
+        <img id="hero-photo" src="assets/headshot.jpg" width="440" height="440" alt="Sarang S. Bhagwat" fetchpriority="high" />
+        <h1 id="hero-name">Sarang S. Bhagwat</h1>
+        <p id="hero-title">Postdoctoral Researcher, <span class="hero-inst">University of California, Berkeley</span></p>
+        <p id="hero-tagline">My work advances agile and predictive <strong>process systems engineering</strong>, building uncertainty-aware design frameworks and physics-informed AI for sustainable, resilient systems that enable circular economies.</p>
         <div class="hero-footer">
           <p class="hero-actions">
-            <a id="hero-cv" href="#" class="button">Download CV</a>
+            <a id="hero-cv" href="assets/Bhagwat-Sarang_CV_November_2026.pdf" class="button" download>Download CV</a>
           </p>
-          <ul id="hero-links" class="icon-links"></ul>
+          <ul id="hero-links" class="icon-links">
+            <li><a class="icon-link" href="mailto:sarangbhagwat@berkeley.edu"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><use href="assets/icons.svg#email"/></svg>sarangbhagwat@berkeley.edu</a></li>
+            <li><a class="icon-link" href="https://scholar.google.com/citations?user=tX_qxfEAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><use href="assets/icons.svg#scholar"/></svg>Google Scholar</a></li>
+            <li><a class="icon-link" href="https://orcid.org/0000-0002-2620-2829" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><use href="assets/icons.svg#orcid"/></svg>ORCID</a></li>
+            <li><a class="icon-link" href="https://www.linkedin.com/in/sarangbhagwat/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><use href="assets/icons.svg#linkedin"/></svg>LinkedIn</a></li>
+            <li><a class="icon-link" href="https://github.com/sarangbhagwat" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true" focusable="false"><use href="assets/icons.svg#github"/></svg>GitHub</a></li>
+          </ul>
         </div>
+        <!-- /generated:hero -->
       </div>
       <div id="education" class="edu-col">
         <h2 id="education-heading">Education</h2>
-        <ul id="education-list"></ul>
+        <ul id="education-list">
+          <!-- generated:education (scripts/sync_head.py from content.yml; do not edit) -->
+          <li class="edu-item"><span class="edu-year">2025</span><div class="edu-inst">University of Illinois Urbana-Champaign</div><div class="edu-degree">Ph.D., Civil &amp; Environmental Engineering</div></li>
+          <li class="edu-item"><span class="edu-year">2019</span><div class="edu-inst">North Carolina State University</div><div class="edu-degree">M.S., Civil &amp; Environmental Engineering</div></li>
+          <li class="edu-item"><span class="edu-year">2017</span><div class="edu-inst">Institute of Chemical Technology, Mumbai/Bombay</div><div class="edu-degree">B.S., Chemical Technology</div></li>
+          <!-- /generated:education -->
+        </ul>
       </div>
     </section>
 
@@ -83,7 +122,7 @@
       <h2>Selected publications</h2>
       <!-- No whitespace between the count and link: the "·" separator is drawn
            by .pub-count::after so it vanishes cleanly when the count is empty. -->
-      <p class="pub-summary"><span id="pub-count" class="pub-count"></span><a id="scholar-link" href="#">See all on Google Scholar</a></p>
+      <p class="pub-summary"><span id="pub-count" class="pub-count"></span><a id="scholar-link" href="https://scholar.google.com/citations?user=tX_qxfEAAAAJ&amp;hl=en">See all on Google Scholar</a></p>
       <div id="publications-list"></div>
     </section>
 
@@ -124,7 +163,7 @@
   </main>
 
   <footer id="site-footer">
-    <p>&copy; <span id="footer-year"></span> <span id="footer-name"></span></p>
+    <p>&copy; <span id="footer-year">2026</span> <span id="footer-name">Sarang S. Bhagwat</span></p>
   </footer>
 
   <script type="module" src="js/main.js"></script>

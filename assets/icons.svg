@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <!-- Link icons shared by index.html (scripts/sync_head.py) and js/main.js,
+       referenced as <use href="assets/icons.svg#ID"/>. Monochrome: fills and
+       strokes use currentColor, so they follow the link color on hover. -->
+  <symbol id="scholar" viewBox="0 0 24 24">
+    <path d="M12 3 1 9l11 6 11-6-11-6Z"/>
+    <path d="M5 11.5v4.8c0 1.7 3.1 3.2 7 3.2s7-1.5 7-3.2v-4.8l-7 3.8-7-3.8Z"/>
+  </symbol>
+  <symbol id="orcid" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <circle cx="8.3" cy="8.2" r="1.1"/>
+    <g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+      <line x1="8.3" y1="10.6" x2="8.3" y2="16.4"/>
+      <line x1="11.8" y1="10.6" x2="15.6" y2="10.6"/>
+      <line x1="11.8" y1="13.3" x2="15.6" y2="13.3"/>
+      <line x1="11.8" y1="16" x2="14.2" y2="16"/>
+    </g>
+  </symbol>
+  <symbol id="email" viewBox="0 0 24 24">
+    <rect x="2.5" y="5" width="19" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <path d="M3.5 6.5 12 13 20.5 6.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+  <symbol id="github" viewBox="0 0 24 24">
+    <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.54 2.87 8.38 6.84 9.74.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.19-3.37-1.19-.46-1.18-1.11-1.5-1.11-1.5-.91-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05a9.3 9.3 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.79-4.57 5.05.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.02 10.02 0 0 0 22 12.26C22 6.58 17.52 2 12 2Z"/>
+  </symbol>
+  <symbol id="linkedin" viewBox="0 0 24 24">
+    <rect x="2.5" y="2.5" width="19" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <circle cx="7" cy="7.5" r="1.35"/>
+    <!-- "in" drawn as even-weight strokes so the i-stem and both n legs match. -->
+    <path d="M7 17.9V10.2" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M11.4 17.9V13a3 3 0 0 1 6 0v4.9" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </symbol>
+</svg>

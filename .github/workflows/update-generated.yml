@@ -6,6 +6,8 @@ on:
     paths:
       - "assets/**"
       - "data/content.yml"
+      - "data/cv.json"
+      - "CNAME"
       - "scripts/detect_cv.py"
       - "scripts/sync_head.py"
       - "scripts/site_meta.py"
@@ -28,15 +30,15 @@ jobs:
       - name: Detect CV file and update cv.json
         run: python scripts/detect_cv.py
 
-      - name: Sync index.html head from content.yml
+      - name: Sync index.html static content from content.yml
         run: python scripts/sync_head.py
 
       - name: Commit changes if any
         run: |
-          if [[ -n "$(git status --porcelain data/cv.json index.html)" ]]; then
+          if [[ -n "$(git status --porcelain data/cv.json index.html assets/favicon.svg)" ]]; then
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add data/cv.json index.html
+            git add data/cv.json index.html assets/favicon.svg
             git commit -m "chore: update generated files from content.yml"
             git push
           else
