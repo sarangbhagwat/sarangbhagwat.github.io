@@ -29,6 +29,15 @@ the page, the title, the CV filename — is built from those parts. Also set you
 `orcid_id` and `scholar_url` there. Do **not** edit `data/publications.json` —
 it is generated from ORCID.
 
+The ORCID sync (`scripts/sync_orcid.py`, daily in CI) is **add-only**: it can add
+publications and authors, and update titles, venues, years and DOIs, but it
+never removes a publication or an author already in `publications.json`. A
+flaky ORCID response (a failed author lookup, an empty works list, a work
+hidden on ORCID) therefore can't erase anything from the site. If the existing
+file can't be read, the sync refuses to write and exits with an error. To remove
+a publication or author on purpose, take it off ORCID first, then delete it from
+`publications.json` by hand; this is the one exception to "do not edit".
+
 ## Sections driven by `content.yml`
 
 Beyond the basics, these optional keys add sections; each one hides itself when

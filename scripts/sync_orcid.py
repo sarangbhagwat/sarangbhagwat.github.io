@@ -1,4 +1,4 @@
-"""Fetch an author's works from the ORCID public API and write publications.json.
+"""Fetch an author's works from the ORCID public API and merge them, add-only, into publications.json.
 
 Standard library only (urllib, json, re). No third-party dependencies.
 """
@@ -114,6 +114,108 @@ def build_publications(orcid_id: str, *, opener=fetch_json) -> dict:
     }
 
 
+# --- Add-only merge ----------------------------------------------------------
+# A sync may add publications and authors but never remove them: a flaky ORCID
+# response (failed per-work detail fetch, empty /works list, a work hidden on
+# ORCID) must not erase anything already on the site. Metadata such as title,
+# venue, year and DOI still update from ORCID. To remove an entry on purpose,
+# delete it from ORCID and then from data/publications.json by hand.
+
+class ExistingFileError(ValueError):
+    """The existing publications.json can't be read, so a merge can't be trusted."""
+
+
+def _norm_name(name: str) -> str:
+    return " ".join(str(name).split()).casefold()
+
+
+def _norm_doi(doi) -> str | None:
+    if not doi:
+        return None
+    d = str(doi).strip().lower()
+    d = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", d)
+    return d or None
+
+
+def _norm_title(title) -> str | None:
+    return _norm_name(title) if title else None
+
+
+def merge_authors(existing: list[str], incoming: list[str]) -> list[str]:
+    """Return an author list that contains every existing name.
+
+    If ORCID's list already includes everyone we have, take it as-is (it may add
+    authors or fix their order). Otherwise keep ours and append ORCID's extras.
+    """
+    existing = list(existing or [])
+    incoming = list(incoming or [])
+    incoming_norm = {_norm_name(n) for n in incoming}
+    if all(_norm_name(n) in incoming_norm for n in existing):
+        return incoming
+    have = {_norm_name(n) for n in existing}
+    return existing + [n for n in incoming if _norm_name(n) not in have]
+
+
+def _find_match(pub: dict, existing: list[dict], used: set[int]) -> int | None:
+    """Index of the existing entry that is the same work as `pub`, if any.
+
+    Same DOI, or same ORCID put-code (e.g. a preprint moving from v1 to v2), or
+    same title when neither has a DOI. Title-only matching is limited to
+    DOI-less works so a preprint and its published version, which often share a
+    title, are never folded into one entry.
+    """
+    doi, code, title = _norm_doi(pub.get("doi")), pub.get("put_code"), _norm_title(pub.get("title"))
+    for test in (
+        lambda e: doi is not None and _norm_doi(e.get("doi")) == doi,
+        lambda e: code is not None and e.get("put_code") == code,
+        lambda e: doi is None and _norm_doi(e.get("doi")) is None
+                  and title is not None and _norm_title(e.get("title")) == title,
+    ):
+        for i, e in enumerate(existing):
+            if i not in used and test(e):
+                return i
+    return None
+
+
+def merge_publications(existing: list[dict], incoming: list[dict]) -> list[dict]:
+    """Merge a fresh ORCID list into the existing one without dropping anything."""
+    existing = list(existing or [])
+    used: set[int] = set()
+    merged: list[dict] = []
+    for pub in incoming or []:
+        i = _find_match(pub, existing, used)
+        if i is None:
+            merged.append(pub)
+            continue
+        used.add(i)
+        merged.append({**existing[i], **pub,
+                       "authors": merge_authors(existing[i].get("authors"), pub.get("authors"))})
+    merged.extend(e for i, e in enumerate(existing) if i not in used)
+    merged.sort(key=lambda p: (p.get("year") is not None, p.get("year") or 0), reverse=True)
+    return merged
+
+
+def _read_existing_publications(out_path: pathlib.Path) -> list[dict]:
+    if not out_path.exists():
+        return []
+    try:
+        pubs = json.loads(out_path.read_text(encoding="utf-8"))["publications"]
+    except Exception as err:
+        raise ExistingFileError(f"cannot read {out_path}: {err}") from err
+    if not isinstance(pubs, list):
+        raise ExistingFileError(f"{out_path}: 'publications' is not a list")
+    return pubs
+
+
+def sync(orcid_id: str, out_path, *, opener=fetch_json) -> bool:
+    """Fetch from ORCID, merge add-only into out_path, and write if anything changed."""
+    out_path = pathlib.Path(out_path)
+    existing = _read_existing_publications(out_path)  # before fetching: fail fast
+    doc = build_publications(orcid_id, opener=opener)
+    doc["publications"] = merge_publications(existing, doc["publications"])
+    return write_publications_atomic(doc, out_path)
+
+
 def _comparable(doc: dict) -> str:
     return json.dumps({k: v for k, v in doc.items() if k != "generated_at"},
                       sort_keys=True)
@@ -145,15 +247,17 @@ def main(argv=None) -> int:
         content_path.read_text(encoding="utf-8"))
 
     try:
-        doc = build_publications(orcid_id)
+        changed = sync(orcid_id, out_path)
+    except ExistingFileError as err:  # refuse to replace a file we can't merge into
+        print(f"error: {err}; not writing publications.json", file=sys.stderr)
+        return 1
     except Exception as err:  # fail-safe: never clobber the live list
         print(f"sync failed, keeping existing publications.json: {err}",
               file=sys.stderr)
         return 0
 
-    changed = write_publications_atomic(doc, out_path)
-    print(f"{'updated' if changed else 'no change'}: "
-          f"{len(doc['publications'])} publications")
+    count = len(json.loads(out_path.read_text(encoding="utf-8"))["publications"])
+    print(f"{'updated' if changed else 'no change'}: {count} publications")
     return 0
 
 
