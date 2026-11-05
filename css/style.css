@@ -361,7 +361,8 @@ main section #education-heading::after { content: none; }
 .pub-role {
   display: inline-block; margin-left: 0.5rem; vertical-align: middle;
   padding: 0.05rem 0.45rem; border-radius: 999px;
-  background: var(--accent2-soft); color: var(--surface);
+  /* --accent2 (not -soft) keeps white text at 4.69:1 in light mode (AA). */
+  background: var(--accent2); color: var(--surface);
   font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600;
   /* Balance the trailing letter-spacing so the text sits centered in the pill. */
   text-indent: 0.05em;
