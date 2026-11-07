@@ -139,7 +139,7 @@ function fullName(meta) {
 // section after the hero gets the white band, so About pops against the hero.
 function assignBands() {
   const sections = [...document.querySelectorAll("main section:not([hidden])")]
-    .filter((s) => s.id !== "hero" && s.id !== "news");
+    .filter((s) => !["hero", "event", "news"].includes(s.id));
   sections.forEach((s, i) => s.classList.toggle("section-alt", i % 2 === 0));
 }
 
@@ -207,6 +207,67 @@ function renderNews(news) {
   show("news", list.length > 0);
 }
 
+// A YAML date as "YYYY-MM-DD", or null. js-yaml turns an unquoted 2026-11-13
+// into a Date (UTC midnight), so both that and the quoted string are accepted.
+function isoDate(v) {
+  if (v instanceof Date) return isNaN(v) ? null : v.toISOString().slice(0, 10);
+  const s = String(v == null ? "" : v).trim();
+  return /^\d{4}-\d{2}-\d{2}$/.test(s) ? s : null;
+}
+
+// Today in the visitor's own time zone, as "YYYY-MM-DD".
+function localToday() {
+  const d = new Date();
+  const pad = (n) => String(n).padStart(2, "0");
+  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+}
+
+// Temporary conference callout under the hero: the first entry in `events:`
+// whose `show_until` date (inclusive) hasn't passed. Entries without a valid
+// show_until never show, so a callout can't be left up forever by mistake.
+function renderEvent(events) {
+  const today = localToday();
+  const ev = (events || []).find((e) => {
+    const until = isoDate(e && e.show_until);
+    if (!until) console.warn("events: entry skipped, show_until must be YYYY-MM-DD", e);
+    return until && today <= until;
+  });
+  if (!ev) {
+    show("event", false);
+    return;
+  }
+  // The meeting name (linked when `url` is set) appears once: in the default
+  // heading, or at the start of the meta line under a custom heading.
+  const name = ev.name || "";
+  const nameNode = name && ev.url ? el("a", { href: safeUrl(ev.url), textContent: name }) : name;
+  fill("event-heading", ev.heading ? [String(ev.heading)] : ["Presenting at ", nameNode]);
+  const meta = [];
+  if (ev.heading && name) meta.push(nameNode);
+  for (const part of [ev.dates, ev.location]) {
+    if (part) meta.push(String(part));
+  }
+  fill("event-meta", meta.flatMap((m, i) => (i ? [" · ", m] : [m])));
+  fill("event-list", (ev.presentations || []).map((p) => {
+    const li = el("li", { className: "event-item" });
+    if (p.kind) li.append(el("span", { className: "event-kind", textContent: String(p.kind) }));
+    li.append(p.url
+      ? el("a", { className: "event-title", href: safeUrl(p.url), textContent: p.title || "" })
+      : el("span", { className: "event-title", textContent: p.title || "" }));
+    if (p.session) li.append(el("div", { className: "event-details", textContent: String(p.session) }));
+    // Day and time are bolded so visitors can scan the schedule at a glance.
+    const details = [
+      p.when ? el("strong", { className: "event-when", textContent: String(p.when) }) : null,
+      p.room ? String(p.room) : null,
+    ].filter(Boolean);
+    if (details.length) {
+      li.append(el("div", { className: "event-details" }, details.flatMap((d, i) => (i ? [" · ", d] : [d]))));
+    }
+    if (p.note) li.append(el("div", { className: "event-note" }, richText(p.note)));
+    return li;
+  }));
+  show("event", true);
+}
+
 // Invited talks: year + title + venue, with an optional link on the title.
 function renderTalks(talks) {
   const list = talks || [];
@@ -236,6 +297,7 @@ function renderYearList(sectionId, items) {
 
 function renderContent(data, softwareMetrics) {
   const m = data.meta || {};
+  renderEvent(data.events || []);
   renderNews(data.news || []);
   const name = fullName(m);
   document.title = name || "Personal website";

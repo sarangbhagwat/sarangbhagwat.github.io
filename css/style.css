@@ -299,6 +299,28 @@ main section #education-heading::after { content: none; }
 /* Sticky header: hard-coded light rgba, needs a translucent-dark match for --bg */
 :root[data-theme="dark"] #site-header { background: rgba(20, 24, 33, 0.92); }
 
+/* Conference callout: a temporary card between the hero and News, shown only
+   until the event's show_until date (see renderEvent in main.js). The ochre
+   left edge echoes the section rule; a smaller heading keeps it a notice, not
+   a full section. */
+#event { padding: 0.5rem 0 1rem; }
+.event-card {
+  background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent2);
+  border-radius: 6px; padding: 1rem 1.25rem;
+}
+#event h2 { font-size: 1.2rem; margin: 0; }
+#event h2::after { display: none; }
+#event h2 a { color: inherit; text-decoration: none; }
+#event h2 a:hover, #event h2 a:focus-visible { color: var(--hover); text-decoration: underline; }
+.event-meta { margin: 0.15rem 0 0.75rem; color: var(--muted); font-size: 0.92rem; }
+.event-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.85rem; }
+.event-kind { display: block; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 600; color: var(--accent2); }
+.event-title { font-weight: 600; color: var(--text); text-decoration: none; }
+a.event-title:hover, a.event-title:focus-visible { color: var(--hover); text-decoration: underline; }
+.event-details { color: var(--muted); font-size: 0.9rem; }
+.event-when { color: var(--text); font-weight: 600; }
+.event-note { color: var(--muted); font-size: 0.9rem; font-style: italic; }
+
 /* News strip: compact, quiet, sits just under the hero */
 /* News: a compact timeline echoing the Education rail (newest on top). Each row
    keeps its date beside the text so the strip stays tight and scannable, with

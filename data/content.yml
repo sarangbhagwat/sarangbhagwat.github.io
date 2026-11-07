@@ -154,6 +154,43 @@ talks:
     title: "Sustainable production of sorbic acid via triacetic acid lactone (TAL) from lignocellulosic biomass"
     venue: "ACS Spring 2023: Crossroads of Chemistry, Indianapolis, IN"
 
+# --- Conference callout (temporary) -------------------------------------------
+# A small card shown between the hero and News while a conference is coming up
+# or under way. It disappears by itself after `show_until` (YYYY-MM-DD,
+# inclusive, in the visitor's time zone); an entry without a valid show_until
+# never shows. If several entries are current, only the first one shows.
+# `heading` is optional (default "Presenting at <name>"); `url`, `dates`,
+# `location`, and each presentation's `kind` (a small label such as "Talk"),
+# `session`, `when`, `room`, `url`, and `note` (markdown allowed, e.g. a
+# related paper or "Presented by co-author ...") are optional.
+events:
+  - name: "AIChE Annual Meeting 2026"
+    url: "https://www.aiche.org/conferences/aiche-annual-meeting/2026"
+    dates: "Nov 8–12, 2026"
+    location: "Minneapolis Convention Center, Minneapolis, MN"
+    show_until: "2026-11-12"
+    presentations:
+      - kind: "Faculty candidate poster"
+        title: "Toward Agile and Predictive Process Systems Engineering for Circular Economies"
+        session: "Meet the Faculty and Post-Doc Candidates"
+        when: "Sun, Nov 8 · 1:00–3:00 PM"
+        room: "Exhibit Hall B, Poster 342"
+        url: "https://studio.m-anage.com/aiche/2026/meetingapp.cgi/Paper/738209"
+      - kind: "Talk"
+        title: "AutoSynthesis: Process Engineering and Systems Analyses at Your Fingertips Using Large Language Models"
+        session: "Sustainable Design of Biomanufacturing: TEA, LCA, and Process Simulation"
+        when: "Tue, Nov 10 · 5:00–5:15 PM"
+        room: "Lower Level, Room L100F"
+        url: "https://studio.m-anage.com/aiche/2026/meetingapp.cgi/Paper/738334"
+        note: "Related article: [*Nature Communications* (2026)](https://doi.org/10.1038/s41467-026-75285-1)"
+      - kind: "Talk"
+        title: "Linking Microbial Kinetics to Facility-Scale Economics Under Uncertainty"
+        session: "Bioprocess Engineering, Experimental and Computational Design, and Scale-Up, Part II"
+        when: "Wed, Nov 11 · 2:18–2:54 PM"
+        room: "Lower Level, Room L100A"
+        url: "https://studio.m-anage.com/aiche/2026/meetingapp.cgi/Paper/738153"
+        note: "Preprint: [ChemRxiv](https://doi.org/10.26434/chemrxiv.15011481/v1)"
+
 # --- News / recent ------------------------------------------------------------
 # Dated one-liners, newest first; keeps the page current between automated pub
 # updates. Only the 4 most recent render (see NEWS_LIMIT in js/main.js), so

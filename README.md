@@ -80,6 +80,13 @@ empty, so you can leave any of them out:
   publications" in the order listed; the rest follow in the groups above.
 - `talks:` — `{year, title, venue, url}` entries for the "Invited talks"
   section (`url` is optional).
+- `events:` — a temporary conference callout between the hero and News. Each
+  entry has a `name`, a `show_until` date (`YYYY-MM-DD`, inclusive), and a
+  list of `presentations` (`title`, plus optional `kind`, `session`, `when`,
+  `room`, `url`, `note`); `heading`, `url`, `dates` and `location` are optional. The
+  callout disappears on its own once `show_until` has passed, and an entry
+  without a valid `show_until` never shows. Only the first current entry
+  renders. See the comments in `content.yml` for an example.
 - `news:` — `{date, text}` one-liners shown below the hero.
 - `awards:` — `{year, description}` entries (fellowships and honors).
 - `teaching_outreach:` — `{year, description}` entries for the "Selected
