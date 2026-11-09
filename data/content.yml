@@ -127,6 +127,10 @@ corresponding_dois:
 # a recording.
 talks:
   - year: "2026"
+    title: "Linking microbial kinetics to facility-scale economics under uncertainty"
+    venue: "AIChE Annual Meeting, Minneapolis, MN"
+    url: "https://studio.m-anage.com/aiche/2026/meetingapp.cgi/Paper/738153"
+  - year: "2026"
     title: "Toward agile and predictive process systems engineering for circular economies"
     venue: "Texas Tech University (Dept. of Chemical Engineering), Lubbock, TX"
   - year: "2026"
@@ -183,7 +187,7 @@ events:
         room: "Lower Level, Room L100F"
         url: "https://studio.m-anage.com/aiche/2026/meetingapp.cgi/Paper/738334"
         note: "Related article: [*Nature Communications* (2026)](https://doi.org/10.1038/s41467-026-75285-1)"
-      - kind: "Talk"
+      - kind: "Invited talk"
         title: "Linking Microbial Kinetics to Facility-Scale Economics Under Uncertainty"
         session: "Bioprocess Engineering, Experimental and Computational Design, and Scale-Up, Part II"
         when: "Wed, Nov 11 · 2:18–2:54 PM"
