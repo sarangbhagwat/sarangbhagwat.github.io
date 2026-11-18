@@ -71,7 +71,7 @@ software:
 # role worded exactly as on the CV so nothing implies PI status. The section and
 # its nav link hide themselves when this list is empty.
 proposals:
-  - { year: "2026", description: "Senior Personnel & Co-Technical Lead; ideated and co-wrote the proposal. NSF PESOSE Track 1, “Toward an Open-Source Ecosystem for BioSTEAM to Accelerate Next-Generation Biomanufacturing” ($300K; PI: Y. Li; submitted)" }
+  - { year: "2026", description: "Senior Personnel & Co-Technical Lead; co-ideated and co-wrote the proposal. NSF PESOSE Track 1, “Toward an Open-Source Ecosystem for BioSTEAM to Accelerate Next-Generation Biomanufacturing” ($300K; PI: Y. Li; submitted)" }
   - { year: "2024", description: "Proposed and co-wrote two technical sections on BioSTEAM software developments. NSF iBioFoundry for Basic and Applied Biology ($15M; PI: H. Zhao; awarded)" }
   - { year: "2023", description: "Key Personnel; set quantitative development targets for fermentative 3-hydroxypropionic acid production, performed supporting analyses, and co-wrote a technical section. BioMADE Project Bluestem ($341K; PI: T. Autera; awarded)" }
   - { year: "2022", description: "Responsible for ideating and co-writing Objective S2.1, one of three main objectives of the Sustainability Thrust. DOE Center for Advanced Bioenergy and Bioproducts Innovation (CABBI) 5-Year Renewal ($145M; PI: A. Leakey; awarded)" }
