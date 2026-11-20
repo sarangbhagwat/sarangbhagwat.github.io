@@ -225,7 +225,9 @@ main section #education-heading::after { content: none; }
   width: 6px; height: 6px; border-radius: 50%; background: var(--accent2-soft);
 }
 
-/* Reading measure: cap prose width for comfortable line length */
+/* Reading measure: cap prose width for comfortable line length. Research gets
+   a wider measure so all four interest pills sit on one row (~52rem total). */
+#research { --measure: 53rem; }
 #research h2, #research .research-pillars, #research .research-list, #research .research-note { max-width: var(--measure); margin-inline: auto; }
 #research .research-note { margin-top: 1.5rem; color: var(--muted); font-size: 0.95rem; font-style: italic; }
 #research .research-note:empty { display: none; }
